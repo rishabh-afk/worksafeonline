@@ -3,9 +3,15 @@ import StarRating from "./StarRating";
 import { bigShoulders } from "@/app/layout";
 import ImageComponent from "./ImageComponent";
 import AddtoCartButton from "./AddtoCartButton";
+import Link from "next/link";
 
 const ProductCard = ({ product }: { product: any }) => {
+
+  console.log(product.Description,product.Description,"product.Description")
   return (
+    <Link
+    href={`/product/category/${product.Description.replace(/\s+/g, '-')}`}
+  >
     <div>
       <ImageComponent product={product} />
       <div
@@ -28,6 +34,7 @@ const ProductCard = ({ product }: { product: any }) => {
         </button>
       </div>
     </div>
+    </Link>
   );
 };
 
