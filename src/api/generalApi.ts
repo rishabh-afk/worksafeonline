@@ -37,6 +37,7 @@ export const fetchHomePageData = async () => {
   ] = results.map((result) =>
     result?.status === "fulfilled" ? result?.value : {}
   );
+
   const brands = brandsResponse?.brand || [];
   const banners = bannerResponse?.special_offers || [];
   const categories = categoriesResponse?.categories || [];

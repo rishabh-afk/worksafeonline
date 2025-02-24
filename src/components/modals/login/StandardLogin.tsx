@@ -123,7 +123,7 @@ const StandardLogin = ({
               placeholder="Email ID or Username"
               value={formData.email}
               onChange={handleInputChange}
-              className={`w-full p-2 border-b text-white outline-none bg-transparent ${
+              className={`w-full p-2 border-b text-white outline-none bg-transparent autofill:bg-transparent ${
                 errors.email ? "border-red-500" : "border-gray-300"
               } focus:ring-primary focus:border-primary`}
             />
@@ -140,7 +140,7 @@ const StandardLogin = ({
               placeholder="Password"
               value={formData.password}
               onChange={handleInputChange}
-              className={`w-full p-2 border-b outline-none bg-transparent ${
+              className={`w-full p-2 border-b outline-none bg-transparent autofill:  ${
                 errors.password ? "border-red-500" : "border-gray-300"
               } focus:ring-primary focus:border-primary`}
             />
