@@ -4,6 +4,7 @@ import { bigShoulders } from "@/app/layout";
 import ProductSwiper from "./ProductSwiper";
 import { FaArrowRightLong } from "react-icons/fa6";
 import AnimatedActionButton from "../common/AnimatedActionButton";
+import Link from "next/link";
 
 const ListingByCategory = ({
   products,
@@ -21,7 +22,7 @@ const ListingByCategory = ({
   const text = sectionText.toLowerCase().split(" ");
   const text2 = text.slice(2).join(" ");
   const text1 = text.slice(0, 2).join(" ");
-
+  console.log(products[0].MenuId);
   return (
     <div className="py-10">
       <div className="relative">
@@ -55,13 +56,12 @@ const ListingByCategory = ({
 
           <AnimatedActionButton
             text="Discover Now"
-            href="/"
+            href={`/shop?category=${products && products[0]?.MenuId}`}
             // onClick={() => console.log("Button clicked")}
             classes="uppercase md:text-lg mt-6 font-semibold whitespace-nowrap py-6 w-[190px] hover:bg-primary bg-white text-black hover:text-black"
             isLoading={false}
             type="submit"
           />
-
         </div>
       </div>
       <div className="max-w-9xl mx-auto p-4 md:p-6 lg:p-10 pb-0">
@@ -71,15 +71,17 @@ const ListingByCategory = ({
           >
             {text1} <span className="text-primary">{text2}</span> products
           </p>
-          <span className="relative hidden lg:flex space-x-2 items-center border rounded-full cursor-pointer hover:bg-primary hover:border-primary border-black/10 py-4 pl-28 pr-4 overflow-hidden group">
-            <span className="absolute whitespace-nowrap left-4 w-full transition-all duration-300 ease-in-out transform group-hover:translate-y-[-100%] group-hover:opacity-0 opacity-100 translate-y-0">
-              View More
+          <Link href={`/shop?category=${products[0]?.MenuId}`}>
+            <span className="relative hidden lg:flex space-x-2 items-center border rounded-full cursor-pointer hover:bg-primary hover:border-primary border-black/10 py-4 pl-28 pr-4 overflow-hidden group">
+              <span className="absolute whitespace-nowrap left-4 w-full transition-all duration-300 ease-in-out transform group-hover:translate-y-[-100%] group-hover:opacity-0 opacity-100 translate-y-0">
+                View More
+              </span>
+              <span className="absolute whitespace-nowrap left-2 w-full transition-all duration-300 ease-in-out transform group-hover:translate-y-0 group-hover:opacity-100 opacity-0 translate-y-[100%]">
+                View More
+              </span>
+              <FaArrowRightLong className="ml-2" />
             </span>
-            <span className="absolute whitespace-nowrap left-2 w-full transition-all duration-300 ease-in-out transform group-hover:translate-y-0 group-hover:opacity-100 opacity-0 translate-y-[100%]">
-              View More
-            </span>
-            <FaArrowRightLong className="ml-2" />
-          </span>
+          </Link>
         </div>
         <ProductSwiper products={products} />
         <span className="relative lg:hidden flex mt-5 w-fit mx-auto space-x-2 items-center border rounded-full cursor-pointer hover:bg-primary hover:border-primary border-black/10 py-4 pl-28 pr-4 overflow-hidden group">
