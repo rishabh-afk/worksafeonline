@@ -495,46 +495,46 @@ const PrivacyPolicy: React.FC = () => {
         </p>
       </div>
 
-        <div className="overflow-x-auto my-4 shadow-md border border-gray-300 rounded-lg mx-4">
-          <table className="min-w-full table-auto border-collapse">
-            <thead>
-              <tr className="bg-gray-100">
-                <th className="border border-gray-300 px-4 py-2 text-left font-semibold text-sm md:text-base">
-                  Purpose/Activity
-                </th>
-                <th className="border border-gray-300 px-4 py-2 text-left font-semibold text-sm md:text-base">
-                  Type of Data
-                </th>
-                <th className="border border-gray-300 px-2 py-2 text-left font-semibold text-sm md:text-base">
-                  Lawful basis for processing including basis of legitimate
-                  interest
-                </th>
+      <div className="overflow-x-auto my-4 shadow-md border border-gray-300 rounded-lg mx-4">
+        <table className="min-w-full table-auto border-collapse">
+          <thead>
+            <tr className="bg-gray-100">
+              <th className="border border-gray-300 px-4 py-2 text-left font-semibold text-sm md:text-base">
+                Purpose/Activity
+              </th>
+              <th className="border border-gray-300 px-4 py-2 text-left font-semibold text-sm md:text-base">
+                Type of Data
+              </th>
+              <th className="border border-gray-300 px-2 py-2 text-left font-semibold text-sm md:text-base">
+                Lawful basis for processing including basis of legitimate
+                interest
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {tableData.map((row, index) => (
+              <tr
+                key={index}
+                className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}
+              >
+                <td className="border border-gray-300 px-4 py-2 text-sm md:text-base whitespace-pre-wrap">
+                  {row.purpose}
+                </td>
+                <td className="border border-gray-300 px-4 py-2 text-sm md:text-base">
+                  <ul className="list-disc pl-5">
+                    {row.typeOfData.map((data, i) => (
+                      <li key={i}>{data}</li>
+                    ))}
+                  </ul>
+                </td>
+                <td className="border border-gray-300 px-4 py-2 text-sm md:text-base whitespace-pre-wrap">
+                  {row.lawfulBasis}
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {tableData.map((row, index) => (
-                <tr
-                  key={index}
-                  className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}
-                >
-                  <td className="border border-gray-300 px-4 py-2 text-sm md:text-base whitespace-pre-wrap">
-                    {row.purpose}
-                  </td>
-                  <td className="border border-gray-300 px-4 py-2 text-sm md:text-base">
-                    <ul className="list-disc pl-5">
-                      {row.typeOfData.map((data, i) => (
-                        <li key={i}>{data}</li>
-                      ))}
-                    </ul>
-                  </td>
-                  <td className="border border-gray-300 px-4 py-2 text-sm md:text-base whitespace-pre-wrap">
-                    {row.lawfulBasis}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
       <section className="space-y-4">
         <div>
@@ -597,7 +597,7 @@ const PrivacyPolicy: React.FC = () => {
           </p>
         </div>
 
-        <div>
+        <div id="cookies">
           <h2
             className={`text-2xl font-bold text-gray-800 mb-1 ${bigShoulders.className}`}
           >
