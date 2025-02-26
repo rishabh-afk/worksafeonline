@@ -106,6 +106,21 @@ const InvoiceAddress = ({
     // eslint-disable-next-line
   }, [selectedAddress?.invoiceAddressId?.ID]);
 
+  const handleFill = () => {
+    const address = {
+      Add: formData?.DAdd,
+      Name: formData?.DName,
+      Email: formData?.DEmail,
+      PCode: formData?.DPCode,
+      PTown: formData?.DPTown,
+      County: formData?.DCounty,
+      Telephone: formData?.DTelephone,
+      CountryCode: formData?.DCountryCode,
+      InvAddressCode: formData?.AddressCode,
+    };
+    setFormData((prev: any) => ({ ...prev, ...address }));
+  };
+
   return (
     <div className="w-full">
       <Accordion
@@ -139,6 +154,12 @@ const InvoiceAddress = ({
                 <div className="h-[2px] flex-grow bg-gray-200"></div>
               </div>
             )}
+          <button
+            onClick={handleFill}
+            className="px-4 mb-5 py-2 bg-secondary text-white font-semibold focus:outline-none transition"
+          >
+            Use Billing Address
+          </button>
           <form ref={formRef2} onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-5 items-center">
               <Text
@@ -174,6 +195,16 @@ const InvoiceAddress = ({
             <div className="grid mt-5 grid-cols-1 lg:grid-cols-4 gap-5 items-center">
               <Text
                 field={{
+                  ...formFields[7],
+                  value: formData[formFields[7].name]
+                    ? formData[formFields[7].name].toUpperCase()
+                    : "",
+                }}
+                handleInputChange={handleInputChange}
+                error={errors[formFields[7].name]}
+              />
+              <Text
+                field={{
                   ...formFields[3],
                   value: formData[formFields[3].name] || "",
                 }}
@@ -207,17 +238,7 @@ const InvoiceAddress = ({
                 handleInputChange={handleInputChange}
                 error={errors[formFields[6].name]}
               />
-              <Text
-                field={{
-                  ...formFields[7],
-                  value: formData[formFields[7].name]
-                    ? formData[formFields[7].name].toUpperCase()
-                    : "",
-                }}
-                // ref={postcodeRef}
-                handleInputChange={handleInputChange}
-                error={errors[formFields[7].name]}
-              />
+
               <div className="hidden lg:block"></div>
               <div className="hidden lg:block"></div>
               <div className="hidden lg:block"></div>

@@ -30,7 +30,10 @@ export async function generateMetadata() {
 const AboutUS = async () => {
   return (
     <>
-      <Header title="About Us" />
+      <Header
+        title="About Us"
+        getBreadCrumbs={[{ id: "/about-us", name: "About Us" }]}
+      />
       <TradeSafetyBanner />
       <Marquee />
       <OurTeam />

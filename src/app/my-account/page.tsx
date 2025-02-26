@@ -104,7 +104,7 @@ export default function Page() {
                   value={editableFields.name}
                   onChange={handleFieldChange}
                   placeholder="Enter your name"
-                  className="mt-2 block w-full border font-normal border-gray-300 rounded-lg outline-none focus:ring-primary/50 focus:ring-2 focus:border-primary/50 text-gray-700 p-2 text-sm"
+                  className="mt-2 block w-full border font-normal border-gray-300 outline-none focus:ring-primary/50 focus:ring-2 focus:border-primary/50 text-gray-700 p-2 text-sm"
                 />
               ) : (
                 <p className="text-sm text-gray-400">
@@ -124,7 +124,7 @@ export default function Page() {
                   value={editableFields.mobile}
                   onChange={handleMobileChange}
                   placeholder="Enter your mobile number"
-                  className="mt-2 block w-full border font-normal border-gray-300 rounded-lg outline-none focus:ring-primary/50 focus:ring-2 focus:border-primary/50 text-gray-700 p-2 text-sm"
+                  className="mt-2 block w-full border font-normal border-gray-300 outline-none focus:ring-primary/50 focus:ring-2 focus:border-primary/50 text-gray-700 p-2 text-sm"
                 />
               ) : (
                 <p className="text-sm text-gray-400">
@@ -137,7 +137,7 @@ export default function Page() {
               <p className="text-sm text-gray-400">
                 {accountDetail?.account_details?.Email || "-"}
               </p>
-              <span className="absolute group-hover:block hidden border top-24 left-0 bg-white shadow-md p-3 rounded-lg text-xs text-gray-600 font-normal">
+              <span className="absolute group-hover:block hidden border top-24 left-0 bg-white shadow-md p-3 text-xs text-gray-600 font-normal">
                 {accountDetail?.account_details?.message}
               </span>
             </div>
@@ -147,13 +147,13 @@ export default function Page() {
               <>
                 <button
                   onClick={handleSave}
-                  className="bg-primary/80 hover:bg-primary transition text-white px-4 py-1.5 rounded-lg"
+                  className="bg-primary/80 hover:bg-primary transition text-white px-4 py-1.5"
                 >
                   Save
                 </button>
                 <button
                   onClick={handleEditToggle}
-                  className="bg-black text-white px-4 py-1.5 transition rounded-lg"
+                  className="bg-black text-white px-4 py-1.5 transition"
                 >
                   Cancel
                 </button>
@@ -161,7 +161,7 @@ export default function Page() {
             ) : (
               <button
                 onClick={handleEditToggle}
-                className="bg-primary inline-flex items-center text-white px-4 py-1.5 rounded-lg"
+                className="bg-primary inline-flex items-center text-white px-4 py-1.5"
               >
                 <MdModeEdit className="text-xl mr-1" />
                 Edit Details

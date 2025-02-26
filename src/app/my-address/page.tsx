@@ -63,9 +63,9 @@ export default function Page() {
             <button
               title="Edit Address"
               onClick={handleCreateNewAddress}
-              className="flex items-center text-lg gap-1 px-6 py-2 text-black bg-primary/80 hover:bg-primary rounded-full transition"
+              className="flex items-center gap-1 px-6 py-2 text-white bg-primary/80 hover:bg-primary rounded-full transition"
             >
-              <IoCreate className="text-2xl" />
+              <IoCreate className="text-xl" />
               Create
             </button>
           </div>

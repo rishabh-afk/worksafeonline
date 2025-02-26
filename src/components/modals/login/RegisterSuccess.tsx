@@ -17,9 +17,9 @@ const RegisterSuccess = ({
         <div className="flex gap-4">
           <span className="p-[2px] h-fit hover:scale-125 transition hover:bg-[#1C1C1C] rounded-full">
             <IoArrowBackOutline
-              size={25}
+              size={22}
               onClick={() => setScreen("register")}
-              className="text-primary cursor-pointer"
+              className="text-primary hover:text-white cursor-pointer"
             />
           </span>
           <Link href="/">
@@ -44,28 +44,28 @@ const RegisterSuccess = ({
         </div>
       </div>
       <div className="w-full lg:w-1/2 space-y-4 md:pl-6 lg:pl-10">
-        <p className="text-center text-white/80">
+        <p className="text-center text-white">
           We have found your email address is registered to the following
           account:
         </p>
         <div className="text-center bg-[#1C1C1C]/50 text-xl border-b border-primary text-primary cursor-not-allowed py-2">
           {formData?.cust} {formData?.custName}
         </div>
-        <p className="text-center text-white/80">
+        <p className="text-center text-white">
           Select &apos;Continue&apos; to register to this account, or choose
           &apos;Register to a different account&apos; to join another group.
         </p>
         <button
           type="submit"
           onClick={() => setScreen("register2")}
-          className={`w-full py-2 px-4 bg-primary text-black uppercase rounded-full shadow-md text-lg font-bold hover:bg-primary/80 transition outline-none ${bigShoulders.className}`}
+          className={`w-full py-2 px-4 bg-primary text-white uppercase rounded-full shadow-md text-lg font-bold hover:bg-primary/80 transition outline-none ${bigShoulders.className}`}
         >
           Continue
         </button>
         <button
           type="submit"
           onClick={() => setScreen("confirmationCode")}
-          className={`w-full py-2 px-4 text-primary uppercase rounded-full text-lg font-bold hover:bg-primary hover:text-black transition outline-none ${bigShoulders.className}`}
+          className={`w-full py-2 px-4 text-primary uppercase rounded-full text-lg font-bold hover:bg-primary hover:text-white transition outline-none ${bigShoulders.className}`}
         >
           Register to a different account
         </button>

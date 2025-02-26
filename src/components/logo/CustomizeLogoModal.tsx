@@ -285,7 +285,7 @@ const CustomizeLogoModal = ({
       removePadding="p-0"
       isVisible={isVisible}
       showCloseButton={false}
-      minHeight="min-h-[90vh]"
+      minHeight="min-h-[95vh]"
       width="w-[95vw] md:w-[90%]"
     >
       <div className="flex flex-col relative">

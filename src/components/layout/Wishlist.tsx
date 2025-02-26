@@ -62,7 +62,7 @@ const Wishlist = () => {
         className="hover:text-yellow-500 relative hidden lg:block transition-all duration-100 ease-linear"
       >
         <FaRegHeart size={23} />
-        <span className="absolute -top-3 -right-3 w-6 h-6 text-xs text-black rounded-full bg-primary flex items-center justify-center">
+        <span className="absolute -top-3 -right-3 min-w-6 min-h-6 text-xs text-black rounded-full bg-secondary flex items-center justify-center">
           {wishlist.length > 0 && wishlist.length < 9
             ? "0" + wishlist.length
             : wishlist.length >= 10

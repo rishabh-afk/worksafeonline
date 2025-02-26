@@ -1,23 +1,122 @@
-import { bigShoulders } from "@/app/layout";
 import React from "react";
+import { bigShoulders } from "@/app/layout";
+import { MdOutlineStarPurple500 } from "react-icons/md";
 
 const Marquee: React.FC = () => {
   return (
-    <div className="overflow-hidden mb-10 whitespace-nowrap relative bottom-12 lg:bottom-7 w-full bg-primary">
-      <div className="marquee h-28 flex justify-center items-center">
+    <div className="overflow-hidden whitespace-nowrap relative w-full bg-primary py-4">
+      <div className="marquee flex h-20 items-center">
         <span
-          className={`text-4xl uppercase font-semibold tracking-wider flex justify-center items-center ${bigShoulders.className}`}
+          className={`text-2xl lg:text-4xl font-medium text-black tracking-wide inline-flex justify-start items-center gap-6 animate-marquee ${bigShoulders.className}`}
         >
-          Build for work &nbsp; * &nbsp; Keep it scrolling forever! &nbsp; *
-          &nbsp; Add more items here! &nbsp; * &nbsp; Keep it scrolling forever!
-          &nbsp; * &nbsp; Add more items here! &nbsp; * &nbsp; Keep it scrolling
-          forever! &nbsp; * &nbsp; Add more items here! &nbsp; * &nbsp; Keep it
-          scrolling forever! &nbsp; * &nbsp; Add more items here! &nbsp; *
-          &nbsp; Keep it scrolling forever! &nbsp; * &nbsp; Add more items here!
-          &nbsp; * &nbsp; Keep it scrolling forever! &nbsp; * &nbsp; Add more
-          items here! &nbsp; * &nbsp; Keep it scrolling forever! &nbsp; * &nbsp;
-          Add more items here! &nbsp; * &nbsp; Keep it scrolling forever! &nbsp;
-          * &nbsp; Add more items here!
+          New Arrivals{" "}
+          <span className="inline-block text-center w-4">
+            <MdOutlineStarPurple500 size={16} />
+          </span>{" "}
+          Premium Quality{" "}
+          <span className="inline-block text-center w-4">
+            <MdOutlineStarPurple500 size={16} />
+          </span>{" "}
+          Limited Edition{" "}
+          <span className="inline-block text-center w-4">
+            <MdOutlineStarPurple500 size={16} />
+          </span>{" "}
+          Exclusive Styles{" "}
+          <span className="inline-block text-center w-4">
+            <MdOutlineStarPurple500 size={16} />
+          </span>{" "}
+          Timeless Fashion{" "}
+          <span className="inline-block text-center w-4">
+            <MdOutlineStarPurple500 size={16} />
+          </span>{" "}
+          Handcrafted Elegance{" "}
+          <span className="inline-block text-center w-4">
+            <MdOutlineStarPurple500 size={16} />
+          </span>{" "}
+          Trendsetting Designs{" "}
+          <span className="inline-block text-center w-4">
+            <MdOutlineStarPurple500 size={16} />
+          </span>{" "}
+          Luxury Wear{" "}
+          <span className="inline-block text-center w-4">
+            <MdOutlineStarPurple500 size={16} />
+          </span>{" "}
+          Signature Collection{" "}
+          <span className="inline-block text-center w-4">
+            <MdOutlineStarPurple500 size={16} />
+          </span>{" "}
+          New Arrivals{" "}
+          <span className="inline-block text-center w-4">
+            <MdOutlineStarPurple500 size={16} />
+          </span>{" "}
+          Premium Quality{" "}
+          <span className="inline-block text-center w-4">
+            <MdOutlineStarPurple500 size={16} />
+          </span>{" "}
+          Limited Edition{" "}
+          <span className="inline-block text-center w-4">
+            <MdOutlineStarPurple500 size={16} />
+          </span>{" "}
+          Exclusive Styles{" "}
+          <span className="inline-block text-center w-4">
+            <MdOutlineStarPurple500 size={16} />
+          </span>{" "}
+          Timeless Fashion{" "}
+          <span className="inline-block text-center w-4">
+            <MdOutlineStarPurple500 size={16} />
+          </span>{" "}
+          Handcrafted Elegance{" "}
+          <span className="inline-block text-center w-4">
+            <MdOutlineStarPurple500 size={16} />
+          </span>{" "}
+          Trendsetting Designs{" "}
+          <span className="inline-block text-center w-4">
+            <MdOutlineStarPurple500 size={16} />
+          </span>{" "}
+          Luxury Wear{" "}
+          <span className="inline-block text-center w-4">
+            <MdOutlineStarPurple500 size={16} />
+          </span>{" "}
+          Signature Collection{" "}
+          <span className="inline-block text-center w-4">
+            <MdOutlineStarPurple500 size={16} />
+          </span>{" "}
+          New Arrivals{" "}
+          <span className="inline-block text-center w-4">
+            <MdOutlineStarPurple500 size={16} />
+          </span>{" "}
+          Premium Quality{" "}
+          <span className="inline-block text-center w-4">
+            <MdOutlineStarPurple500 size={16} />
+          </span>{" "}
+          Limited Edition{" "}
+          <span className="inline-block text-center w-4">
+            <MdOutlineStarPurple500 size={16} />
+          </span>{" "}
+          Exclusive Styles{" "}
+          <span className="inline-block text-center w-4">
+            <MdOutlineStarPurple500 size={16} />
+          </span>{" "}
+          Timeless Fashion{" "}
+          <span className="inline-block text-center w-4">
+            <MdOutlineStarPurple500 size={16} />
+          </span>{" "}
+          Handcrafted Elegance{" "}
+          <span className="inline-block text-center w-4">
+            <MdOutlineStarPurple500 size={16} />
+          </span>{" "}
+          Trendsetting Designs{" "}
+          <span className="inline-block text-center w-4">
+            <MdOutlineStarPurple500 size={16} />
+          </span>{" "}
+          Luxury Wear{" "}
+          <span className="inline-block text-center w-4">
+            <MdOutlineStarPurple500 size={16} />
+          </span>{" "}
+          Signature Collection{" "}
+          <span className="inline-block text-center w-4">
+            <MdOutlineStarPurple500 size={16} />
+          </span>
         </span>
       </div>
     </div>

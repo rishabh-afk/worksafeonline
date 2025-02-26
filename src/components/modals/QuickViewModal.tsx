@@ -1,10 +1,11 @@
-import Link from "next/link";
+// import Link from "next/link";
 import Modal from "../common/Modal";
-import { bigShoulders } from "@/app/layout";
+import { RxCross1 } from "react-icons/rx";
+// import { bigShoulders } from "@/app/layout";
 import { productData } from "@/data/productData";
 import QuickViewProductSwiper from "./QuickViewProductSwiper";
 import ProductDetails from "@/app/product/components/ProductDetail";
-import ProductMetaInfo from "@/app/product/components/ProductMetaInfo";
+// import ProductMetaInfo from "@/app/product/components/ProductMetaInfo";
 import QuantitySelector from "@/app/product/components/QuantitySelector";
 
 const QuickViewModal = ({
@@ -23,25 +24,36 @@ const QuickViewModal = ({
     data?.ProductImageList.map((image: any) => image?.ProductImage);
   const product = { ...data, ...productData };
   return (
-    <Modal onClose={onclose} isVisible={isVisible}>
-      <div className="flex flex-col lg:flex-row gap-10">
+    <Modal
+      onClose={onclose}
+      removePadding={true}
+      isVisible={isVisible}
+      showCloseButton={false}
+    >
+      <p className="w-full flex justify-end items-center bg-white rounded-t-xl fixed p-4">
+        <RxCross1
+          size={24}
+          className="cursor-pointer text-black"
+          onClick={onclose}
+        />
+      </p>
+      <div className="flex flex-col pt-14 p-4 lg:flex-row gap-10">
         <div className="w-full lg:w-1/2">
           <QuickViewProductSwiper
             productListingImages={productListImages ?? []}
           />
         </div>
         <div className="w-full lg:w-1/2">
-          <ProductDetails product={product} />
-          <QuantitySelector showLogoCustomisation={false} product={product} />
-          <Link
-            href={product?.slug}
-            className={`w-full flex items-center justify-center px-4 py-2 transition-all duration-200 ease-linear hover:bg-primary rounded-full text-2xl font-bold uppercase bg-black text-white hover:text-black ${bigShoulders.className}`}
-          >
-            View Product
-          </Link>
-          <div className="bg-gray-300 mt-5 h-[1px]" />
-          <ProductMetaInfo />
-          <div className="bg-gray-300 h-[1px] mt-5" />
+          <div className="">
+            <ProductDetails product={product} />
+            <QuantitySelector
+              product={product}
+              showLogoCustomisation={product.ShowDesignLogo}
+            />
+          </div>
+          {/* <div className="bg-gray-300 mt-5 h-[1px]" /> */}
+          {/* <ProductMetaInfo /> */}
+          {/* <div className="bg-gray-300 h-[1px] mt-5" /> */}
         </div>
       </div>
     </Modal>

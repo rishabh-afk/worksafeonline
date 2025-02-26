@@ -23,7 +23,8 @@ export default {
         roboto: ["Roboto", "sans-serif"],
       },
       colors: {
-        primary: "#FFC700",
+        primary: "#F06022",
+        // primary: "#FFC700",
         secondary: "#F06022",
       },
       boxShadow: {

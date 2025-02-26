@@ -1,12 +1,11 @@
 "use client";
+
 import React from "react";
-// import Link from "next/link";
 import ActivateLink from "./ActivateLink";
 import { bigShoulders } from "@/app/layout";
-// import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const Categories = ({ categories }: { categories: any }) => {
-  // const navigate = useRouter();
   const handleNavigation = (menu_id: string | number) => {
     const href = `/shop?category=${menu_id}`;
     if (href && menu_id) return (window.location.href = href);
@@ -17,12 +16,12 @@ const Categories = ({ categories }: { categories: any }) => {
   };
 
   return (
-    <div className="flex lg:flex-wrap gap-3 lg:gap-5 items-center overflow-x-auto lg:overflow-x-visible">
+    <div className="flex lg:flex-wrap gap-3 lg:gap-5 text-white items-center overflow-x-auto lg:overflow-x-visible">
       {categories.map((link: any) => {
         return (
           <span
             key={link.menu_id}
-            className="text-base group cursor-pointer relative lg:text-sm whitespace-nowrap hover:text-primary capitalize"
+            className="text-base group cursor-pointer relative lg:text-lg text-white whitespace-nowrap hover:text-primary capitalize"
           >
             <span onClick={() => handleNavigation(link?.menu_id)}>
               <ActivateLink
@@ -30,7 +29,7 @@ const Categories = ({ categories }: { categories: any }) => {
                 id={link.menu_id?.toString() || ""}
               />
             </span>
-            <span className="w-fit bg-white gap-2 shadow-lg py-3 rounded-b-lg hidden group-hover:flex text-black flex-col left-0 z-20 absolute opacity-0 h-0 group-hover:h-fit transition-all duration-300 ease-in-out group-hover:opacity-100">
+            <span className="w-max bg-white gap-1 shadow-lg py-1 rounded-b-lg hidden group-hover:flex text-black flex-col left-0 z-20 absolute opacity-0 h-0 group-hover:h-fit transition-all duration-300 ease-in-out group-hover:opacity-100">
               {Array.isArray(link?.subcategories) &&
               link?.subcategories.length > 0 ? (
                 link.subcategories.map((category: any) => {
@@ -39,17 +38,30 @@ const Categories = ({ categories }: { categories: any }) => {
                     return null;
                   }
                   return (
-                    <span
+                    <div
                       key={category.menu_id}
-                      onClick={() =>
-                        handlelink(
-                          `/shop?category=${category.parent_id}&subcategory=${category?.menu_id}`
-                        )
-                      }
-                      className={`px-4 text-lg font-semibold hover:text-primary ${bigShoulders.className}`}
+                      className="flex px-2 items-center"
                     >
-                      {category.menu_name}
-                    </span>
+                      <Image
+                        width={100}
+                        height={100}
+                        priority
+                        unoptimized
+                        src={category.menu_Image}
+                        alt={category.menu_name}
+                        className="w-10 object-cover rounded-lg"
+                      />
+                      <span
+                        onClick={() =>
+                          handlelink(
+                            `/shop?category=${category.parent_id}&subcategory=${category?.menu_id}`
+                          )
+                        }
+                        className={`pl-2 pr-4 text-lg font-semibold hover:text-primary ${bigShoulders.className}`}
+                      >
+                        {category.menu_name}
+                      </span>
+                    </div>
                   );
                 })
               ) : (

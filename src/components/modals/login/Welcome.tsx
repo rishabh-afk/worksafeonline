@@ -65,7 +65,7 @@ const Welcome = ({ setScreen, onClose }: { setScreen: any; onClose: any }) => {
           >
             Welcome!
           </h2>
-          <p className="text-center md:text-left pb-5 md:pb-0 md:pr-10 text-white/80">
+          <p className="text-center md:text-left pb-5 md:pb-0 md:pr-10 text-white">
             Log in or register to shop, see previous orders and access specific
             products or deals available to you. If you have an online web
             account, please use the same details to log in.
@@ -77,14 +77,14 @@ const Welcome = ({ setScreen, onClose }: { setScreen: any; onClose: any }) => {
           <button
             type="submit"
             onClick={() => handleButtonClick("register")}
-            className={`w-full py-2 px-4 bg-primary text-black uppercase rounded-full shadow-md text-lg font-bold hover:bg-primary/80 transition outline-none ${bigShoulders.className}`}
+            className={`w-full py-2 px-4 bg-primary text-white uppercase rounded-full shadow-md text-lg font-bold hover:bg-primary/80 transition outline-none ${bigShoulders.className}`}
           >
             Register
           </button>
           <button
             type="submit"
             onClick={() => handleButtonClick("standardlogin")}
-            className={`w-full py-2 px-4 bg-[#1C1C1C] text-primary border border-primary hover:text-black uppercase rounded-full shadow-md text-lg font-bold hover:bg-primary transition outline-none ${bigShoulders.className}`}
+            className={`w-full py-2 px-4 bg-[#1C1C1C] text-primary border border-primary hover:text-white uppercase rounded-full shadow-md text-lg font-bold hover:bg-primary transition outline-none ${bigShoulders.className}`}
           >
             Login
           </button>
@@ -92,7 +92,7 @@ const Welcome = ({ setScreen, onClose }: { setScreen: any; onClose: any }) => {
             <button
               type="submit"
               onClick={handleGuestLogin}
-              className={`w-full py-2 px-4 text-primary uppercase rounded-full text-lg font-bold hover:bg-primary hover:text-black transition outline-none ${bigShoulders.className}`}
+              className={`w-full py-2 px-4 text-primary uppercase rounded-full text-lg font-bold hover:bg-primary hover:text-white transition outline-none ${bigShoulders.className}`}
             >
               Continue as guest
             </button>

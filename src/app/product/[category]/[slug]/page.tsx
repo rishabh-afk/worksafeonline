@@ -1,8 +1,8 @@
-import { Get } from "@/api/generalApi";
 import { redirect } from "next/navigation";
 import { productData } from "@/data/productData";
 import Features from "@/components/common/Features";
 import ProductImage from "../../components/ProductImage";
+import { fetchProductMenuData, Get } from "@/api/generalApi";
 import ProductContent from "../../components/ProductContent";
 import ProductFeatures from "../../components/ProductFeatures";
 import BreadcrumbsHeader from "../../components/BradcrumbsHeader";
@@ -38,20 +38,22 @@ export default async function Page(ctx: ProductPageProps) {
   const productResponse = await Get(
     `api/ProductDetails12?product_id=${slug}&category_id=${category}`
   );
+  const getBreadCrumbs: any = await fetchProductMenuData(category);
   if (productResponse.status && !productResponse?.ProductID)
     return redirect("/error");
   const productListImages = productResponse.ProductImageList.map(
     (image: any) => image?.ProductImage
   );
   const product = productData;
+  const bread = {
+    name: productData?.productName,
+    id: `/product/${category}/${slug}`,
+  };
+  if (getBreadCrumbs.length > 0) getBreadCrumbs.push(bread);
   return (
     <>
       <div className="max-w-9xl mx-auto p-4 md:p-6 lg:p-10">
-        <BreadcrumbsHeader
-          text={"shop"}
-          category={category}
-          formattedSlug={productResponse?.ProductName}
-        />
+        <BreadcrumbsHeader getBreadCrumbs={getBreadCrumbs} />
         <div className="mt-5 lg:mt-10 block min-h-screen lg:flex gap-14">
           <ProductImage images={productListImages} />
           <ProductContent

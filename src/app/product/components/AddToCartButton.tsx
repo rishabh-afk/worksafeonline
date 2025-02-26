@@ -19,8 +19,9 @@ const AddToCartButton = ({
   filterProductSizes: any;
 }) => {
   const handleCart = async (product: any) => {
+    console.log(filterProductSizes);
     if (fieldsCheck()) return;
-    if (selectedFields?.size.length === 0 && filterProductSizes.length > 0)
+    if (selectedFields?.size.length === 0)
       return toast.info("Please select a size");
 
     const deviceId = getDeviceCheck();
@@ -35,7 +36,7 @@ const AddToCartButton = ({
         ? selectedFields?.fitting?.Fitting.trim()
         : "NA",
       Size:
-        filterProductSizes.length > 0 && selectedFields?.size.length > 0
+        selectedFields?.size.length > 0
           ? selectedFields?.size.map((item: any) => ({
               Size: item?.Size,
               Quantity: item?.quantity,
@@ -49,7 +50,7 @@ const AddToCartButton = ({
     <button
       type="button"
       onClick={() => handleCart(product)}
-      className={`w-full flex items-center justify-center px-4 py-2 border transition-all duration-200 ease-linear border-primary/20 hover:bg-primary rounded-full text-2xl font-bold uppercase bg-primary/80 text-black ${bigShoulders.className}`}
+      className={`w-full flex items-center justify-center px-4 py-2 border transition-all duration-200 ease-linear border-primary hover:bg-primary/80 rounded-full text-2xl font-bold uppercase bg-primary text-white ${bigShoulders.className}`}
     >
       Add to Cart
     </button>

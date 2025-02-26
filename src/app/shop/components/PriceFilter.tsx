@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { FaAngleUp } from "react-icons/fa";
 import { bigShoulders } from "@/app/layout";
+import { formatPound } from "@/components/logo/general";
 
 interface FilterProps {
   filters: any;
@@ -32,13 +33,13 @@ const PriceFilter = ({
     const clampedValue = Math.min(Math.max(numericValue, min), max);
     previousValue.current = value;
     setValue(clampedValue);
-    const valueToBeSent = `£${min} to £${clampedValue}`;
+    const valueToBeSent = `${formatPound(min)} to ${formatPound(clampedValue)}`;
     const updatedFilters = { ...filters, price: valueToBeSent };
     setFilters(updatedFilters);
   };
 
   const applyFilter = async () => {
-    const valueToBeSent = `£${min} to £${value}`;
+    const valueToBeSent = `${formatPound(min)} to ${formatPound(value)}`;
     const updatedFilters = { ...filters, price: valueToBeSent };
     setFilters(updatedFilters);
     handleProducts(updatedFilters);
@@ -90,7 +91,7 @@ const PriceFilter = ({
             >
               Price:{" "}
               <span className="text-black">
-                £{min} - £{value.toFixed(2)}
+                {formatPound(min)} - {formatPound(value)}
               </span>
             </span>
             <button

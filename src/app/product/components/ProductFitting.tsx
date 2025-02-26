@@ -22,13 +22,13 @@ const ProductFitting = ({
               onClick={() =>
                 setSelectedFields({ ...selectedFields, fitting: fitting })
               }
-              className={`flex flex-col items-center justify-center px-4 py-2 rounded-lg border shadow-sm cursor-pointer transition duration-300 ${
+              className={`flex flex-col items-center justify-center px-4 py-1 rounded-lg border shadow-sm cursor-pointer transition duration-300 ${
                 isSelected
                   ? "border-black bg-gray-100 shadow-md"
                   : "hover:shadow-md"
               }`}
             >
-              <p className="font-semibold flex items-center gap-2">
+              <p className="font-semibold flex text-lg items-center gap-2">
                 {fitting.Fitting_Description.trim()}
                 {fitting.Perc_Uplift > 0 && (
                   <span className="text-sm text-green-500">
@@ -36,7 +36,7 @@ const ProductFitting = ({
                   </span>
                 )}
               </p>
-              <p className="text-sm text-gray-500">
+              <p className="text-xs text-gray-500">
                 Code: {fitting.Fitting.trim()}
               </p>
             </div>

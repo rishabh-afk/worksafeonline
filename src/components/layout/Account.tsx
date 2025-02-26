@@ -54,7 +54,7 @@ const Account = () => {
   const onClose = () => setIsVisible(false);
 
   return (
-    <span className="hover:text-yellow-500 cursor-pointer hidden lg:block relative transition-all duration-100 ease-linear">
+    <span className="hover:text-secondary cursor-pointer hidden lg:block relative transition-all duration-100 ease-linear">
       <FaRegUser onClick={handleToggle} size={23} />
       <AuthFlow onClose={onClose} isVisible={isVisible} />
     </span>

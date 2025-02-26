@@ -1,6 +1,7 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import LogoModal from "@/components/modals/LogoModal";
+import { formatPound } from "@/components/logo/general";
 
 interface ProductDetailsProps {
   cart: {
@@ -79,10 +80,10 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ cart }) => {
               <td className="px-2 text-center">{product.Size}</td>
               <td className="px-2 text-center">X {product.Quantity}</td>
               <td className="px-2 text-center">
-                £{product.SalesPrice && product.SalesPrice.toFixed(2)}
+                {product.SalesPrice && formatPound(product.SalesPrice)}
               </td>
               <td className="px-2 text-base font-semibold text-center">
-                £{product.LineTotal && product.LineTotal.toFixed(2)}
+                {product.LineTotal && formatPound(product.LineTotal)}
               </td>
               <td>
                 {product?.ArtworkExist > 0 ? (

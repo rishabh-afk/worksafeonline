@@ -1,4 +1,5 @@
 import { bigShoulders } from "@/app/layout";
+import { formatPound } from "@/components/logo/general";
 
 // interface CartItem {
 //   ID: string;
@@ -23,7 +24,7 @@ const SubTotal = ({ cart }: { cart: any }) => {
     >
       <strong>SubTotal:</strong>{" "}
       <span className="font-black text-xl">
-        £ {cart?.TotalAmountExVat.toFixed(2)}
+        {formatPound(cart?.TotalAmountExVat)}
       </span>
     </div>
   );

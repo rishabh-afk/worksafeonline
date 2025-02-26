@@ -1,5 +1,5 @@
 import React from "react";
-import { Get } from "@/api/generalApi";
+import { fetchMenuData, Get } from "@/api/generalApi";
 import Header from "./components/Header";
 import FilterSection from "./components/FilterSection";
 
@@ -52,9 +52,10 @@ export default async function Page(ctx: any) {
       "api/ProductsByPageN?category_id=0&page=1&pagesize=12"
     );
   }
+  const getBreadCrumbs = await fetchMenuData(category, subcategory);
   return (
     <>
-      <Header title="Shop" />
+      <Header title="Shop" getBreadCrumbs={getBreadCrumbs} />
       <FilterSection
         category={category}
         response={response}

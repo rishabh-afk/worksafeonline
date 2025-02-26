@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { bigShoulders } from "@/app/layout";
+import { BASE_URL } from "@/api/generalApi";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import eventEmitter from "@/hooks/useEventEmitter";
 import { IoArrowBackOutline } from "react-icons/io5";
@@ -41,38 +42,9 @@ const Login = ({
     setErrors({ ...errors, [name]: "" }); // Clear errors on change
   };
 
-  // const validateForm = () => {
-  //   let valid = true;
-  //   const newErrors = { email: "", password: "" };
-
-  //   // Email validation
-  //   if (!formData.email) {
-  //     newErrors.email = "Email is required.";
-  //     valid = false;
-  //   } else if (
-  //     !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(formData.email)
-  //   ) {
-  //     newErrors.email = "Please enter a valid email address.";
-  //     valid = false;
-  //   }
-
-  //   // Password validation
-  //   if (!formData.password) {
-  //     newErrors.password = "Password is required.";
-  //     valid = false;
-  //   } else if (formData.password.length < 7) {
-  //     newErrors.password = "Password must be at least 7 characters long.";
-  //     valid = false;
-  //   }
-
-  //   setErrors(newErrors);
-  //   return valid;
-  // };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      // if (!validateForm()) return;
       setLoading(true);
       const deviceData = getDeviceData();
       const data = {
@@ -83,7 +55,7 @@ const Login = ({
         DeviceID: deviceData ? deviceData.deviceId : "",
       };
       const responseData: any = await axios.post(
-        "https://johntrn.worksafeonline.co.uk/api/NewLogin",
+        `${BASE_URL}api/NewLogin`,
         data
       );
       const response: LoginResponse = responseData?.data;
@@ -109,9 +81,9 @@ const Login = ({
         <div className="flex gap-4">
           <span className="p-[2px] h-fit hover:scale-125 transition hover:bg-[#1C1C1C] rounded-full">
             <IoArrowBackOutline
-              size={25}
+              size={22}
               onClick={() => setScreen("welcome")}
-              className="text-primary cursor-pointer"
+              className="text-primary hover:text-white cursor-pointer"
             />
           </span>
           <Link href="/">
@@ -133,13 +105,13 @@ const Login = ({
           >
             Login!
           </h2>
-          <p className="text-center md:text-left text-white/80">
+          <p className="text-center md:text-left text-white">
             Please check your email for more information.
           </p>
         </div>
       </div>
       <div className="w-full lg:w-1/2 space-y-6 md:pl-10">
-        <p className="text-center text-base text-white/80">
+        <p className="text-center text-base text-white">
           We have emailed your username and password to:{" "}
           <span className="text-primary underline cursor-not-allowed">
             {email}
@@ -156,6 +128,14 @@ const Login = ({
               className={`w-full p-2 border-b text-white outline-none bg-transparent ${
                 errors.email ? "border-red-500" : "border-gray-300"
               } focus:ring-primary focus:border-primary`}
+              style={{
+                WebkitBoxShadow: "0 0 0px 1000px transparent inset", // Force autofill to stay transparent
+                boxShadow: "0 0 0px 1000px transparent inset",
+                WebkitTextFillColor: "white", // Ensure text remains visible
+                backgroundClip: "text", // Helps prevent background color filling in some cases
+                transition: "background-color 9999s ease-in-out 0s", // Prevents autofill styling
+                caretColor: "white",
+              }}
             />
             {errors.email && (
               <p className="text-red-500 text-sm mt-1">{errors.email}</p>
@@ -173,6 +153,14 @@ const Login = ({
               className={`w-full p-2 border-b outline-none bg-transparent ${
                 errors.password ? "border-red-500" : "border-gray-300"
               } focus:ring-primary focus:border-primary`}
+              style={{
+                WebkitBoxShadow: "0 0 0px 1000px transparent inset", // Force autofill to stay transparent
+                boxShadow: "0 0 0px 1000px transparent inset",
+                WebkitTextFillColor: "white", // Ensure text remains visible
+                backgroundClip: "text", // Helps prevent background color filling in some cases
+                transition: "background-color 9999s ease-in-out 0s", // Prevents autofill styling
+                caretColor: "white",
+              }}
             />
             <span
               className="absolute cursor-pointer right-0 top-4 z-10"
@@ -187,11 +175,11 @@ const Login = ({
           <button
             type="submit"
             disabled={loading}
-            className={`w-full py-2 px-4 disabled:cursor-not-allowed bg-primary text-black uppercase rounded-full shadow-md text-lg font-bold hover:bg-primary/80 transition outline-none ${bigShoulders.className}`}
+            className={`w-full py-2 px-4 disabled:cursor-not-allowed bg-primary text-white uppercase rounded-full shadow-md text-lg font-bold hover:bg-primary/80 transition outline-none ${bigShoulders.className}`}
           >
             {loading ? "Please wait..." : "Login"}
           </button>
-          <p className="text-xs mt-2 text-center text-white/60">
+          <p className="text-xs mt-2 text-center text-white/80">
             I have read & agree to the{" "}
             <Link href={"/terms-and-conditions"} className="underline">
               terms & condition{" "}

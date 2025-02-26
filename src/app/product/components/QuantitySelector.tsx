@@ -11,6 +11,7 @@ import SizeQuantities from "./SizeQuantities";
 import ProductFitting from "./ProductFitting";
 import AddToCartButton from "./AddToCartButton";
 import { isTokenExist } from "@/api/generateDeviceId";
+import { formatPound } from "@/components/logo/general";
 
 interface QuantitySelectorProps {
   product: Product;
@@ -25,7 +26,10 @@ const QuantitySelector = ({
     ProductSellingPrice: product?.ProductSellingPrice,
     ProductActualPrice: product?.ProductActualPrice,
   });
-  const [showLogoModal, setShowLogoModal] = useState(false);
+
+  const [showLogoModal, setShowLogoModal] = useState(
+    showLogoCustomisation || false
+  );
   const [filterProductSizes, setFilterProductSizes] = useState<any>(
     product?.ProductSizes
   );
@@ -216,9 +220,11 @@ const QuantitySelector = ({
     <>
       {price?.ProductActualPrice && price?.ProductSellingPrice && (
         <p className={`mt-4 text-4xl space-x-2 ${bigShoulders.className}`}>
-          <span>£{price.ProductSellingPrice.toFixed(2)}</span>
-          <span className="text-3xl text-gray-500 line-through">
-            £{price.ProductActualPrice.toFixed(2)}
+          <span className="text-primary font-bold">
+            {formatPound(price.ProductSellingPrice)}
+          </span>
+          <span className="text-3xl text-gray-400 line-through">
+            {formatPound(price.ProductActualPrice)}
           </span>
         </p>
       )}
@@ -236,10 +242,14 @@ const QuantitySelector = ({
           productFittings={filterProductFittings}
         />
       )}
-      {filterProductSizes.length > 0 && (
+      {product?.ProductSizes.length > 0 && (
         <SizeQuantities
           fieldsCheck={fieldsCheck}
-          sizes={filterProductSizes}
+          sizes={
+            product?.ProductSizes.length === 1
+              ? product?.ProductSizes
+              : filterProductSizes
+          }
           selectedFields={selectedFields}
           setSelectedFields={setSelectedFields}
         />

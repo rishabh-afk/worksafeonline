@@ -96,9 +96,9 @@ const Code = ({
         <div className="flex gap-4">
           <span className="p-[2px] h-fit hover:scale-125 transition hover:bg-[#1C1C1C] rounded-full">
             <IoArrowBackOutline
-              size={25}
+              size={22}
               onClick={() => setScreen("confirmationCode")}
-              className="text-primary cursor-pointer"
+              className="text-primary hover:text-white cursor-pointer"
             />
           </span>
           <Link href="/">
@@ -120,7 +120,7 @@ const Code = ({
           >
             Register!
           </h2>
-          <p className="text-center md:text-left text-white/80">
+          <p className="text-center md:text-left text-white">
             Welcome to WORKSAFE, Please enter your group or company code below
             and select &apos;Continue&apos;
           </p>
@@ -157,13 +157,13 @@ const Code = ({
           </div>
           <button
             type="submit"
-            className={`w-full py-2 px-4 bg-primary text-black uppercase rounded-full shadow-md text-lg font-bold hover:bg-primary/80 transition outline-none ${bigShoulders.className}`}
+            className={`w-full py-2 px-4 bg-primary text-white uppercase rounded-full shadow-md text-lg font-bold hover:bg-primary/80 transition outline-none ${bigShoulders.className}`}
           >
             Continue
           </button>
         </form>
         <div>
-          <p className="text-xs mt-2 text-center text-white/60">
+          <p className="text-xs mt-2 text-center text-white/80">
             I have read & agree to the{" "}
             <Link href={"/terms-and-conditions"} className="underline">
               terms & condition{" "}

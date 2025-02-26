@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { bigShoulders } from "@/app/layout";
 import React, { useEffect, useState } from "react";
+import { formatPound } from "../../general";
 
 interface GalleryProps {
   localData: {
@@ -100,7 +101,9 @@ const Gallery: React.FC<GalleryProps> = ({
                   <p className="font-bold leading-4 text-sm text-gray-700">
                     {data.Description} ({data.Item_Code})
                   </p>
-                  <p className="text-gray-600">Cost - £{data.Sales_Price}</p>
+                  <p className="text-gray-600">
+                    Cost - {formatPound(data.Sales_Price)}
+                  </p>
                   <p className="text-gray-600">Size - {data.Size}</p>
                   <p className="text-gray-600">Type - {data.ArtworkType}</p>
                 </div>

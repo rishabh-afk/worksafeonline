@@ -1,13 +1,13 @@
 import { Get } from "@/api/generalApi";
-import Header from "./components/Header";
 import { features } from "@/data/country";
 import Map from "./components/MapComponent";
 import ContactForm from "./components/ContactForm";
 import ContactDetails from "./components/ContactDetails";
+import Header from "../about-us/components/Header";
 
 export async function generateMetadata() {
   // Replace with the correct endpoint
-  const pageData = await Get('');
+  const pageData = await Get("");
 
   return {
     title: pageData?.title ?? "Worksafeonline | Contact Us",
@@ -29,7 +29,10 @@ export default async function Page() {
   const data = await Get("api/ContactDetail1?app=Worksafe");
   return (
     <>
-      <Header title="Contact" />
+      <Header
+        title="Contact"
+        getBreadCrumbs={[{ id: "/contact", name: "Contact Us" }]}
+      />
       <ContactDetails details={data} />
       <Map location={data?.Location} />
       <ContactForm />

@@ -75,7 +75,7 @@ const ImageText = ({
       variants={containerVariants}
       viewport={{ once: true }}
     >
-      <div className="h-full w-full lg:w-1/2">
+      <div className="h-full w-full lg:w-[45%]">
         <Image
           priority
           unoptimized
@@ -86,7 +86,7 @@ const ImageText = ({
           className="w-full object-contain rounded-2xl mx-auto"
         />
       </div>
-      <div className="grid w-full lg:w-1/2 grid-cols-1 gap-5">
+      <div className="grid w-full lg:w-[55%] grid-cols-1 gap-5">
         {options.map((option) => (
           <motion.div
             key={option.id}

@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { MdDelete } from "react-icons/md";
 import { bigShoulders } from "@/app/layout";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { formatPound } from "../../general";
 
 interface LogoData {
   name?: string;
@@ -117,7 +118,7 @@ const SelectedLogo: React.FC<SelectedLogoProps> = ({
 
           <div className="flex justify-center items-center flex-wrap pt-1 gap-10">
             <p className="text-gray-700">
-              Cost - £{isLogoSelected.Sales_Price}
+              Cost - {formatPound(isLogoSelected.Sales_Price)}
             </p>
             <p className="text-gray-700">Size - {isLogoSelected.Size}</p>
             <p className="text-gray-700">Type - {isLogoSelected.ArtworkType}</p>

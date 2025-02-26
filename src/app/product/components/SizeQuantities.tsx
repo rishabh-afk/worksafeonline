@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
+import { debounce } from "@/api/generalApi";
 import { bigShoulders } from "@/app/layout";
 import React, { useEffect, useState } from "react";
 import { containerVariants, itemVariants } from "@/animation/framer";
-import { debounce } from "@/api/generalApi";
 
 const SizeQuantities = ({
   sizes,
@@ -103,7 +103,7 @@ const SizeQuantities = ({
     <div className="pb-2">
       <p className="mt-4 mb-2 font-semibold">Sizes</p>
       <motion.div
-        className="grid grid-cols-4 md:grid-cols-7 lg:grid-cols-6 gap-3 lg:gap-2"
+        className="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-6 gap-3 lg:gap-2"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
@@ -114,24 +114,24 @@ const SizeQuantities = ({
           return (
             <motion.div
               key={size.Size}
-              className={`rounded-lg pt-1 p-[2px] text-center cursor-pointer ${
-                isActive ? "bg-primary/70" : "bg-gray-200/80"
+              className={`spt-1 p-[2px] text-center cursor-pointer ${
+                isActive ? "bg-primary/80" : "bg-gray-200/80"
               }`}
               variants={itemVariants}
             >
               <div
                 className={`font-black ${
-                  isActive ? "text-black" : "text-gray-600"
+                  isActive ? "text-white" : "text-gray-600"
                 } ${bigShoulders.className}`}
               >
                 {size.Size}
               </div>
-              <div className={`px-1 pt-px pb-1 mt-1 bg-white rounded-b-lg`}>
+              <div className={`px-1 pt-px pb-1 mt-1 bg-white`}>
                 <div className="flex items-center justify-between mt-2">
                   <button
-                    className={`w-5 h-5 flex justify-center items-center active:scale-[0.9] transition rounded ${
+                    className={`w-5 h-5 flex justify-center items-center active:scale-[0.9] transition ${
                       isActive
-                        ? "bg-primary/70 text-black hover:bg-primary"
+                        ? "bg-primary/80 text-white hover:bg-primary"
                         : "bg-gray-300 text-white hover:bg-gray-400"
                     }`}
                     onClick={debounce(() => handleDecrement(size), 150)}
@@ -144,27 +144,28 @@ const SizeQuantities = ({
                     onChange={(e) => {
                       const newValue = Math.max(
                         0,
-                        Math.min(size.qty, Number(e.target.value))
+                        Math.min(9999, Number(e.target.value))
+                        // Math.min(size.qty, Number(e.target.value))
                       );
                       setQuantities({ ...quantities, [size.Size]: newValue });
                     }}
                     onBlur={() => handleIncrement(size, true)}
-                    className="text-xs py-0.5 w-7 text-center border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary"
+                    className="text-xs py-0.5 w-9 text-center border border-gray-300 focus:outline-none focus:ring-1 focus:ring-primary"
                   />
                   <button
-                    className={`w-5 h-5 flex disabled:cursor-not-allowed justify-center items-center active:scale-[0.9] transition rounded ${
+                    className={`w-5 h-5 flex disabled:cursor-not-allowed justify-center items-center active:scale-[0.9] transition ${
                       isActive
-                        ? "bg-primary/70 text-black hover:bg-primary"
+                        ? "bg-primary/80 text-white hover:bg-primary"
                         : "bg-gray-300 text-white hover:bg-gray-400"
                     }`}
-                    disabled={quantities[size.Size] === size.qty}
+                    // disabled={quantities[size.Size] === size.qty}
                     onClick={debounce(() => handleIncrement(size), 150)}
                   >
                     +
                   </button>
                 </div>
-                <div className="text-xs mt-2 pb-px">In Stock</div>
-                <div className="text-[10px] font-thin text-gray-600">
+                <div className="text-xs mt-2 font-semibold pb-px">In Stock</div>
+                <div className="text-[10px] text-gray-600">
                   {size.qty} Available
                 </div>
               </div>

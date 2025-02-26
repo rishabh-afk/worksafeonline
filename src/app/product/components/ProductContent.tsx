@@ -1,5 +1,5 @@
 import Guarantee from "./Guarantee";
-import ShippingInfo from "./ShippingInfo";
+// import ShippingInfo from "./ShippingInfo";
 import ProductDetails from "./ProductDetail";
 import ProductActions from "./ProductActions";
 import QuantitySelector from "./QuantitySelector";
@@ -7,17 +7,20 @@ import QuantitySelector from "./QuantitySelector";
 
 const ProductContent = ({ product }: { product: any }) => {
   return (
-    <div className="w-full lg:w-[45%] mt-4 lg:mt-0">
+    <div className="w-full lg:w-1/2 overflow-auto mt-4 lg:mt-0">
       <ProductDetails product={product} />
       <QuantitySelector
         product={product}
         showLogoCustomisation={product.ShowDesignLogo}
       />
-      <ProductActions />
-      <Guarantee />
-      <ShippingInfo />
-      {/* <div className="bg-gray-300 h-[1px] my-8" /> */}
-      {/* <ProductMetaInfo /> */}
+      <ProductActions ProSpecsheet={product?.ProSpecsheet} />
+      <Guarantee warranty={product?.warranty} />
+      {/* <ShippingInfo shippingDetails={product.shippingDetails} /> */}
+      {/* <div className="bg-gray-300 h-[1px] my-8" />
+      <ProductMetaInfo
+        productSKU={product.productSKU}
+        productCategory={product.productCategory}
+      /> */}
     </div>
   );
 };

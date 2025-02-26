@@ -67,7 +67,7 @@ const QuickViewProductSwiper = ({
   };
 
   return (
-    <div className="sticky top-16 border rounded-xl">
+    <div className="sticky top-14 border rounded-xl">
       <Swiper
         spaceBetween={30}
         effect={"fade"}

@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { RxCross1 } from "react-icons/rx";
+import { formatPound } from "@/components/logo/general";
 
 const CartItem = ({
   product,
@@ -20,8 +21,8 @@ const CartItem = ({
       </span>
       <div className="w-1/5">
         <Image
-          width={200}
-          height={200}
+          width={225}
+          height={225}
           src={product?.ProductImage}
           alt={product?.ProductDescription}
           onClick={() => (window.location.href = slug)}
@@ -30,27 +31,27 @@ const CartItem = ({
       </div>
       <div>
         <h2
-          className="text-black font-semibold"
+          className="text-black text-lg font-semibold"
           onClick={() => (window.location.href = slug)}
         >
           {product.ProductDescription} ({product.ProductCode})
         </h2>
         <p>
           {product?.Colour && (
-            <span className="text-sm">Color: {product?.Colour}</span>
+            <span className="text-base">Color: {product?.Colour}</span>
           )}
           {product?.Fitting && (
-            <span className="border-x text-sm px-2 mx-2 border-black">
+            <span className="border-x text-base px-2 mx-2 border-black">
               Fitting: {product?.Fitting}
             </span>
           )}
           {product?.Size && (
-            <span className="text-sm">Size: {product?.Size}</span>
+            <span className="text-base">Size: {product?.Size}</span>
           )}
         </p>
-        <p className="text-primary font-semibold">
+        <p className="text-primary text-lg font-semibold">
           <span className="text-black font-normal">{product?.Quantity} x</span>{" "}
-          £ {product?.SalesPrice}
+          {formatPound(product?.SalesPrice)}
         </p>
       </div>
     </div>

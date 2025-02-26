@@ -1,8 +1,17 @@
 import React from "react";
 import { bigShoulders } from "@/app/layout";
 import Link from "next/link";
+import { formatPound } from "@/components/logo/general";
 
-const ThankYouHeader = ({ order, email }: { order: any; email: string }) => {
+const ThankYouHeader = ({
+  order,
+  email,
+  YourReff,
+}: {
+  order: any;
+  email: string;
+  YourReff: string;
+}) => {
   return (
     <div className="bg-gray-100 p-2 mb-5 md:p-5 rounded-xl">
       <div className="text-left flex flex-col lg:flex-row justify-between gap-5 lg:gap-10">
@@ -12,7 +21,7 @@ const ThankYouHeader = ({ order, email }: { order: any; email: string }) => {
           >
             Thank You for <span className="text-secondary">your order!</span>
           </h1>
-          <p className="mt-2 text-xl font-semibold text-gray-600">
+          <p className="mt-3 mb-4 text-xl font-semibold text-gray-600">
             Your order has been successfully placed.
           </p>
           <p className="text-gray-500 text-xs mt-1">
@@ -43,12 +52,18 @@ const ThankYouHeader = ({ order, email }: { order: any; email: string }) => {
             <p className="text-gray-900 font-bold">#{order?.orderId}</p>
           </div>
           <div className="flex justify-between items-center whitespace-nowrap gap-32 border-b pb-2 mb-2">
+            <p className="font-semibold text-gray-700">Reference Number:</p>
+            <p className="text-gray-900">{YourReff}</p>
+          </div>
+          <div className="flex justify-between items-center whitespace-nowrap gap-32 border-b pb-2 mb-2">
             <p className="font-semibold text-gray-700">Order Date:</p>
             <p className="text-gray-900">{order?.orderDate}</p>
           </div>
           <div className="flex justify-between items-center whitespace-nowrap gap-32">
             <p className="font-semibold text-gray-700">Total Amount:</p>
-            <p className="text-gray-900 font-bold">£{order?.totalAmount}</p>
+            <p className="text-gray-900 font-bold">
+              {formatPound(order?.totalAmount)}
+            </p>
           </div>
         </div>
       </div>

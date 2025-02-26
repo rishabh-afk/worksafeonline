@@ -6,6 +6,7 @@ import Welcome from "./login/Welcome";
 import Register from "./login/Register";
 import { RxCross1 } from "react-icons/rx";
 import StandardLogin from "./login/StandardLogin";
+import RegisterForget from "./login/RegisterForget";
 import RegisterSuccess from "./login/RegisterSuccess";
 import RegisterAccount from "./login/RegisterAccount";
 import { motion, AnimatePresence } from "framer-motion";
@@ -82,6 +83,14 @@ const AuthFlow: React.FC<AuthFlowProps> = ({ onClose, isVisible }) => {
             setFormData={setFormData}
           />
         );
+      case "forgetregister":
+        return (
+          <RegisterForget
+            formData={formData}
+            setScreen={setScreen}
+            setFormData={setFormData}
+          />
+        );
       case "register2":
         return (
           <RegisterAccount
@@ -122,7 +131,7 @@ const AuthFlow: React.FC<AuthFlowProps> = ({ onClose, isVisible }) => {
           className="w-full h-full object-cover"
           src="https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/bc-page.jpg"
         />
-        <div className="absolute inset-0 bg-black bg-opacity-65"></div>
+        <div className="absolute inset-0 bg-black bg-opacity-50"></div>
         <div className="absolute inset-0 flex justify-center">
           <AnimatePresence mode="wait">
             <motion.div

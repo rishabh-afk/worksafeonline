@@ -63,6 +63,7 @@ const ClientPage = () => {
     <div className="max-w-9xl min-h-screen mx-auto p-4 md:p-6 lg:p-10">
       <ThankYouHeader
         order={orderData}
+        YourReff={orderSummary?.Orderdetails?.YourReff}
         email={
           orderSummary?.Orderaddress?.Email ??
           orderSummary?.Orderinvaddress?.InvEmail

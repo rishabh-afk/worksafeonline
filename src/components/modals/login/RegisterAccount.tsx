@@ -130,9 +130,9 @@ const RegisterAccount = ({
         <div className="flex gap-4">
           <span className="p-[2px] h-fit hover:scale-125 transition hover:bg-[#1C1C1C] rounded-full">
             <IoArrowBackOutline
-              size={25}
+              size={22}
               onClick={() => setScreen("registerSuccess")}
-              className="text-primary cursor-pointer"
+              className="text-primary hover:text-white cursor-pointer"
             />
           </span>
           <Link href="/">
@@ -152,7 +152,7 @@ const RegisterAccount = ({
           >
             Register!
           </h2>
-          <p className="text-center md:text-left text-white/80">
+          <p className="text-center md:text-left text-white">
             Your code is registered with the following account. Please select
             continue to register:
           </p>
@@ -160,10 +160,10 @@ const RegisterAccount = ({
       </div>
       <div className="w-full lg:w-1/2 md:pl-10">
         <form onSubmit={handleSubmit}>
-          <div className="text-center bg-primary rounded-full text-black cursor-not-allowed py-2">
+          <div className="text-center bg-primary rounded-full text-white cursor-not-allowed py-2">
             {formData?.cust} {formData?.custName}
           </div>
-          <p className="text-center text-lg py-4 text-white/80">
+          <p className="text-center text-lg py-4 text-white">
             Please select below to continue
           </p>
           <div className="mb-6">
@@ -229,7 +229,7 @@ const RegisterAccount = ({
           </div>
           <button
             type="submit"
-            className={`w-full py-2 px-4 bg-primary text-black uppercase rounded-full shadow-md text-lg font-bold hover:bg-primary/80 transition outline-none ${bigShoulders.className}`}
+            className={`w-full py-2 px-4 bg-primary text-white uppercase rounded-full shadow-md text-lg font-bold hover:bg-primary/80 transition outline-none ${bigShoulders.className}`}
           >
             Continue
           </button>

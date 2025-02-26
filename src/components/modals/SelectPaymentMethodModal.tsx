@@ -65,7 +65,7 @@ const SelectPaymentMethodModal = ({
           disabled={!selectedMethod}
           className={`mt-6 px-6 py-3 rounded-lg text-lg font-bold transition w-full ${
             selectedMethod
-              ? "bg-primary text-black hover:bg-primary/80"
+              ? "bg-primary text-white hover:bg-primary/80"
               : "bg-gray-300 text-gray-500 cursor-not-allowed"
           }`}
         >

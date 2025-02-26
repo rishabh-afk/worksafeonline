@@ -2,44 +2,24 @@ import React from "react";
 import Link from "next/link";
 
 interface BreadcrumbsHeaderProps {
-  text: string;
-  category?: string;
-  formattedSlug?: string;
+  getBreadCrumbs: any;
 }
 
 const BreadcrumbsHeader: React.FC<BreadcrumbsHeaderProps> = ({
-  text,
-  category,
-  formattedSlug,
+  getBreadCrumbs,
 }) => {
   const breadcrumbs = [{ label: "Home", href: "/" }];
-
-  if (category) {
-    breadcrumbs.push({
-      label: category,
-      href: `/shop?category=${category}`,
+  if (getBreadCrumbs && getBreadCrumbs.length > 0)
+    getBreadCrumbs.map((breadcrumb: any) => {
+      breadcrumbs.push({
+        href: breadcrumb.id,
+        label: breadcrumb.name,
+      });
     });
-  }
-
-  if (formattedSlug) {
-    breadcrumbs.push({
-      label: "Shop",
-      href: "/shop-all",
-    });
-    breadcrumbs.push({
-      label: formattedSlug,
-      href: `/${formattedSlug}`,
-    });
-  } else {
-    breadcrumbs.push({
-      label: text,
-      href: "#",
-    });
-  }
 
   return (
     <nav aria-label="Breadcrumb" className="uppercase font-bold text-sm">
-      <ol className="flex space-x-2">
+      <ol className="flex flex-wrap gap-x-2 gap-y-1 whitespace-nowrap">
         {breadcrumbs.map((breadcrumb, index) => {
           const isLast = index === breadcrumbs.length - 1;
           return (

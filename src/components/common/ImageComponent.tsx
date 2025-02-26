@@ -38,7 +38,7 @@ const ImageComponent = ({ product, slug }: { product: any; slug: string }) => {
             onLoad={handleLoad}
             onError={handleError}
             alt={product?.Description}
-            className={`h-48 md:h-64 object-contain transition-all duration-200 ease-linear p-2 border mb-4 rounded-lg ${
+            className={`h-48 md:h-64 object-contain transition-all duration-200 ease-linear p-2 border-2 mb-4 ${
               isLoading ? "opacity-0" : "opacity-100"
             }`}
           />

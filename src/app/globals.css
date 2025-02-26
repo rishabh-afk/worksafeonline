@@ -1,7 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@layer components {}
+@layer components {
+}
 
 body {
   font-family: Arial, Helvetica, sans-serif;
@@ -33,7 +34,7 @@ body {
 
 /* For WebKit-based browsers (Chrome, Safari, etc.) */
 ::-webkit-scrollbar {
-  width: 3px; /* Width of the scrollbar */
+  width: 8px; /* Width of the scrollbar */
 }
 
 ::-webkit-scrollbar-track {
@@ -130,13 +131,21 @@ body {
   box-sizing: border-box; /* Ensures the border is included in the thumb size */
 }
 
-
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
-  background: transparent !important;
-  -webkit-box-shadow: 0 0 0px 1000px transparent inset !important;
+#emailInput:-webkit-autofill,
+#emailInput:-webkit-autofill:hover,
+#emailInput:-webkit-autofill:focus,
+#emailInput:-webkit-autofill:active {
+  caret-color: white !important;
+  background-color: transparent !important;
+  -webkit-text-fill-color: white !important;
+  transition: background-color 9999s ease-in-out 0s;
   box-shadow: 0 0 0px 1000px transparent inset !important;
-  color: inherit !important;
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset !important;
+}
+
+#emailInput:-moz-autofill {
+  color: white !important;
+  caret-color: white !important;
+  background-color: transparent !important;
+  box-shadow: 0 0 0px 1000px transparent inset !important;
 }

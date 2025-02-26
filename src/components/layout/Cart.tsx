@@ -60,6 +60,19 @@ const CartModal = () => {
     setOpenCartModal((prev) => !prev);
   };
 
+  useEffect(() => {
+    const fetchData = () => {
+      setTimeout(() => {
+        fetchCart();
+      }, 500);
+    };
+    eventEmitter?.on("loggedIn", fetchData);
+    return () => {
+      eventEmitter?.off("loggedIn", fetchData);
+    };
+    // eslint-disable-next-line
+  }, [fetchCart]);
+
   const totalQuantity =
     cart?.Products?.reduce(
       (sum: number, product: any) => sum + (product.Quantity || 0),
@@ -83,7 +96,7 @@ const CartModal = () => {
       />
       <span
         onClick={openCart}
-        className="absolute -top-3 -right-3 w-5 md:w-6 h-5 md:h-6 text-xs text-black rounded-full bg-primary flex items-center justify-center"
+        className="absolute -top-3 -right-3 w-5 md:min-w-6 h-5 md:min-h-6 text-xs text-black rounded-full bg-secondary flex items-center justify-center"
       >
         {formattedQuantity}
       </span>

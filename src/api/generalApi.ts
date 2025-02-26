@@ -1,8 +1,8 @@
+import axios from "axios";
 import { Cart } from "@/types/api";
 import { includes } from "@/utils/polyfills";
-import axios from "axios";
 
-export const BASE_URL = "https://johntrn.worksafeonline.co.uk/";
+export const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export const Get = async (url: string) => {
   try {
@@ -158,4 +158,76 @@ export const formatKey = (key: string): string => {
     .replace(/([a-z])([A-Z])/g, "$1 $2") // Add space between camelCase words
     .replace(/_/g, " ") // Replace underscores with spaces
     .replace(/\b\w/g, (char) => char.toUpperCase()); // Capitalize the first letter of each word
+};
+
+interface MenuItem {
+  menu_id: string;
+  menu_name: string;
+  subcategories?: { menu_id: string; menu_name: string }[];
+}
+
+export const fetchMenuData = async (id: any, subId?: any) => {
+  try {
+    const response: any = await Get("api/GetFullMenu?App=Worksafe");
+    if (!response.status) return { data: [] };
+
+    let menu: any = [];
+    const categories: MenuItem[] = response.categories;
+    const result: { id: string; name: string }[] = [];
+
+    if (id) {
+      const menuData = categories.find(
+        (item) => item.menu_id.toString() === id.toString()
+      );
+      menu = menuData;
+      if (!menuData) return { data: [] };
+      result.push({
+        name: menuData.menu_name,
+        id: `/shop?category=${menuData.menu_id}`,
+      });
+    }
+
+    if (id && subId && menu.subcategories) {
+      const subcategory = menu.subcategories.find(
+        (sub: any) => sub.menu_id.toString() === subId.toString()
+      );
+      if (subcategory) {
+        result.push({
+          id: `/shop?category=${id}&subcategory=${subcategory.menu_id}`,
+          name: subcategory.menu_name,
+        });
+      }
+    }
+    return result || { data: [] };
+  } catch (error) {
+    console.error("Error fetching menu:", error);
+    return { data: [] };
+  }
+};
+
+export const fetchProductMenuData = async (id: any) => {
+  try {
+    const response: any = await Get("api/GetFullMenu?App=Worksafe");
+    if (!response.status) return { data: [] };
+
+    const categories: MenuItem[] = response.categories;
+    const result: { id: string; name: string }[] = [];
+
+    categories.forEach((category) => {
+      if (category.subcategories) {
+        category.subcategories.forEach((sub) => {
+          if (sub.menu_id.toString() === id.toString())
+            result.push({
+              name: sub.menu_name,
+              id: `/shop?category=${category.menu_id}&subcategory=${sub.menu_id}`,
+            });
+        });
+      }
+    });
+
+    return result || [];
+  } catch (error) {
+    console.error("Error fetching menu:", error);
+    return [];
+  }
 };

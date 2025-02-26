@@ -125,7 +125,7 @@ export const InvoiceFormFields: FormField[] = [
     name: "PCode",
     required: true,
     maxLength: 10,
-    label: "Post Code",
+    label: "Post Code (by Address Finder)",
     placeholder: "Enter post code",
     validation: (value) => {
       if (!value) return "Post code is required";
@@ -231,7 +231,7 @@ export const BillingFormField: FormField[] = [
     type: "text",
     required: true,
     name: "DPCode",
-    label: "Post Code",
+    label: "Post Code (by Address Finder)",
     maxLength: 10,
     placeholder: "Enter post code",
     validation: (value) => {

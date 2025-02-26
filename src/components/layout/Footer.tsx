@@ -1,22 +1,22 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { bigShoulders } from "@/app/layout";
-import AnimatedActionButton from "../common/AnimatedActionButton";
-import SubscribeMail from "./SubscribeMail";
-import SocialConnect from "./SocialLinks";
 import { Get } from "@/api/generalApi";
+// import SocialConnect from "./SocialLinks";
+import { bigShoulders } from "@/app/layout";
+import SubscribeMail from "./SubscribeMail";
+import AnimatedActionButton from "../common/AnimatedActionButton";
 
 const Footer = async () => {
-  const customerLinks = [
-    { label: "Help Center", href: "/faqs" },
-    { label: "My Account", href: "/my-account" },
-    { label: "Track My Order", href: "/order-tracking" },
-  ];
+  // const customerLinks = [
+  //   { label: "Help Center", href: "/faqs" },
+  //   { label: "My Account", href: "/my-account" },
+  //   { label: "Track My Order", href: "/order-tracking" },
+  // ];
 
   const aboutLinks = [
     { label: "Company Info", href: "/about-us" },
-    { label: "Reviews", href: "/about-us" },
+    // { label: "Reviews", href: "/about-us" },
   ];
 
   const quickLinks = [
@@ -51,9 +51,9 @@ const Footer = async () => {
         {/* Overlay */}
         <div className="absolute max-w-9xl mx-auto inset-0 bg-black bg-opacity-20 flex flex-col md:flex-row py-5 md:py-0 items-center gap-2 md:gap-5 px-4 md:px-6 lg:px-10">
           <h2
-            className={`text-white text-2xl text-center md:text-left lg:text-3xl font-black ${bigShoulders.className}`}
+            className={`text-white uppercase text-2xl text-center md:text-left lg:text-3xl font-black ${bigShoulders.className}`}
           >
-            LET US GUIDE YOU IN YOUR CHOICE OF WORKWEAR
+            Check our Special Offers
           </h2>
           {/* <span className="relative flex space-x-2 items-center border rounded-full cursor-pointer hover:bg-primary bg-white hover:border-primary border-black/10 py-4 pl-44 md:pl-64 pr-4 overflow-hidden group">
             <span className="absolute text-xs md:text-sm font-semibold whitespace-nowrap left-4 w-full transition-all duration-300 ease-in-out transform group-hover:translate-y-[-100%] group-hover:opacity-0 opacity-100 translate-y-0">
@@ -65,21 +65,20 @@ const Footer = async () => {
             <FaArrowRightLong className="ml-2" />
           </span> */}
           <AnimatedActionButton
-            text=" CHECK OUT OUR GUIDES"
-            href="/"
-            // onClick={() => console.log("Button clicked")}
-            classes="md:text-lg font-extrabold whitespace-nowrap py-6 text-wider w-[280px] hover:bg-primary bg-white text-black hover:text-black"
+            href="/shop-all"
+            text="CLICK HERE TO VIEW"
+            classes="md:text-lg font-extrabold whitespace-nowrap py-6 text-wider w-[280px] hover:bg-primary bg-white text-black hover:!text-white"
             isLoading={false}
             type="submit"
           />
         </div>
       </div>
 
-      <footer className="bg-[#1C1C1C] text-white pt-20 mb-16 md:mb-20 lg:mb-0">
+      <footer className="bg-[#1C1C1C] text-white pt-14 mb-16 md:mb-20 lg:mb-0">
         {/* Top Section */}
-        <div className="max-w-9xl mx-auto px-4 md:px-6 lg:px-10 grid gap-7 lg:gap-10 grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
+        <div className="max-w-9xl mx-auto px-4 md:px-6 lg:px-10 grid gap-7 lg:gap-10 grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
           {/* Customer Links */}
-          <div>
+          {/* <div>
             <h4
               className={`${bigShoulders.className} font-bold text-2xl uppercase mb-4`}
             >
@@ -97,7 +96,7 @@ const Footer = async () => {
                 </li>
               ))}
             </ul>
-          </div>
+          </div> */}
 
           {/* About Links */}
           <div>
@@ -152,12 +151,12 @@ const Footer = async () => {
               <p>
                 <a
                   href={`mailto:${data.Email}`}
-                  className="text-blue-500 text-xs md:text-base underline"
+                  className="hover:text-primary text-xs md:text-base underline"
                 >
                   {data.Email}
                 </a>
               </p>
-              <p>{data.HeadQuarter || "Default headquarter address"}</p>
+              <p>{data.StoreLocation || "Default headquarter address"}</p>
             </div>
           </div>
 
@@ -165,13 +164,13 @@ const Footer = async () => {
           <SubscribeMail />
         </div>
 
-        <div className="border-t border-white/20 mt-10 md:mt-20" />
+        <div className="border-t border-white/20 mt-14" />
 
         {/* social links */}
-        <SocialConnect />
+        {/* <SocialConnect /> */}
 
         <div className="flex flex-col justify-center items-center w-full relative">
-          <div className="hidden lg:flex absolute bg-[#1C1C1C] p-4 justify-center items-center -top-12 sm:left-auto ">
+          <div className="hidden lg:flex absolute bg-[#1C1C1C] justify-center items-center -top-10 p-1 sm:left-auto ">
             <Link href="/">
               <Image
                 width={100}
@@ -187,7 +186,8 @@ const Footer = async () => {
           </div>
           <div className="bg-white pt-6 w-full text-black flex flex-col md:flex-row gap-3 justify-center md:justify-between items-center py-5 max-w-9xl mx-auto px-4 md:px-6 lg:px-10">
             <p className="text-gray-500">
-              Copyright © {new Date().getFullYear()} WorkSafeOnline. All rights reserved
+              Copyright © {new Date().getFullYear()} WorkSafeOnline. All rights
+              reserved
             </p>
             <Image
               src="https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/payment.jpg"

@@ -1,12 +1,12 @@
 "use client";
 
+import { toast } from "react-toastify";
 import { bigShoulders } from "../layout";
 import { Fetch, Post } from "@/utils/axios";
 import { useRouter } from "next/navigation";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useCallback, useEffect, useState } from "react";
 import AccountLayout from "@/components/account/AccountLayout";
-import { toast } from "react-toastify";
 
 export default function Page() {
   const router = useRouter();
@@ -146,6 +146,8 @@ export default function Page() {
                 name="newPassword"
                 autoComplete="off"
                 required
+                pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$"
+                title="Password must contain at least 1 uppercase letter, 1 number, 1 special character, and be at least 8 characters long."
                 value={passwords.newPassword}
                 onChange={handlePasswordChange}
                 className="mt-2 block w-full border font-normal border-gray-300 rounded-xl outline-none focus:ring-primary/50 focus:ring-2 focus:border-primary/50 text-gray-700 p-3"
@@ -176,6 +178,7 @@ export default function Page() {
                 name="reenterPassword"
                 autoComplete="off"
                 required
+                title="Password must contain at least 1 uppercase letter, 1 number, 1 special character, and be at least 8 characters long."
                 value={passwords.reenterPassword}
                 onChange={handlePasswordChange}
                 className="mt-2 block w-full border font-normal border-gray-300 rounded-xl outline-none focus:ring-primary/50 focus:ring-2 focus:border-primary/50 text-gray-700 p-3"

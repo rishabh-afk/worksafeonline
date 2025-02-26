@@ -79,9 +79,9 @@ export default function ClientPage() {
       <div className="max-w-9xl min-h-screen mx-auto p-4 md:p-6 lg:p-10">
         <div className="flex justify-between items-center">
           <h1
-            className={`uppercase text-3xl md:text-5xl lg:text-7xl flex items-center font-black ${bigShoulders.className}`}
+            className={`text-lg md:text-2xl lg:text-4xl flex items-center font-black ${bigShoulders.className}`}
           >
-            Cart{" "}
+            Order Details{" "}
             <span className="text-xl md:text-2xl lg:text-4xl">
               {" "}
               ({cart && cart?.Products ? cart?.Products.length : 0})

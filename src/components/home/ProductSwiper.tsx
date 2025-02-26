@@ -53,7 +53,7 @@ const ProductSwiper = ({
           },
           1200: {
             slidesPerView: slidesPerViewDesktop ?? 4,
-            spaceBetween: slidesPerViewDesktop ? 25 : 40,
+            spaceBetween: 40,
           },
           1680: {
             slidesPerView: products.length >= 5 ? 5 : 4,

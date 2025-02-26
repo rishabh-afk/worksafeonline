@@ -1,12 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Get } from "@/api/generalApi";
 import { toast } from "react-toastify";
-import { IoMdSearch } from "react-icons/io";
 import { bigShoulders } from "@/app/layout";
+import { formatPound } from "../logo/general";
+// import { IoMdSearch } from "react-icons/io";
 import { useState, useEffect, useRef } from "react";
-import Image from "next/image";
 
 const Search = () => {
   const searchRef = useRef<HTMLDivElement | null>(null);
@@ -113,11 +114,11 @@ const Search = () => {
         value={searchText}
         placeholder={placeholder}
         onChange={handleInputChange}
-        className="w-full px-4 text-lg py-3 text-gray-500 rounded-full outline-none"
+        className="w-[85%] px-4 text-lg py-2.5 text-gray-500 rounded-full outline-none"
       />
-      <button className="absolute z-20 top-0 right-0 px-4 py-3 rounded-full">
-        <IoMdSearch size={25} className="text-black" />
-      </button>
+      {/* <button className="absolute z-20 top-0 right-0 bg-white px-4 py-3 rounded-r-full">
+        <IoMdSearch size={24} className="text-gray-500" />
+      </button> */}
       {openModal && products.length > 0 && (
         <div className="absolute w-full z-20 top-[58px] shadow-2xl bg-white right-0 text-gray-500 text-sm p-4 pb-2 rounded-lg overflow-auto max-h-64">
           <ul className={`${bigShoulders.className} font-extrabold text-lg`}>
@@ -142,7 +143,7 @@ const Search = () => {
                     {product.Description ?? "Unnamed Product"}{" "}
                   </span>
                 </Link>
-                <span>£{product?.EndPrice.toFixed(2)}</span>
+                <span>{formatPound(product?.EndPrice)}</span>
               </li>
             ))}
           </ul>

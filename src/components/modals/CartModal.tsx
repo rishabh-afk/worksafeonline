@@ -97,14 +97,14 @@ const CartListModal = ({
               <Link
                 href={"/cart"}
                 onClick={handleToggle}
-                className="bg-primary rounded-full uppercase hover:bg-primary/70 font-semibold transition-all duration-200 ease-linear outline-none w-full text-center py-3"
+                className="bg-primary text-lg rounded-full uppercase hover:bg-primary/70 font-semibold transition-all duration-200 ease-linear outline-none w-full text-center py-3"
               >
                 View Cart
               </Link>
               <Link
                 href={"/checkout"}
                 onClick={handleToggle}
-                className="bg-black rounded-full uppercase hover:bg-transparent/80 font-semibold transition-all duration-200 ease-linear outline-none w-full text-center py-3"
+                className="bg-black text-lg rounded-full uppercase hover:bg-transparent/80 font-semibold transition-all duration-200 ease-linear outline-none w-full text-center py-3"
               >
                 Checkout
               </Link>

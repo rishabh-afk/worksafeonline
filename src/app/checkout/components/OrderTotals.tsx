@@ -1,3 +1,4 @@
+import { formatPound } from "@/components/logo/general";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { IoBagCheckOutline } from "react-icons/io5";
@@ -60,20 +61,19 @@ const OrderTotals: React.FC<OrderTotalsProps> = ({
         <div className="flex justify-between items-center pt-2">
           <span className="text-sm font-bold">Sub Total (Excl VAT)</span>
           <span className="text-base font-semibold font-sans">
-            £
             {cartValues?.TotalAmountExVat
-              ? cartValues.TotalAmountExVat
-              : cart?.CartTot?.TotalAmountExVat.toFixed(2)}
+              ? formatPound(cartValues.TotalAmountExVat)
+              : formatPound(cart?.CartTot?.TotalAmountExVat)}
           </span>
         </div>
         {(cartValues.ArtworkCost > 0 || cart?.CartTot?.ArtworkCost > 0) && (
           <div className="flex justify-between items-center pt-2">
             <span className="text-sm font-bold">ArtWork Cost</span>
             <span className="text-base font-semibold font-sans">
-              + £
+              +
               {cartValues.ArtworkCost
-                ? cartValues.ArtworkCost
-                : cart?.CartTot?.ArtworkCost.toFixed(2)}
+                ? formatPound(cartValues.ArtworkCost)
+                : formatPound(cart?.CartTot?.ArtworkCost)}
             </span>
           </div>
         )}
@@ -81,7 +81,7 @@ const OrderTotals: React.FC<OrderTotalsProps> = ({
           <div className="flex justify-between items-center pt-2">
             <span className="text-sm font-bold">Carriage</span>
             <span className="text-base font-semibold font-sans">
-              + £{cartValues.Carriage}
+              + {formatPound(cartValues.Carriage)}
             </span>
           </div>
         )}
@@ -98,10 +98,10 @@ const OrderTotals: React.FC<OrderTotalsProps> = ({
           <div className="flex justify-between items-center pt-2">
             <span className="text-sm font-bold">Coupon Discount Applied</span>
             <span className="text-base font-semibold font-sans">
-              - £
+              -
               {cartValues.CouponDiscount
-                ? cartValues.CouponDiscount
-                : cart?.CartTot?.CouponDiscount.toFixed(2)}
+                ? formatPound(cartValues.CouponDiscount)
+                : formatPound(cart?.CartTot?.CouponDiscount)}
             </span>
           </div>
         )}
@@ -109,29 +109,28 @@ const OrderTotals: React.FC<OrderTotalsProps> = ({
           <div className="flex justify-between items-center pt-2">
             <span className="text-sm font-bold">Discount Applied</span>
             <span className="text-base font-semibold font-sans">
-              - £
+              -
               {cartValues.Discount
-                ? cartValues.Discount
-                : cart?.CartTot?.Discount.toFixed(2)}
+                ? formatPound(cartValues.Discount)
+                : formatPound(cart?.CartTot?.Discount)}
             </span>
           </div>
         )}
         <div className="flex justify-between items-center pt-2">
           <span className="text-sm font-bold">Total VAT</span>
           <span className="text-base font-semibold font-sans">
-            + £
+            +
             {cartValues.Vat_Amount
-              ? cartValues.Vat_Amount
-              : cart?.CartTot?.Vat_Amount.toFixed(2)}
+              ? formatPound(cartValues.Vat_Amount)
+              : formatPound(cart?.CartTot?.Vat_Amount)}
           </span>
         </div>
         <div className="flex justify-between text-secondary items-center font-semibold pt-2 text-xl md:text-2xl mb-5">
           <span className="font-bold">Final Amount:</span>
           <span className="text-xl md:text-2xl font-bold font-sans">
-            £
             {cartValues.TotalAmount
-              ? cartValues.TotalAmount
-              : cart?.CartTot?.TotalAmount.toFixed(2)}
+              ? formatPound(cartValues.TotalAmount)
+              : formatPound(cart?.CartTot?.TotalAmount)}
           </span>
         </div>
         <p className="font-sans text-xs md:text-sm text-gray-700">

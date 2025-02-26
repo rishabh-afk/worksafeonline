@@ -48,7 +48,7 @@ const CustomFilter = ({
 
   return (
     <div className="pb-5 flex flex-col lg:flex-row justify-between items-center gap-5">
-      <p className="flex items-center font-extralight text-lg gap-2">
+      <p className="flex items-center text-xl font-semibold gap-2">
         <span>
           <BsFilterLeft size={25} />
         </span>

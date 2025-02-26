@@ -8,10 +8,10 @@ const WhoWeAre = ({ brands }: { brands: any }) => {
   return (
     <>
       <div
-        style={{
-          clipPath: "polygon(0 5%, 100% 0, 100% 95%, 0% 100%)",
-          overflow: "hidden",
-        }}
+        // style={{
+        //   clipPath: "polygon(0 5%, 100% 0, 100% 95%, 0% 100%)",
+        //   overflow: "hidden",
+        // }}
         className="min-h-screen relative"
       >
         <Image
@@ -82,7 +82,7 @@ const WhoWeAre = ({ brands }: { brands: any }) => {
               <div className="grid grid-cols-3 md:grid-cols-5 mt-5 mb-10">
                 {brands &&
                   brands.length > 0 &&
-                  brands.slice(1, 6).map((brand: any, index: number) => {
+                  brands.map((brand: any, index: number) => {
                     return (
                       <span
                         className="flex justify-center text-center text-sm md:text-lg font-semibold items-center border py-4 md:py-7"

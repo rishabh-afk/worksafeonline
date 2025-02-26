@@ -44,7 +44,7 @@ export default function RootLayout({
         />
       </Head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} relative antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${bigShoulders.className} relative antialiased`}
       >
         <Navbar />
         <GoogleScript />
@@ -52,9 +52,9 @@ export default function RootLayout({
         <div className="min-h-screen w-full mx-auto">{children}</div>
         <Footer />
         <ToastContainer
-          position="top-center"
           autoClose={2000}
           newestOnTop={true}
+          position="top-right"
           hideProgressBar={true}
         />
       </body>

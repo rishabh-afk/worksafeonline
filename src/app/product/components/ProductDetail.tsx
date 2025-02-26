@@ -1,31 +1,34 @@
-// import Link from "next/link";
+"use client";
+
+import { useState } from "react";
 import { Product } from "@/types/api";
-// import { BiCheck } from "react-icons/bi";
 import { bigShoulders } from "@/app/layout";
-// import StarRating from "@/components/common/StarRating";
 
 type ProductDetailsProps = {
   product: Product;
 };
 
 const ProductDetails = ({ product }: ProductDetailsProps) => {
+  const [isOpen, setIsOpen] = useState(false);
   const savePercent =
     ((product.ProductActualPrice - product.ProductSellingPrice) /
       product.ProductActualPrice) *
     100;
   const save = Math.round(savePercent * 10) / 10;
   return (
-    <div>
-      <span className="px-3 py-1 bg-[#C70A33] text-sm text-white rounded-full">
-        Save {save}%
-      </span>
+    <div className="">
+      <p className="flex items-center">
+        <span className="text-primary text-4xl font-bold">
+          {product.ProductID}
+        </span>
+        <span className="px-3 py-1 ml-2 w-fit bg-gray-500 text-sm text-white rounded-full">
+          Save {save}%
+        </span>
+      </p>
       <h1
-        className={`text-3xl md:text-5xl py-5 font-black uppercase ${bigShoulders.className}`}
+        className={`text-3xl md:text-4xl pb-5 pt-3 font-black ${bigShoulders.className}`}
       >
         {product.ProductName}{" "}
-        <span className="text-2xl md:text-4xl text-primary">
-          ({product.ProductID})
-        </span>
       </h1>
       {/* <div className="flex flex-wrap text-gray-600 items-center gap-3 md:gap-5">
         <span className="pt-px">
@@ -46,7 +49,15 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
         </div>
       </div> */}
       <div className="bg-gray-300 h-[1px]" />
-      <p className="mt-4 text-gray-500">{product.Detail}</p>
+      <p className={`mt-4 text-gray-600 ${isOpen ? "" : "line-clamp-3"}`}>
+        {product.Detail}
+      </p>
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="text-primary text-sm font-semibold underline underline-offset-2"
+      >
+        {isOpen ? "Read Less" : "Read More"}
+      </button>
     </div>
   );
 };

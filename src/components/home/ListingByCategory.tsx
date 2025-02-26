@@ -1,20 +1,22 @@
 import React from "react";
+import Link from "next/link";
 import Image from "next/image";
 import { bigShoulders } from "@/app/layout";
 import ProductSwiper from "./ProductSwiper";
 import { FaArrowRightLong } from "react-icons/fa6";
 import AnimatedActionButton from "../common/AnimatedActionButton";
-import Link from "next/link";
 
 const ListingByCategory = ({
   products,
   bannerDesc,
+  categoryID,
   sectionText,
   bannerTitle,
   bannerImage,
 }: {
   products: any;
   bannerDesc: string;
+  categoryID: string;
   bannerTitle: string;
   sectionText: string;
   bannerImage: string;
@@ -22,7 +24,6 @@ const ListingByCategory = ({
   const text = sectionText.toLowerCase().split(" ");
   const text2 = text.slice(2).join(" ");
   const text1 = text.slice(0, 2).join(" ");
-  console.log(products[0].MenuId);
   return (
     <div className="py-10">
       <div className="relative">
@@ -33,20 +34,21 @@ const ListingByCategory = ({
           src={bannerImage}
           className="object-cover w-screen h-[50vh] lg:h-screen"
           priority
-          style={{
-            clipPath: "polygon(0 5%, 100% 0, 100% 95%, 0% 100%)",
-            overflow: "hidden",
-          }}
+          // style={{
+          //   clipPath: "polygon(0 5%, 100% 0, 100% 95%, 0% 100%)",
+          //   overflow: "hidden",
+          // }}
           unoptimized
         />
         <div
-          style={{
-            clipPath: "polygon(0 5%, 100% 0, 100% 95%, 0% 100%)",
-            overflow: "hidden",
-          }}
+          // style={{
+          //   clipPath: "polygon(0 5%, 100% 0, 100% 95%, 0% 100%)",
+          //   overflow: "hidden",
+          // }}
           className="absolute inset-0 bg-gradient-to-r from-black to-transparent transition-all duration-500 ease-linear opacity-70 group-hover:opacity-40"
         ></div>
-        <div
+        <Link
+          href={`/shop?category=${categoryID}`}
           className={`absolute animate-fade-up text-white inset-0 flex text-left flex-col justify-center max-w-9xl pl-5 md:pl-10 ${bigShoulders.className}`}
         >
           <p className="text-6xl md:text-8xl lg:text-9xl uppercase w-1/2 mb-5 font-bold">
@@ -55,14 +57,14 @@ const ListingByCategory = ({
           <p className="text-2xl uppercase">{bannerDesc}</p>
 
           <AnimatedActionButton
-            text="Discover Now"
-            href={`/shop?category=${products && products[0]?.MenuId}`}
-            // onClick={() => console.log("Button clicked")}
-            classes="uppercase md:text-lg mt-6 font-semibold whitespace-nowrap py-6 w-[190px] hover:bg-primary bg-white text-black hover:text-black"
-            isLoading={false}
             type="submit"
+            nestedHref={true}
+            isLoading={false}
+            text="Discover Now"
+            href={`/shop?category=${categoryID}`}
+            classes="uppercase md:text-lg mt-6 font-semibold whitespace-nowrap py-6 w-[190px] hover:bg-primary bg-white text-black hover:text-black"
           />
-        </div>
+        </Link>
       </div>
       <div className="max-w-9xl mx-auto p-4 md:p-6 lg:p-10 pb-0">
         <div className="flex justify-between pb-10 items-center">

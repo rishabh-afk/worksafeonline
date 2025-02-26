@@ -175,7 +175,7 @@ const WishlistButton = ({
         }}
         className="text-black absolute hover:bg-slate-100 rounded-full p-[6px] top-10 right-1 opacity-0 group-hover:opacity-100 cursor-pointer transition-all duration-200 ease-linear"
       >
-        <RxEnterFullScreen title="Quick View" size={24} />
+        <RxEnterFullScreen title="Quick Shop" size={24} />
       </span>
       {product?.MultipleImage && product?.MultipleImage.length > 0 && (
         <div className="grid p-1.5 grid-cols-5 gap-1 absolute bottom-0 left-0 right-0 opacity-0 group-hover:opacity-100 cursor-pointer transition-all duration-200 ease-linear">

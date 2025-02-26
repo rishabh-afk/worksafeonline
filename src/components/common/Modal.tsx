@@ -24,7 +24,7 @@ const Modal: React.FC<ModalProps> = ({
   if (!isVisible) return null;
 
   return ReactDOM.createPortal(
-    <div className="fixed inset-0 flex items-center overflow-hidden justify-center z-50">
+    <div className="fixed inset-0 flex items-center overflow-hidden justify-center z-[100]">
       <motion.div
         className="fixed inset-0 bg-white backdrop-blur-lg bg-opacity-10"
         initial={{ opacity: 0 }}

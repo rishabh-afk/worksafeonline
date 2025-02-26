@@ -42,7 +42,10 @@ export default async function Page() {
 
   return (
     <>
-      <Header title="Shop" />
+      <Header
+        title="Shop"
+        getBreadCrumbs={[{ id: "/shop-all", name: "Shop" }]}
+      />
       <FilterSection
         category={0}
         subcategory={0}

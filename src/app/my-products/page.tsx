@@ -25,7 +25,10 @@ export async function generateMetadata() {
 export default async function Page() {
   return (
     <>
-      <Header title="My Products" />
+      <Header
+        title="My Products"
+        getBreadCrumbs={[{ id: "/my-products", name: "My Products" }]}
+      />
       <ClientPage />
     </>
   );

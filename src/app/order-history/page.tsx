@@ -2,6 +2,7 @@
 
 import { Fetch } from "@/utils/axios";
 import { bigShoulders } from "../layout";
+import { LuSearch } from "react-icons/lu";
 import { useRouter } from "next/navigation";
 import Loader from "@/components/common/Loader";
 import OrderHistoryTable from "./components/OrderCard";
@@ -13,6 +14,22 @@ export default function Page() {
   const [loading, setLoading] = useState(true);
   const [orderHistory, setOrderHistory] = useState<any>({});
   const [accountDetail, setAccountDetail] = useState<any>({});
+  const [realorderHistory, setRealOrderHistory] = useState<any>({});
+
+  const filterOrders = (value: string) => {
+    if (!value) return setOrderHistory(realorderHistory);
+    const lowerCaseValue = value.toLowerCase();
+
+    const filtered = realorderHistory.filter((order: any) =>
+      Object.values(order).some(
+        (field) =>
+          field !== null &&
+          field !== undefined &&
+          field.toString().toLowerCase().includes(lowerCaseValue)
+      )
+    );
+    setOrderHistory(filtered);
+  };
 
   const fetchData = useCallback(async () => {
     try {
@@ -36,8 +53,10 @@ export default function Page() {
         setAccountDetail(profileResult.value);
 
       // Handle orders fetch result
-      if (ordersResult.status === "fulfilled" && ordersResult.value?.status)
+      if (ordersResult.status === "fulfilled" && ordersResult.value?.status) {
         setOrderHistory(ordersResult.value?.my_orders || []);
+        setRealOrderHistory(ordersResult.value?.my_orders || []);
+      }
 
       setLoading(false);
     } catch (error) {
@@ -61,6 +80,17 @@ export default function Page() {
           >
             Order <span className="text-primary"> History</span>
           </h1>
+          <div className="relative w-full mt-5">
+            <input
+              type="text"
+              placeholder="Search by Order ID, Customer, Reference, Email, or Order By"
+              onChange={(e) => filterOrders(e.target.value)}
+              className="w-full px-5 py-3 border border-gray-300 rounded-full focus:ring-1 focus:ring-primary focus:border-primary outline-none text-sm transition-all duration-300"
+            />
+            <div className="absolute inset-y-0 right-4 flex items-center text-gray-500">
+              <LuSearch className="w-5 h-5" />
+            </div>
+          </div>
           {orderHistory && orderHistory.length > 0 ? (
             <OrderHistoryTable orders={orderHistory} />
           ) : (

@@ -6,16 +6,17 @@ import Text from "@/components/input/Text";
 import { bigShoulders } from "@/app/layout";
 import { FaAddressBook } from "react-icons/fa";
 import Select from "@/components/input/Select";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { BillingFormField as formFields } from "./formType";
+import { AddressFinder } from "@ideal-postcodes/address-finder";
 import NumericStringInput from "@/components/input/NumericString";
 
 const CheckoutForm = ({
   errors,
   isOpen,
   formData,
-  setIsOpen,
   formRef1,
+  setIsOpen,
   countries,
   setFormData,
   accountDetail,
@@ -26,10 +27,10 @@ const CheckoutForm = ({
 }: {
   errors: any;
   formData: any;
-  setIsOpen: any;
   formRef1: any;
-  isOpen: boolean;
+  setIsOpen: any;
   countries: any;
+  isOpen: boolean;
   setFormData: any;
   accountDetail: any;
   selectedAddress: any;
@@ -37,6 +38,27 @@ const CheckoutForm = ({
   setSelectedAddress: any;
   handleForm1Validation: any;
 }) => {
+  const shouldRender2 = useRef(true);
+
+  useEffect(() => {
+    if (!shouldRender2.current) return;
+    shouldRender2.current = false;
+
+    AddressFinder.watch({
+      inputField: "#DPCode",
+      apiKey: "ak_m5xjqe9dDb9a32eo5fgmZkbbzf9a2",
+      onAddressRetrieved: (address: any) => {
+        setFormData((prev: any) => ({
+          ...prev,
+          Add: address.line_1,
+          DPCode: address.postcode,
+          DPTown: address.post_town,
+        }));
+      },
+    });
+    // eslint-disable-next-line
+  }, []);
+
   const [options, setOptions] = useState([]);
 
   const handleInputChange = (e: any) => {
@@ -140,6 +162,16 @@ const CheckoutForm = ({
             <div className="grid mt-5 grid-cols-1 lg:grid-cols-4 gap-5 items-center">
               <Text
                 field={{
+                  ...formFields[7],
+                  value: formData[formFields[7].name]
+                    ? formData[formFields[7].name].toUpperCase()
+                    : "",
+                }}
+                handleInputChange={handleInputChange}
+                error={errors[formFields[7].name]}
+              />
+              <Text
+                field={{
                   ...formFields[3],
                   value: formData[formFields[3].name] || "",
                 }}
@@ -172,16 +204,6 @@ const CheckoutForm = ({
                 }}
                 handleInputChange={handleInputChange}
                 error={errors[formFields[6].name]}
-              />
-              <Text
-                field={{
-                  ...formFields[7],
-                  value: formData[formFields[7].name]
-                    ? formData[formFields[7].name].toUpperCase()
-                    : "",
-                }}
-                handleInputChange={handleInputChange}
-                error={errors[formFields[7].name]}
               />
 
               <div className="hidden lg:block"></div>

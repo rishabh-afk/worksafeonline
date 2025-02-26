@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { RxCross1 } from "react-icons/rx";
 import { bigShoulders } from "@/app/layout";
 import LogoModal from "@/components/modals/LogoModal";
+import { formatPound } from "@/components/logo/general";
+import DeleteProductModal from "@/components/modals/DeleteProductModal";
 
 interface CartItemProps {
   fetchCart: any;
@@ -17,6 +19,13 @@ const CartItem: React.FC<CartItemProps> = ({
 }) => {
   const [data, setData] = useState<any>({});
   const [openModal, setOpenModal] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false);
+  const [deleteModalID, setDeleteModalID] = useState("");
+
+  const handleDeleteClick = (id: any) => {
+    setDeleteModal(true);
+    setDeleteModalID(id);
+  };
 
   // Manage quantity state
   const [quantities, setQuantities] = useState<Record<string, number>>(
@@ -31,8 +40,23 @@ const CartItem: React.FC<CartItemProps> = ({
     setOpenModal(true);
   };
 
+  const resetDeleteModal = () => {
+    setDeleteModal(false);
+    setDeleteModalID("");
+  };
+
+  const deleteProduct = async (id: any) => {
+    try {
+      if (id) await handleRemove(id);
+    } catch (error) {
+      console.log("Error deleting: ", error);
+    } finally {
+      resetDeleteModal();
+    }
+  };
+
   const handleChange = (line: string, value: string) => {
-    const newValue = Math.max(1, Number(value)); // Prevents negative values
+    const newValue = Math.max(1, Math.min(9999, Number(value)));
     setQuantities((prev) => ({ ...prev, [line]: newValue }));
   };
 
@@ -42,6 +66,12 @@ const CartItem: React.FC<CartItemProps> = ({
 
   return (
     <>
+      <DeleteProductModal
+        isVisible={deleteModal}
+        onDelete={deleteProduct}
+        onClose={resetDeleteModal}
+        deleteModalID={deleteModalID}
+      />
       <LogoModal
         cart={data}
         isVisible={openModal}
@@ -96,9 +126,10 @@ const CartItem: React.FC<CartItemProps> = ({
 
                   <input
                     type="text"
+                    maxLength={4}
                     value={quantities[item.Line]}
-                    onChange={(e) => handleChange(item.Line, e.target.value)}
                     onBlur={() => handleBlur(item.Line)}
+                    onChange={(e) => handleChange(item.Line, e.target.value)}
                     className="px-1 w-10 text-sm mx-1.5 text-center border border-gray-300 rounded py-1 focus:outline-none focus:ring-2 focus:ring-primary"
                   />
 
@@ -136,13 +167,11 @@ const CartItem: React.FC<CartItemProps> = ({
           className={`grid grid-cols-7 border-y py-4 gap-5 justify-center items-center ${bigShoulders.className}`}
         >
           <p></p>
-          <p className="text-xl lg:text-2xl col-span-2 font-black uppercase">
-            Product
-          </p>
-          <p className="text-xl lg:text-2xl font-black uppercase">ArtWork</p>
-          <p className="text-xl lg:text-2xl font-black uppercase">Price</p>
-          <p className="text-xl lg:text-2xl font-black uppercase">Quantity</p>
-          <p className="text-xl lg:text-2xl font-black uppercase">Subtotal</p>
+          <p className="text-xl col-span-2 font-black uppercase">Product</p>
+          <p className="text-xl font-black uppercase">ArtWork</p>
+          <p className="text-xl font-black uppercase">Unit</p>
+          <p className="text-xl font-black uppercase">Quantity</p>
+          <p className="text-xl font-black uppercase">Total</p>
         </div>
 
         {fetchCart.map((item: any) => (
@@ -152,32 +181,31 @@ const CartItem: React.FC<CartItemProps> = ({
           >
             <div className="p-2 flex justify-center items-center">
               <span
-                onClick={() => handleRemove(item.Line)}
+                onClick={() => handleDeleteClick(item.Line)}
                 className="flex justify-center items-center my-auto h-full transition-all duration-200 ease-linear cursor-pointer rounded-full hover:bg-gray-200 p-2 mr-1"
               >
                 <RxCross1 />
               </span>
               <Image
-                width={200}
-                height={200}
+                width={100}
+                height={100}
                 src={item.ProductImage}
                 alt={item.ProductDescription}
-                className="w-full aspect-square object-contain rounded-md border"
+                className="min-w-14 aspect-square object-contain border"
               />
             </div>
             <div className="col-span-2">
-              <p className="line-clamp-3 text-sm lg:text-base font-semibold">
-                {item.ProductDescription} ({item.ProductCode})
+              <p className="line-clamp-3 text-sm font-bold">
+                <span className="text-primary">{item.ProductCode} </span>{" "}
+                {item.ProductDescription}
               </p>
-              {item.Colour && (
-                <span className="text-sm">Color: {item.Colour}</span>
-              )}
+              {item.Colour && <span className="text-sm"> {item.Colour}</span>}
               {item.Fitting && (
                 <span className="border-x text-sm px-2 mx-2 border-black">
-                  Fitting: {item.Fitting}
+                  {item.Fitting}
                 </span>
               )}
-              {item.Size && <span className="text-sm">Size: {item.Size}</span>}
+              {item.Size && <span className="text-sm">{item.Size}</span>}
             </div>
             {item.ArtworkExist > 0 ? (
               <p
@@ -187,12 +215,14 @@ const CartItem: React.FC<CartItemProps> = ({
                 View Detail
               </p>
             ) : (
-              "-"
+              <p className="text-left ml-8">-</p>
             )}
-            <p className="text-sm lg:text-lg">£ {item.SalesPrice}</p>
+            <p className="text-sm lg:text-lg font-semibold">
+              {formatPound(item.SalesPrice)}
+            </p>
             <div className="flex items-center">
               <button
-                className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300"
+                className="px-2 bg-gray-200 rounded hover:bg-gray-300"
                 onClick={() => {
                   const newValue = Math.max(1, quantities[item.Line] - 1);
                   setQuantities((prev) => ({ ...prev, [item.Line]: newValue }));
@@ -205,13 +235,13 @@ const CartItem: React.FC<CartItemProps> = ({
               <input
                 type="text"
                 value={quantities[item.Line]}
-                onChange={(e) => handleChange(item.Line, e.target.value)}
                 onBlur={() => handleBlur(item.Line)}
-                className="px-1 w-10 text-sm mx-1.5 text-center border border-gray-300 rounded py-1 focus:outline-none focus:ring-2 focus:ring-primary"
+                onChange={(e) => handleChange(item.Line, e.target.value)}
+                className="px-1 w-10 text-sm mx-1.5 text-center border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary"
               />
 
               <button
-                className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300"
+                className="px-2 bg-gray-200 rounded hover:bg-gray-300"
                 onClick={() => {
                   const newValue = quantities[item.Line] + 1;
                   setQuantities((prev) => ({ ...prev, [item.Line]: newValue }));
@@ -221,7 +251,7 @@ const CartItem: React.FC<CartItemProps> = ({
                 +
               </button>
             </div>
-            <p className="text-sm lg:text-lg">£ {item.LineTotal.toFixed(2)}</p>
+            <p className="text-sm lg:text-lg">{formatPound(item.LineTotal)}</p>
           </div>
         ))}
       </div>

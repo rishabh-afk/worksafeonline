@@ -24,7 +24,7 @@ const MobileSidebar = ({ categories }: { categories: any }) => {
     <div>
       <span
         onClick={handleToggle}
-        className="hover:text-primary lg:hidden transition-all duration-100 ease-linear"
+        className="hover:text-secondary lg:hidden transition-all duration-100 ease-linear"
       >
         <BiMenuAltLeft size={23} />
       </span>
@@ -46,7 +46,7 @@ const MobileSidebar = ({ categories }: { categories: any }) => {
           </Link>
           <IoClose
             onClick={handleToggle}
-            className="text-white absolute right-5 text-3xl hover:text-primary"
+            className="text-white absolute right-5 text-3xl hover:text-secondary"
           />
         </div>
         <div className="flex gap-3 text-black p-6 pb-2 font-sans font-semibold items-center">
@@ -58,7 +58,7 @@ const MobileSidebar = ({ categories }: { categories: any }) => {
           >
             Main Menu
             <span
-              className={`absolute left-0 bottom-0 h-[2px] bg-primary transition-all duration-300 ease-in-out ${
+              className={`absolute left-0 bottom-0 h-[2px] bg-secondary transition-all duration-300 ease-in-out ${
                 showlist ? "w-full" : "w-0"
               }`}
             ></span>
@@ -71,7 +71,7 @@ const MobileSidebar = ({ categories }: { categories: any }) => {
           >
             Categories
             <span
-              className={`absolute left-0 bottom-0 h-[2px] bg-primary transition-all duration-300 ease-in-out ${
+              className={`absolute left-0 bottom-0 h-[2px] bg-secondary transition-all duration-300 ease-in-out ${
                 !showlist ? "w-full" : "w-0"
               }`}
             ></span>
@@ -96,8 +96,8 @@ const MobileSidebar = ({ categories }: { categories: any }) => {
                     <Link
                       href={"/"}
                       key={link.menu_id}
-                      className={`font-semibold uppercase text-black lg:text-white flex items-center relative text-nowrap rounded-lg pb-1 hover:text-primary transition-all duration-200 ease-linear ${
-                        isActive(link.href) && "text-primary"
+                      className={`font-semibold uppercase text-black lg:text-white flex items-center relative text-nowrap rounded-lg pb-1 hover:text-secondary transition-all duration-200 ease-linear ${
+                        isActive(link.href) && "text-secondary"
                       }`}
                     >
                       {link?.menu_name}

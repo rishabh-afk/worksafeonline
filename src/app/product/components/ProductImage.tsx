@@ -19,7 +19,6 @@ type ProductImageProps = {
 const ProductImage: React.FC<ProductImageProps> = ({ images }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [position, setPosition] = useState({ x: 50, y: 50 });
-  // const thumbnailsRef = useRef<(HTMLDivElement | null)[]>([]);
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperClass | null>(null);
   const [swiperInstance, setSwiperInstance] = useState<SwiperClass | null>(
     null
@@ -55,76 +54,14 @@ const ProductImage: React.FC<ProductImageProps> = ({ images }) => {
   };
 
   if (!images || images.length === 0) {
+    console.log(setThumbsSwiper);
     return <div className="text-center">No images available</div>;
   }
 
   return (
-    <div className="grid grid-cols-5 gap-5 w-full lg:w-[55%] h-full lg:h-screen lg:sticky lg:top-36">
-      <div className="hidden lg:block col-span-1 gap-2">
-        <Swiper
-          spaceBetween={20}
-          modules={[Thumbs]}
-          direction="vertical"
-          onSwiper={setThumbsSwiper}
-          className="h-[50vh] lg:h-screen"
-          onSlideChange={handleSlideChange}
-          slidesPerView={Math.min(4, images.length)}
-        >
-          {images.map((src, index) => (
-            <SwiperSlide key={src} className="!h-fit">
-              <div
-                className={`w-full rounded-md shadow-sm cursor-pointer ${
-                  activeIndex === index
-                    ? "border-black shadow-lg border-2"
-                    : "border-gray-300 border"
-                }`}
-                onClick={() => thumbsSwiper?.slideTo(index)} // Added this line to sync thumbs with main swiper
-              >
-                <Image
-                  src={src}
-                  alt={`Thumbnail ${index + 1}`}
-                  width={100}
-                  height={100}
-                  className="w-full py-2 object-contain rounded-md"
-                />
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </div>
-      {/* <div className="lg:hidden col-span-5 gap-2">
-        <Swiper
-          spaceBetween={15}
-          modules={[Thumbs]}
-          onSwiper={setThumbsSwiper}
-          className="h-fit"
-          onSlideChange={handleSlideChange}
-          slidesPerView={Math.min(4, images.length)}
-        >
-          {images.map((src, index) => (
-            <SwiperSlide key={src}>
-              <div
-                className={`w-full rounded-md shadow-sm cursor-pointer ${
-                  activeIndex === index
-                    ? "border-black shadow-lg border-2"
-                    : "border-gray-300 border"
-                }`}
-                onClick={() => thumbsSwiper?.slideTo(index)} // Added this line to sync thumbs with main swiper
-              >
-                <Image
-                  src={src}
-                  alt={`Thumbnail ${index + 1}`}
-                  width={100}
-                  height={100}
-                  className="w-full h-full object-cover rounded-md"
-                />
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </div> */}
-
-      <div className="col-span-5 lg:col-span-4 order-first lg:order-last">
+    <div className="w-full lg:w-1/2 lg:sticky top-40 lg:h-screen flex flex-col items-center">
+      {/* Main Swiper (Bigger) */}
+      <div className="w-full aspect-square border-2 border-black/10 overflow-hidden">
         <Swiper
           spaceBetween={10}
           autoplay={{ delay: 5000 }}
@@ -132,7 +69,7 @@ const ProductImage: React.FC<ProductImageProps> = ({ images }) => {
           thumbs={{ swiper: thumbsSwiper }}
           onSlideChange={handleSlideChange}
           modules={[Navigation, Thumbs, Autoplay]}
-          className="w-full h-[50vh] lg:h-screen border-2 border-black/10 rounded-xl"
+          className="w-full h-full"
         >
           {images.map((src, index) => (
             <SwiperSlide key={src}>
@@ -140,7 +77,7 @@ const ProductImage: React.FC<ProductImageProps> = ({ images }) => {
                 onMouseMove={handleMouseMove}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
-                className="relative group cursor-zoom-in overflow-hidden w-full h-[50vh] lg:h-screen rounded-md"
+                className="relative group cursor-zoom-in overflow-hidden w-full h-full"
               >
                 <Image
                   src={src}
@@ -160,32 +97,33 @@ const ProductImage: React.FC<ProductImageProps> = ({ images }) => {
           ))}
         </Swiper>
       </div>
+
+      {/* Horizontal Thumbnails Grid */}
+      <div className="w-full mt-2 md:mt-5 lg:mt-3 grid grid-cols-3 md:grid-cols-4 gap-2 lg:gap-3 justify-start">
+        {images.map((src, index) => (
+          <div
+            key={src}
+            className={`w-fit shadow-sm cursor-pointer ${
+              activeIndex === index
+                ? "border-primary shadow-lg border-2"
+                : "border-gray-300 border"
+            }`}
+            onClick={() => thumbsSwiper?.slideTo(index)}
+          >
+            <Image
+              src={src}
+              alt={`Thumbnail ${index + 1}`}
+              width={60}
+              height={60}
+              priority
+              unoptimized
+              className="w-[120px] sm:w-[140px] md:w-[160px] lg:w-[180px] p-1 md:p-2 h-auto object-cover"
+            />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
 
 export default ProductImage;
-// useEffect(() => {
-//   const observer = new IntersectionObserver(
-//     ([entry]) => {
-//       if (entry.isIntersecting) {
-//         if (thumbnailsRef.current[activeIndex]) {
-//           thumbnailsRef.current[activeIndex]?.scrollIntoView({
-//             block: "center",
-//             inline: "nearest",
-//             behavior: "smooth",
-//           });
-//         }
-//       }
-//     },
-//     { root: null, rootMargin: "0px", threshold: 0.5 }
-//   );
-
-//   if (thumbnailContainerRef.current)
-//     observer.observe(thumbnailContainerRef.current);
-
-//   return () => {
-//     if (thumbnailContainerRef.current)
-//       observer.unobserve(thumbnailContainerRef.current);
-//   };
-// }, [activeIndex]);

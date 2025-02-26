@@ -3,9 +3,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-// import { RxCross1 } from "react-icons/rx";
 import { Post } from "@/utils/axios";
+// import { RxCross1 } from "react-icons/rx";
 import { bigShoulders } from "@/app/layout";
+import { formatPound } from "../logo/general";
 import DeleteModal from "../modals/DeleteModal";
 import { getDeviceCheck } from "@/api/generateDeviceId";
 
@@ -77,7 +78,6 @@ export default function ArtworkGallery({
     setDeleteModalID("");
     setIsVisible(false);
   };
-
   return (
     <div className={`bg-[#1C1C1C] p-6 ${bigShoulders.className}`}>
       <div>
@@ -98,69 +98,61 @@ export default function ArtworkGallery({
             src={
               "https://www.worksafeonline.co.uk/LogoImages/WorksafeHeader.png"
             }
-            className="w-32 p-1"
+            className="w-24 p-1"
           />
         </Link>
-        <h1 className="text-4xl font-extrabold text-center text-secondary mb-8 tracking-wide">
+        <h1 className="text-2xl font-extrabold text-center text-secondary mb-4 tracking-wide">
           Artwork Gallery
         </h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 gap-2">
           {artWorklist.map((artwork, index) => (
             <div
               key={index}
-              className="relative group border border-white/50 shadow-lg rounded-2xl transition-all duration-300"
+              className="relative group border border-white/50 shadow-lg rounded-2xl transition-all duration-300 p-2"
             >
-              <div className="relative w-full h-48">
-                <Image
-                  src={artwork.ArtworkImage}
-                  alt={artwork.ArtworkDescription}
-                  fill
-                  priority
-                  className="object-contain bg-white rounded-t-2xl w-fit"
-                />
-              </div>
-              {/* {showDeleteButton && (
-                <span className="">
-                  <RxCross1
-                    size={32}
-                    title="Remove Artwork"
-                    onClick={() => handleDelete(artwork.ArtworkSequence)}
-                    className="cursor-pointer bg-secondary rounded-full p-1.5 font-bold transition absolute -top-3 z-20 -right-3 text-white"
+              <div className="flex items-center space-x-5">
+                <div className="relative w-20 h-20 border border-white/50 rounded-xl overflow-hidden">
+                  <Image
+                    src={artwork.ArtworkImage}
+                    alt={artwork.ArtworkDescription}
+                    fill
+                    priority
+                    className="object-contain bg-white"
                   />
-                </span>
-              )} */}
-
-              <div className="p-5">
-                <h2 className="text-2xl font-semibold text-white">
-                  {artwork.ArtworkDescription} ({artwork.ArtworkType})
-                </h2>
-                <div className="mt-3 grid grid-cols-2 space-y-0.5 text-gray-200">
-                  <p className="text-lg">
-                    <span className="font-medium text-white/50 uppercase pr-1 text-lg">
-                      Code:
-                    </span>{" "}
-                    {artwork.ArtworkCode}
-                  </p>
-                  <p className="text-lg">
-                    <span className="font-medium text-white/50 uppercase pr-1 text-lg">
-                      Position:
-                    </span>{" "}
-                    {artwork.ArtworkPosition}
-                  </p>
-                  <p className="text-lg">
-                    <span className="font-medium text-white/50 uppercase pr-1 text-lg">
-                      Size:
-                    </span>{" "}
-                    {artwork.ArtworkSize}
-                  </p>
-                  <p className="text-lg">
-                    <span className="font-medium text-white/50 uppercase pr-1 text-lg">
-                      Price:
-                    </span>{" "}
-                    <span className="text-green-400 font-medium">
-                      £{artwork.ArtworkPrice}
-                    </span>
-                  </p>
+                </div>
+                <div className="flex-1 text-white">
+                  <h2 className="text-xl font-semibold">
+                    {artwork.ArtworkDescription}{" "}
+                    {artwork.ArtworkType && `(${artwork.ArtworkType})`}
+                  </h2>
+                  <div className="mt-2 flex flex-wrap gap-2 text-gray-200">
+                    <p className="border-[0.5px] px-2.5 py-0.5 rounded-lg">
+                      <span className="font-medium text-white/50 uppercase pr-1">
+                        Code:
+                      </span>{" "}
+                      {artwork.ArtworkCode}
+                    </p>
+                    <p className="border-[0.5px] px-2.5 py-0.5 rounded-lg">
+                      <span className="font-medium text-white/50 uppercase pr-1">
+                        Position:
+                      </span>{" "}
+                      {artwork.ArtworkPosition}
+                    </p>
+                    <p className="border-[0.5px] px-2.5 py-0.5 rounded-lg">
+                      <span className="font-medium text-white/50 uppercase pr-1">
+                        Size:
+                      </span>{" "}
+                      {artwork.ArtworkSize}
+                    </p>
+                    <p className="border-[0.5px] px-2.5 py-0.5 rounded-lg">
+                      <span className="font-medium text-white/50 uppercase pr-1">
+                        Price:
+                      </span>
+                      <span className="text-green-400 font-medium">
+                        {formatPound(artwork.ArtworkPrice)}
+                      </span>
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>

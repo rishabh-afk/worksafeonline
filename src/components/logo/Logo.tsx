@@ -73,7 +73,7 @@ const Logo = ({
         type="button"
         text="Customize Logo"
         onClick={handleCustomizeLogo}
-        classes={`w-full flex items-center justify-center px-4 py-2 transition-all duration-200 ease-linear hover:bg-primary !rounded-full text-2xl font-bold uppercase bg-black hover:!text-black ${bigShoulders.className}`}
+        classes={`w-full flex items-center justify-center px-4 py-2 transition-all duration-200 ease-linear hover:bg-primary !rounded-full text-2xl font-bold uppercase bg-black !text-white ${bigShoulders.className}`}
       />
     </>
   );

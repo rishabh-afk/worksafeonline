@@ -5,7 +5,7 @@ import { Post } from "@/utils/axios";
 import { bigShoulders } from "@/app/layout";
 import { IoArrowBackOutline } from "react-icons/io5";
 
-const Register = ({
+const RegisterForget = ({
   formData,
   setScreen,
   setFormData,
@@ -141,4 +141,4 @@ const Register = ({
   );
 };
 
-export default Register;
+export default RegisterForget;

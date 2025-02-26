@@ -1,7 +1,8 @@
-import { formatKey } from "@/api/generalApi";
-import { bigShoulders } from "@/app/layout";
-import Image from "next/image";
 import React from "react";
+import Image from "next/image";
+import { bigShoulders } from "@/app/layout";
+import { formatKey } from "@/api/generalApi";
+import { formatPound } from "@/components/logo/general";
 
 const OrderDetails = ({ data }: { data: any }) => {
   const {
@@ -30,7 +31,7 @@ const OrderDetails = ({ data }: { data: any }) => {
                 </p>
                 <p className="text-gray-600">
                   {typeof value === "number" && key !== "OrderID"
-                    ? `£${value}`
+                    ? `${formatPound(value)}`
                     : value}
                 </p>
               </div>
@@ -172,14 +173,14 @@ const OrderDetails = ({ data }: { data: any }) => {
                   {/* Sales Price */}
                   <td className="border border-yellow-200 px-4 py-2">
                     {product.Sales_Price
-                      ? `£${product.Sales_Price.toFixed(2)}`
+                      ? `${formatPound(product.Sales_Price)}`
                       : "N/A"}
                   </td>
 
                   {/* Line Total */}
                   <td className="border border-yellow-200 px-4 py-2">
                     {product.Line_Total
-                      ? `£${product.Line_Total.toFixed(2)}`
+                      ? `${formatPound(product.Line_Total)}`
                       : "N/A"}
                   </td>
                 </tr>
@@ -204,7 +205,7 @@ const OrderDetails = ({ data }: { data: any }) => {
                   {formatKey(key)}:
                 </p>
                 <p className="text-gray-600">
-                  {typeof value === "number" ? `£${value}` : value}
+                  {typeof value === "number" ? `${formatPound(value)}` : value}
                 </p>
               </div>
             ) : null

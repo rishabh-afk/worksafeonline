@@ -1,5 +1,6 @@
-import Link from "next/link";
 import React from "react";
+import Link from "next/link";
+import { formatPound } from "@/components/logo/general";
 
 interface Order {
   Seq: number;
@@ -21,7 +22,7 @@ const OrderHistoryTable = ({ orders }: { orders: Order[] }) => {
   return (
     <div className="overflow-x-auto no-scrollbar mt-5">
       <table className="min-w-full whitespace-nowrap border-collapse bg-white text-sm text-gray-800">
-        <thead className="bg-primary/80 text-black font-semibold">
+        <thead className="bg-primary/80 text-white text-lg font-semibold">
           <tr>
             <th className="border border-primary px-4 text-center py-3">#</th>
             <th className="border border-primary px-4 py-3 text-left">
@@ -35,6 +36,9 @@ const OrderHistoryTable = ({ orders }: { orders: Order[] }) => {
             </th>
             <th className="border border-primary px-4 py-3 text-left">
               Order Date
+            </th>
+            <th className="border border-primary px-4 py-3 text-left">
+              Order By
             </th>
             <th className="border border-primary px-4 py-3 text-right">
               Total Value
@@ -71,14 +75,17 @@ const OrderHistoryTable = ({ orders }: { orders: Order[] }) => {
               <td className="border border-primary px-4 py-3">
                 {order.Order_Date ? order.Order_Date : "-"}
               </td>
+              <td className="border border-primary px-4 py-3">
+                {order.OrderedBy ? order.OrderedBy : "-"}
+              </td>
               <td className="border border-primary font-semibold px-4 py-3 text-left">
-                £ {order.TotalValue ? order.TotalValue.toFixed(2) : "-"}
+                {order.TotalValue ? formatPound(order.TotalValue) : "-"}
               </td>
               <td className="border border-primary px-4 py-3">
                 {order.Email ? order.Email : "-"}
               </td>
               <td
-                className={`border border-primary px-4 py-3 ${
+                className={`border border-primary text-lg px-4 py-2 ${
                   order.PaymentStatus === "success"
                     ? "text-green-700"
                     : "text-red-600"

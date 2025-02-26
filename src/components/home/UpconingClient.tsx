@@ -26,7 +26,7 @@ const UpcomingClient = ({
           }}
           classes={`${
             selectedTab === "arrival" && ""
-          } !rounded-full bg-black w-full md:w-fit text-3xl py-3 font-semibold border-2 tracking-tight !px-10 hover:bg-black border-black text-white hover:!text-black`}
+          } !rounded-full bg-black w-full md:w-fit text-3xl py-3 font-semibold border-2 tracking-tight !px-10 hover:bg-black border-black text-white hover:!text-white`}
         />
         <Button
           text="BEST SELLERS"
@@ -36,7 +36,7 @@ const UpcomingClient = ({
           }}
           classes={`${
             selectedTab === "bestSeller" && "!bg-primary !text-black"
-          } !rounded-full text-3xl py-3 hidden md:block font-semibold hover:!text-black border-2 tracking-tight !px-10`}
+          } !rounded-full text-3xl py-3 hidden md:block font-semibold hover:!text-white border-2 tracking-tight !px-10`}
         />
       </div>
       <ProductSwiper

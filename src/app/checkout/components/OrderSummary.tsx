@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { bigShoulders } from "@/app/layout";
+import { formatPound } from "@/components/logo/general";
 
 const OrderSummary = ({
   cart,
@@ -31,7 +32,7 @@ const OrderSummary = ({
               <span className="text-gray-600 text-lg">
                 {item.ProductDescription} x {item.Quantity}
               </span>
-              <span className="text-lg">£ {item?.LineTotal.toFixed(2)}</span>
+              <span className="text-lg">{formatPound(item?.LineTotal)}</span>
             </div>
           );
         })}
@@ -44,14 +45,14 @@ const OrderSummary = ({
       <div className="flex justify-between items-center border-b border-gray-300 py-4">
         <span className="text-xl font-bold">Amount excluding Vat</span>
         <span className="text-xl font-sans">
-          £{cart?.CartTot?.TotalAmountExVat.toFixed(2)}
+          {formatPound(cart?.CartTot?.TotalAmountExVat)}
         </span>
       </div>
       {cart?.CartTot?.ArtworkCost > 0 && (
         <div className="flex justify-between items-center border-b border-gray-300 py-4">
           <span className="text-xl font-bold">ArtWork Cost</span>
           <span className="text-xl font-sans">
-            + £{cart?.CartTot?.ArtworkCost.toFixed(2)}
+            + {formatPound(cart?.CartTot?.ArtworkCost)}
           </span>
         </div>
       )}
@@ -59,20 +60,20 @@ const OrderSummary = ({
         <div className="flex justify-between items-center border-b border-gray-300 py-4">
           <span className="text-xl font-bold">Discount Applied</span>
           <span className="text-xl font-sans">
-            - £{cart?.CartTot?.Discount.toFixed(2)}
+            - {formatPound(cart?.CartTot?.Discount)}
           </span>
         </div>
       )}
       <div className="flex justify-between items-center border-b border-gray-300 py-4">
         <span className="text-xl font-bold">Vat Amount</span>
         <span className="text-xl font-sans">
-          + £{cart?.CartTot?.Vat_Amount.toFixed(2)}
+          + {formatPound(cart?.CartTot?.Vat_Amount)}
         </span>
       </div>
       <div className="flex justify-between items-center font-semibold pt-4 text-lg mb-4">
         <span className="text-xl font-bold">Amount to be Paid:</span>
         <span className="text-2xl font-sans">
-          £{cart?.CartTot?.TotalAmount.toFixed(2)}
+          {formatPound(cart?.CartTot?.TotalAmount)}
         </span>
       </div>
       <p className="font-sans text-gray-500 pb-5">

@@ -11,13 +11,13 @@ const ActivateLink = ({ name, id }: { name: string; id: string }) => {
     <span
       className={`relative inline-block ${
         category === id
-          ? "text-primary"
-          : "text-black hover:text-primary transition-all duration-200 ease-in-out"
+          ? "text-secondary"
+          : "text-white hover:text-secondary transition-all duration-200 ease-in-out"
       } group`}
     >
       {name}
       <span
-        className={`hidden lg:block absolute inset-x-0 bottom-0 h-[1.5px] bg-primary transform origin-left transition-transform duration-300 ${
+        className={`hidden lg:block absolute inset-x-0 bottom-0 h-[1.5px] bg-secondary transform origin-left transition-transform duration-300 ${
           category === id || "group-hover:scale-x-100"
         } ${category === id ? "scale-x-100" : "scale-x-0"}`}
       />

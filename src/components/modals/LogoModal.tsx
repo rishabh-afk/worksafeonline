@@ -18,15 +18,15 @@ const LogoModal = ({
       onClose={onclose}
       removePadding={true}
       isVisible={isVisible}
-      width="w-[90%] lg:w-2/3"
+      width="w-[90%] lg:w-1/2"
       showCloseButton={false}
     >
       <div className="relative text-white">
         <RxCross1
-          size={24}
+          size={20}
           onClick={onclose}
           title="Click to close"
-          className="cursor-pointer hover:scale-110 absolute top-2 z-20 right-3 text-white"
+          className="cursor-pointer hover:scale-110 absolute top-3 z-20 right-3 text-white"
         />
         <div>
           <ArtworkGallery

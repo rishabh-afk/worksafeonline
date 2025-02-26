@@ -39,11 +39,11 @@ const ConfirmationCode = ({
         <div className="flex gap-4">
           <span className="p-[2px] h-fit hover:scale-125 transition hover:bg-[#1C1C1C] rounded-full">
             <IoArrowBackOutline
-              size={25}
+              size={22}
               onClick={() =>
                 setScreen(formData?.custCode ? "registerSuccess" : "register")
               }
-              className="text-primary cursor-pointer"
+              className="text-primary hover:text-white cursor-pointer"
             />
           </span>
           <Link href="/">
@@ -76,14 +76,14 @@ const ConfirmationCode = ({
             <button
               type="button"
               onClick={handleNext}
-              className={`w-1/2 py-2 px-4 flex items-center gap-2 justify-center bg-primary text-black uppercase rounded-full text-xl font-black hover:bg-primary hover:text-black transition outline-none ${bigShoulders.className}`}
+              className={`w-1/2 py-2 px-4 flex items-center gap-2 justify-center bg-primary text-white uppercase rounded-full text-xl font-black hover:bg-primary hover:text-white transition outline-none ${bigShoulders.className}`}
             >
               <GiCheckMark /> Yes
             </button>
             <button
               type="button"
               onClick={handleSkip}
-              className={`w-1/2 py-2 px-4 flex items-center gap-2 justify-center bg-black border border-primary text-primary uppercase rounded-full text-xl font-black hover:bg-primary hover:text-black transition outline-none ${bigShoulders.className}`}
+              className={`w-1/2 py-2 px-4 flex items-center gap-2 justify-center bg-black border border-primary text-primary uppercase rounded-full text-xl font-black hover:bg-primary hover:text-white transition outline-none ${bigShoulders.className}`}
             >
               <RxCross2 size={25} /> No
             </button>

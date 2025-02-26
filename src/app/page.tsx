@@ -42,9 +42,10 @@ export default async function Home() {
   return (
     <div>
       <Banner banners={banners} />
-      <Upcoming slidesPerViewDesktop={5} />
+      <Upcoming slidesPerViewDesktop={4} />
       {homeListing1?.product && homeListing1?.product.length > 0 && (
         <ListingByCategory
+          categoryID={homeListing1.categoryID}
           sectionText={homeListing1.offerName}
           bannerTitle={homeListing1?.banner_title}
           bannerImage={homeListing1?.banner_image}
@@ -54,6 +55,7 @@ export default async function Home() {
       )}
       {homeListing2?.product && homeListing2?.product.length > 0 && (
         <ListingByCategory
+          categoryID={homeListing2.categoryID}
           sectionText={homeListing2.offerName}
           bannerTitle={homeListing2?.banner_title}
           bannerImage={homeListing2?.banner_image}
@@ -63,6 +65,7 @@ export default async function Home() {
       )}
       {homeListing3?.product && homeListing3?.product.length > 0 && (
         <ListingByCategory
+          categoryID={homeListing3.categoryID}
           sectionText={homeListing3.offerName}
           bannerTitle={homeListing3?.banner_title}
           bannerImage={homeListing3?.banner_image}
@@ -70,22 +73,24 @@ export default async function Home() {
           bannerDesc={homeListing3?.banner_description}
         />
       )}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 max-w-9xl mx-auto px-5 py-10">
-        <div className="relative">
-          <Image
-            src="https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/h1_bn-1.jpg"
-            alt="Image"
-            width={100}
-            height={100}
-            className="object-cover w-full aspect-square md:h-[75vh] rounded-lg"
-            priority
-            unoptimized
-          />
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 max-w-9xl mx-auto px-5 pt-10 lg:pt-0 pb-20">
+        <div className="relative w-full h-auto">
+          <div className="relative w-full h-full">
+            <Image
+              src="https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/h1_bn-1.jpg"
+              alt="Image"
+              width={100}
+              height={100}
+              className="object-contain w-full h-full bg-white rounded-lg"
+              priority
+              unoptimized
+            />
+          </div>
           <div
             className={`absolute inset-0 flex flex-col justify-between p-5 md:p-10 ${bigShoulders.className}`}
           >
             <div className="text-left pl-12 md:pl-14 relative">
-              <div className="absolute tracking-widest md:text-lg top-10 md:top-12 -rotate-90 text-pink-600 font-bold -left-7">
+              <div className="absolute tracking-widest md:text-lg top-12 -rotate-90 text-pink-600 font-bold -left-8 md:-left-10">
                 SALE NOW ON
               </div>
               <p className="text-7xl md:text-8xl text-stroke font-extrabold text-lime-500 leading-none">
@@ -98,44 +103,49 @@ export default async function Home() {
             <AnimatedActionButton
               text="SHOP NOW"
               href="/shop-all"
-              // onClick={() => console.log("Button clicked")}
-              classes="uppercase md:text-lg font-semibold whitespace-nowrap py-6 w-[165px] hover:bg-primary bg-white text-black hover:text-black"
+              classes="uppercase md:text-lg font-semibold whitespace-nowrap py-6 w-[165px] hover:bg-primary bg-white text-black hover:text-black self-start"
               isLoading={false}
               type="submit"
             />
           </div>
         </div>
-        <div className="relative">
-          <Image
-            src="https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/h1_bn-2.jpg"
-            alt="Image"
-            width={100}
-            height={100}
-            className="object-cover w-full aspect-square md:h-[75vh] rounded-lg"
-            priority
-            unoptimized
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-black rounded-lg to-transparent transition-all duration-500 ease-linear opacity-70 group-hover:opacity-40"></div>
+
+        <div className="relative w-full h-auto">
+          <div className="relative w-full h-full">
+            <Image
+              src="https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/h1_bn-2.jpg"
+              alt="Image"
+              width={100}
+              height={100}
+              className="object-contain w-full h-full bg-white rounded-lg"
+              priority
+              unoptimized
+            />
+          </div>
+
+          {/* Gradient Overlay */}
+          <div className="absolute inset-0 h-full w-full bg-gradient-to-r from-black to-transparent rounded-lg transition-all duration-500 ease-linear opacity-70 group-hover:opacity-40"></div>
+
+          {/* Content Layer */}
           <div
             className={`absolute inset-0 flex flex-col justify-between p-5 md:p-10 ${bigShoulders.className}`}
           >
             <div className="text-left uppercase pl-14 relative">
-              <div className="absolute tracking-widest text-lg top-12 -rotate-90 text-[#a9bc41] font-bold -left-7">
-                special offer
+              <div className="absolute tracking-widest text-lg top-12 -rotate-90 text-[#a9bc41] font-bold -left-8 md:-left-10">
+                SPECIAL OFFER
               </div>
               <p className="text-4xl font-extrabold text-white leading-none">
-                high visibility <br /> workwear
+                HIGH VISIBILITY <br /> WORKWEAR
               </p>
               <p className="text-2xl mt-5 font-extrabold text-white">
-                start from <span className="text-[#a9bc41]">$299 </span>
+                START FROM <span className="text-[#a9bc41]">$299</span>
               </p>
             </div>
 
             <AnimatedActionButton
               text="SHOP NOW"
-              href="/shop-all"
-              // onClick={() => console.log("Button clicked")}
-              classes="uppercase md:text-lg font-semibold whitespace-nowrap py-6 w-[165px] hover:bg-primary bg-white text-black hover:text-black"
+              href="/shop?category=39"
+              classes="uppercase md:text-lg font-semibold whitespace-nowrap py-6 w-[165px] hover:bg-primary bg-white text-black hover:text-black self-start"
               isLoading={false}
               type="submit"
             />

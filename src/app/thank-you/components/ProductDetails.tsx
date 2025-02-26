@@ -1,3 +1,4 @@
+import { formatPound } from "@/components/logo/general";
 import Image from "next/image";
 import React from "react";
 
@@ -66,10 +67,10 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ cart }) => {
               <td className="px-2 text-center">{product.Size}</td>
               <td className="px-2 text-center">X {product.Quantity}</td>
               <td className="px-2 text-center">
-                £{product.Sales_Price && product.Sales_Price.toFixed(2)}
+                {product.Sales_Price && formatPound(product.Sales_Price)}
               </td>
               <td className="px-2 text-base font-semibold text-center">
-                £{product.Line_Total && product.Line_Total.toFixed(2)}
+                {product.Line_Total && formatPound(product.Line_Total)}
               </td>
             </tr>
           ))}

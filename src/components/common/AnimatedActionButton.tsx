@@ -1,8 +1,10 @@
+import Link from "next/link";
 import React from "react";
 import { FaArrowRightLong } from "react-icons/fa6";
 
 interface AnimatedActionButtonProps {
   text: string;
+  nestedHref?: boolean;
   onClick?: () => void; // OnClick handler for the button
   classes?: string; // Additional custom classes for the button
   isLoading?: boolean; // If the button is in loading state
@@ -11,12 +13,13 @@ interface AnimatedActionButtonProps {
 }
 
 const AnimatedActionButton: React.FC<AnimatedActionButtonProps> = ({
-  text = "Discover Now",
+  href,
   onClick,
   classes = "",
-  isLoading = false,
   type = "button",
-  href,
+  isLoading = false,
+  nestedHref = false,
+  text = "Discover Now",
 }) => {
   const buttonContent = (
     <>
@@ -29,9 +32,7 @@ const AnimatedActionButton: React.FC<AnimatedActionButtonProps> = ({
           {text}
         </span>
       )}
-      <span
-        className="absolute text-sm md:text-sm font-semibold text-start pl-6 transition-all duration-300 py-4 ease-in-out transform group-hover:translate-y-0 group-hover:opacity-100 opacity-0 translate-y-[100%] group-hover:text-black"
-      >
+      <span className="absolute text-sm md:text-sm font-semibold text-start pl-6 transition-all duration-300 py-4 ease-in-out transform group-hover:translate-y-0 group-hover:opacity-100 opacity-0 translate-y-[100%] group-hover:text-black">
         {text}
       </span>
       <span className="mr-2 absolute right-2 flex items-center justify-end">
@@ -40,19 +41,16 @@ const AnimatedActionButton: React.FC<AnimatedActionButtonProps> = ({
     </>
   );
 
-  if (href) {
-    // Render as anchor tag if href is provided
+  if (href && !nestedHref) {
     return (
-      <a
+      <Link
         href={href}
         className={`relative font-sans font-semibold flex items-center border rounded-full cursor-pointer overflow-hidden group ${classes} hover:text-black`}
       >
         {buttonContent}
-      </a>
+      </Link>
     );
   }
-
-  // Default button render
   return (
     <button
       type={type}
