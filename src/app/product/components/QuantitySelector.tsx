@@ -254,7 +254,7 @@ const QuantitySelector = ({
           setSelectedFields={setSelectedFields}
         />
       )}
-      <div className="flex text-center py-5 gap-3">
+      <div className="flex text-center pt-5 pb-2 gap-3">
         <AddToCartButton
           fieldsCheck={fieldsCheck}
           selectedFields={selectedFields}

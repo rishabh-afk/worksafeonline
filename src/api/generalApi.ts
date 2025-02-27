@@ -23,6 +23,7 @@ export const fetchHomePageData = async () => {
     Get("api/HomeProductListing2?App=Worksafe"), // Fetch home listing 2
     Get("api/HomeProductListing3?App=Worksafe"), // Fetch home listing 3
     Get("api/BannerOffersWeb?App=Worksafe"), // Fetch Home Page Banner
+    Get("api/TwoBannerOffersWeb?app=Worksafe"), // Fetch Two Banner Offers Web
   ];
 
   // Use Promise.allSettled to handle individual promise results
@@ -34,6 +35,7 @@ export const fetchHomePageData = async () => {
     homeListing2,
     homeListing3,
     bannerResponse,
+    twoBannerResponse,
   ] = results.map((result) =>
     result?.status === "fulfilled" ? result?.value : {}
   );
@@ -41,6 +43,7 @@ export const fetchHomePageData = async () => {
   const brands = brandsResponse?.brand || [];
   const banners = bannerResponse?.special_offers || [];
   const categories = categoriesResponse?.categories || [];
+  const offerBanner = twoBannerResponse?.twoBannerList || [];
   return {
     categories,
     brands,
@@ -48,6 +51,7 @@ export const fetchHomePageData = async () => {
     homeListing2,
     homeListing3,
     banners,
+    offerBanner,
   };
 };
 

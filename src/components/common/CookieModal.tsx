@@ -1,9 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import Modal from "../common/Modal";
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 const CookieSettings = ({
@@ -13,6 +13,7 @@ const CookieSettings = ({
   onClose: any;
   handleAccept: any;
 }) => {
+  const [accepted, setAccepted] = useState(false);
   const [expanded, setExpanded] = useState<string | null>(null);
   const [cookies, setCookies] = useState({
     necessary: true,
@@ -28,7 +29,13 @@ const CookieSettings = ({
   };
 
   const handleAcceptAll = () => {
+    setAccepted(true);
     setCookies({ necessary: true, analytical: true });
+  };
+
+  const handleRejectAll = () => {
+    setAccepted(false);
+    setCookies({ necessary: true, analytical: false });
   };
 
   const handleSetting = () => {
@@ -155,16 +162,27 @@ const CookieSettings = ({
         <button
           type="button"
           onClick={handleSetting}
-          className="bg-gray-500 px-4 py-2 text-white hover:bg-gray-400 transition"
+          className="bg-blue-500 px-4 py-2 text-white hover:bg-blue-400 transition"
         >
           Save Settings
         </button>
         <button
           type="button"
-          onClick={handleAcceptAll}
-          className="bg-blue-600 text-white px-4 py-2 hover:bg-blue-700 transition"
+          onClick={() => {
+            if (accepted) handleRejectAll();
+            else handleAcceptAll();
+          }}
+          className=" text-white transition"
         >
-          ✓ Accept All
+          {accepted ? (
+            <span className="bg-red-600 px-4 py-2.5 font-medium">
+              ✖ Reject All
+            </span>
+          ) : (
+            <span className="bg-green-600 px-4 py-2.5 font-medium">
+              ✓ Accept All
+            </span>
+          )}
         </button>
       </div>
     </motion.div>

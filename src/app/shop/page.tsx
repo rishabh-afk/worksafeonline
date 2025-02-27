@@ -24,8 +24,11 @@ export async function generateMetadata() {
 }
 
 export default async function Page(ctx: any) {
-  const { category = null, subcategory = null } =
-    (await ctx.searchParams) || {};
+  const {
+    brand = null,
+    category = null,
+    subcategory = null,
+  } = (await ctx.searchParams) || {};
   let response = null,
     categoryResponse = null,
     subcategoryName = null;
@@ -47,6 +50,10 @@ export default async function Page(ctx: any) {
       );
       if (subcategoryMatch) subcategoryName = subcategoryMatch.menu_name;
     }
+  } else if (brand) {
+    response = await Get(
+      `api/PopularBrandProductsByPage?brand=${brand}&page=1&pagesize=12`
+    );
   } else {
     response = await Get(
       "api/ProductsByPageN?category_id=0&page=1&pagesize=12"

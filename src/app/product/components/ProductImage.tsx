@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { TbZoomScan } from "react-icons/tb";
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperClass } from "swiper";
@@ -17,6 +17,7 @@ type ProductImageProps = {
 };
 
 const ProductImage: React.FC<ProductImageProps> = ({ images }) => {
+  const [mounted, setMounted] = useState(true);
   const [activeIndex, setActiveIndex] = useState(0);
   const [position, setPosition] = useState({ x: 50, y: 50 });
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperClass | null>(null);
@@ -29,21 +30,11 @@ const ProductImage: React.FC<ProductImageProps> = ({ images }) => {
       e.currentTarget.getBoundingClientRect();
     const x = ((e.clientX - left) / width) * 100;
     const y = ((e.clientY - top) / height) * 100;
-
     setPosition({ x, y });
   }, []);
 
-  const handleMouseEnter = () => {
-    if (swiperInstance) {
-      swiperInstance.autoplay.stop();
-    }
-  };
-
-  const handleMouseLeave = () => {
-    if (swiperInstance) {
-      swiperInstance.autoplay.start();
-    }
-  };
+  const handleMouseEnter = () => swiperInstance?.autoplay.stop();
+  const handleMouseLeave = () => swiperInstance?.autoplay.start();
 
   const handleSwiperInstance = useCallback((swiper: SwiperClass) => {
     setSwiperInstance(swiper);
@@ -53,10 +44,18 @@ const ProductImage: React.FC<ProductImageProps> = ({ images }) => {
     setActiveIndex(swiper.activeIndex);
   };
 
+  useEffect(() => {
+    setMounted(false);
+  }, []);
+
   if (!images || images.length === 0) {
-    console.log(setThumbsSwiper);
     return <div className="text-center">No images available</div>;
   }
+
+  if (mounted)
+    return (
+      <div className="w-full lg:w-1/2 aspect-square bg-gray-200 animate-pulse rounded-md" />
+    );
 
   return (
     <div className="w-full lg:w-1/2 lg:sticky top-40 lg:h-screen flex flex-col items-center">
@@ -98,29 +97,42 @@ const ProductImage: React.FC<ProductImageProps> = ({ images }) => {
         </Swiper>
       </div>
 
-      {/* Horizontal Thumbnails Grid */}
-      <div className="w-full mt-2 md:mt-5 lg:mt-3 grid grid-cols-3 md:grid-cols-4 gap-2 lg:gap-3 justify-start">
-        {images.map((src, index) => (
-          <div
-            key={src}
-            className={`w-fit shadow-sm cursor-pointer ${
-              activeIndex === index
-                ? "border-primary shadow-lg border-2"
-                : "border-gray-300 border"
-            }`}
-            onClick={() => thumbsSwiper?.slideTo(index)}
-          >
-            <Image
-              src={src}
-              alt={`Thumbnail ${index + 1}`}
-              width={60}
-              height={60}
-              priority
-              unoptimized
-              className="w-[120px] sm:w-[140px] md:w-[160px] lg:w-[180px] p-1 md:p-2 h-auto object-cover"
-            />
-          </div>
-        ))}
+      {/* Swiper Thumbnails */}
+      <div className="w-full mt-2 md:mt-5 lg:mt-3">
+        <Swiper
+          onSwiper={setThumbsSwiper}
+          spaceBetween={10}
+          slidesPerView={3} // Default: 3 thumbnails
+          breakpoints={{
+            0: { slidesPerView: 4 }, // 4 thumbnails on md
+            1024: { slidesPerView: 5 }, // 5 thumbnails on lg
+          }}
+          modules={[Navigation, Thumbs]}
+          className="w-full"
+        >
+          {images.map((src, index) => (
+            <SwiperSlide key={src} className="cursor-pointer">
+              <div
+                className={`border ${
+                  activeIndex === index
+                    ? "border-primary shadow-lg"
+                    : "border-gray-300"
+                }`}
+                onClick={() => swiperInstance?.slideTo(index)}
+              >
+                <Image
+                  src={src}
+                  width={60}
+                  height={60}
+                  priority
+                  unoptimized
+                  alt={`Thumbnail ${index + 1}`}
+                  className="w-full p-1 md:p-2 h-auto object-cover"
+                />
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
     </div>
   );

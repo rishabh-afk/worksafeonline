@@ -42,12 +42,17 @@ const FilterSection = ({
   const [loader, setLoader] = useState<boolean>(false);
   const [filteredProducts, setFilteredProducts] = useState(state.products);
 
-  const handleProducts = async (filters: any) => {
+  const handleClear = async () => {
+    setFilters({});
+    await handleProducts({}, true);
+  };
+
+  const handleProducts = async (filters: any, clear?: boolean) => {
     try {
       const allFiltersEmpty = Object.keys(filters).every(
         (key) => Array.isArray(filters[key]) && filters[key].length === 0
       );
-      if (allFiltersEmpty) return false;
+      if (allFiltersEmpty && !clear) return false;
 
       setLoader(true);
       const updatedData = getPaginateData({
@@ -71,9 +76,14 @@ const FilterSection = ({
         setFilteredProducts(response?.product ?? []);
         setState((prev: any) => ({
           ...prev,
+          sizes: response?.Sizes ?? [],
+          prices: response?.Prices ?? [],
+          brands: response?.Brands ?? [],
+          colors: response?.Colours ?? [],
           products: response?.product ?? [],
-          pageCount: response?.PageCount ?? 0,
-          currentPage: response?.CurrentPage ?? 0,
+          fittings: response?.Fittings ?? [],
+          pageCount: response?.PageCount ?? 1,
+          currentPage: response?.CurrentPage ?? 1,
         }));
       } else throw new Error(response?.message || "Failed to fetch products.");
     } catch (error: any) {
@@ -94,7 +104,9 @@ const FilterSection = ({
         fittings: response?.Fittings ?? [],
         pageCount: response?.PageCount ?? 1,
         currentPage: response?.CurrentPage ?? 1,
-        categories: categoryResponse?.SubCategories ?? [],
+        categories: categoryResponse?.SubCategories
+          ? categoryResponse?.SubCategories
+          : response?.SubCategories ?? [],
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -110,6 +122,16 @@ const FilterSection = ({
           className="grid md:grid-cols-3 lg:grid-cols-5 gap-10 max-w-9xl mx-auto p-4 lg:p-10"
         >
           <div className="col-span-1 hidden md:block space-y-6">
+            <div className="flex justify-between mt-3 items-center">
+              <h4 className={`font-bold text-lg`}>Filters</h4>
+              <button
+                type="button"
+                onClick={handleClear}
+                className="bg-primary transition text-sm px-2 py-0.5 text-white hover:bg-black"
+              >
+                Clear All
+              </button>
+            </div>
             {state.categories && state.categories.length > 0 && (
               <Filter
                 countKey="Cnt"

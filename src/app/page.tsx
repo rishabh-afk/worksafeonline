@@ -38,6 +38,7 @@ export default async function Home() {
     homeListing2,
     homeListing3,
     banners,
+    offerBanner,
   } = await fetchHomePageData();
   return (
     <div>
@@ -77,13 +78,13 @@ export default async function Home() {
         <div className="relative w-full h-auto">
           <div className="relative w-full h-full">
             <Image
-              src="https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/h1_bn-1.jpg"
-              alt="Image"
-              width={100}
-              height={100}
-              className="object-contain w-full h-full bg-white rounded-lg"
               priority
               unoptimized
+              width={100}
+              height={100}
+              src={offerBanner[0]?.Banner}
+              alt={offerBanner[0]?.LText ?? "Image"}
+              className="object-contain w-full h-full bg-white rounded-lg"
             />
           </div>
           <div
@@ -91,18 +92,18 @@ export default async function Home() {
           >
             <div className="text-left pl-12 md:pl-14 relative">
               <div className="absolute tracking-widest md:text-lg top-12 -rotate-90 text-pink-600 font-bold -left-8 md:-left-10">
-                SALE NOW ON
+                {offerBanner[0]?.LText}
               </div>
               <p className="text-7xl md:text-8xl text-stroke font-extrabold text-lime-500 leading-none">
-                15% OFF
+                {offerBanner[0]?.RText1}
               </p>
               <p className="text-2xl font-extrabold text-gray-700">
-                ALL SELECTED BRANDS
+                {offerBanner[0]?.RText2}
               </p>
             </div>
             <AnimatedActionButton
-              text="SHOP NOW"
-              href="/shop-all"
+              href={offerBanner[0]?.ButtonLink}
+              text={offerBanner[0]?.ButtonText}
               classes="uppercase md:text-lg font-semibold whitespace-nowrap py-6 w-[165px] hover:bg-primary bg-white text-black hover:text-black self-start"
               isLoading={false}
               type="submit"
@@ -113,13 +114,13 @@ export default async function Home() {
         <div className="relative w-full h-auto">
           <div className="relative w-full h-full">
             <Image
-              src="https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/h1_bn-2.jpg"
-              alt="Image"
-              width={100}
-              height={100}
-              className="object-contain w-full h-full bg-white rounded-lg"
               priority
+              height={100}
+              width={100}
               unoptimized
+              src={offerBanner[1]?.Banner}
+              alt={offerBanner[1]?.LText ?? "Image"}
+              className="object-contain w-full h-full bg-white rounded-lg"
             />
           </div>
 
@@ -132,19 +133,29 @@ export default async function Home() {
           >
             <div className="text-left uppercase pl-14 relative">
               <div className="absolute tracking-widest text-lg top-12 -rotate-90 text-[#a9bc41] font-bold -left-8 md:-left-10">
-                SPECIAL OFFER
+                {offerBanner[1]?.LText}
               </div>
               <p className="text-4xl font-extrabold text-white leading-none">
-                HIGH VISIBILITY <br /> WORKWEAR
+                {(() => {
+                  const text = offerBanner[1]?.RText1 || "";
+                  const parts = text.split(" ");
+                  if (parts.length < 3) return text;
+                  return (
+                    <>
+                      {parts.slice(0, 2).join(" ")} <br />
+                      {parts.slice(2).join(" ")}
+                    </>
+                  );
+                })()}
               </p>
               <p className="text-2xl mt-5 font-extrabold text-white">
-                START FROM <span className="text-[#a9bc41]">$299</span>
+                {offerBanner[1]?.RText2}
               </p>
             </div>
 
             <AnimatedActionButton
-              text="SHOP NOW"
-              href="/shop?category=39"
+              href={offerBanner[1]?.ButtonLink}
+              text={offerBanner[1]?.ButtonText}
               classes="uppercase md:text-lg font-semibold whitespace-nowrap py-6 w-[165px] hover:bg-primary bg-white text-black hover:text-black self-start"
               isLoading={false}
               type="submit"

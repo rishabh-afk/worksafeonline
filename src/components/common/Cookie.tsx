@@ -25,6 +25,7 @@ const CookiePopup = () => {
   const handleAccept = () => {
     setIsVisible(false);
     localStorage.setItem("COOKIE_POPUP_ACCEPTED", "true");
+    localStorage.setItem("COOKIE_POPUP_ANALYTICAL", "true");
   };
 
   const handleSettings = () => {

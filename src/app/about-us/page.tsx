@@ -1,10 +1,10 @@
-import Blogs from "./components/Blogs";
 import { Get } from "@/api/generalApi";
 import Header from "./components/Header";
+// import Blogs from "./components/Blogs";
 import OurTeam from "./components/OurTeam";
-import Marquee from "./components/Marquee";
+import Marquee from "@/components/common/Marquee";
 import Features from "@/components/common/Features";
-import BusinessStats from "./components/BusinessStats";
+// import BusinessStats from "./components/BusinessStats";
 import TradeSafetyBanner from "./components/TradeSafetyBanner";
 
 export async function generateMetadata() {
@@ -28,17 +28,18 @@ export async function generateMetadata() {
 }
 
 const AboutUS = async () => {
+  const response = await Get("api/AboutUs1?app=Worksafe");
   return (
     <>
       <Header
         title="About Us"
         getBreadCrumbs={[{ id: "/about-us", name: "About Us" }]}
       />
-      <TradeSafetyBanner />
+      <TradeSafetyBanner response={response} />
       <Marquee />
-      <OurTeam />
-      <BusinessStats />
-      <Blogs />
+      <OurTeam response={response} />
+      {/* <BusinessStats /> */}
+      {/* <Blogs /> */}
       <Features />
     </>
   );

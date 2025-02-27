@@ -34,10 +34,10 @@ const BusinessStats: React.FC = () => {
   return (
     <div
       ref={targetRef} // Attach the ref to the observed section
-      style={{
-        clipPath: "polygon(0 5%, 100% 0, 100% 90%, 0 100%)",
-        overflow: "hidden",
-      }}
+      // style={{
+      //   clipPath: "polygon(0 5%, 100% 0, 100% 90%, 0 100%)",
+      //   overflow: "hidden",
+      // }}
       className="relative text-white w-full h-[700px] sm:h-[400px]"
     >
       {/* Full-width background image */}

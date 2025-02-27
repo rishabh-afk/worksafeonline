@@ -25,28 +25,18 @@ const ListingByCategory = ({
   const text2 = text.slice(2).join(" ");
   const text1 = text.slice(0, 2).join(" ");
   return (
-    <div className="py-10">
-      <div className="relative">
+    <div className="pb-10">
+      <div className="relative min-h-full">
         <Image
+          priority
           alt="Image"
           width={100}
           height={100}
-          src={bannerImage}
-          className="object-cover w-screen h-[50vh] lg:h-screen"
-          priority
-          // style={{
-          //   clipPath: "polygon(0 5%, 100% 0, 100% 95%, 0% 100%)",
-          //   overflow: "hidden",
-          // }}
           unoptimized
+          src={bannerImage}
+          className="object-cover w-screen h-[50vh] lg:h-full"
         />
-        <div
-          // style={{
-          //   clipPath: "polygon(0 5%, 100% 0, 100% 95%, 0% 100%)",
-          //   overflow: "hidden",
-          // }}
-          className="absolute inset-0 bg-gradient-to-r from-black to-transparent transition-all duration-500 ease-linear opacity-70 group-hover:opacity-40"
-        ></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-black to-transparent transition-all duration-500 ease-linear opacity-70 group-hover:opacity-40"></div>
         <Link
           href={`/shop?category=${categoryID}`}
           className={`absolute animate-fade-up text-white inset-0 flex text-left flex-col justify-center max-w-9xl pl-5 md:pl-10 ${bigShoulders.className}`}

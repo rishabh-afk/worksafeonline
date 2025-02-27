@@ -1,8 +1,8 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { FaAngleUp } from "react-icons/fa";
 import { bigShoulders } from "@/app/layout";
+import { FaPlus, FaMinus } from "react-icons/fa";
 import { formatPound } from "@/components/logo/general";
 
 interface FilterProps {
@@ -25,8 +25,8 @@ const PriceFilter = ({
   const max = options[0]?.HighestPrice || 100;
 
   const [value, setValue] = useState<number>(options[0]?.HighestPrice || 0);
-  const [isOpen, setIsOpen] = useState<boolean>(true);
   const previousValue = useRef<number>(value);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const handleChange = (newValue: string) => {
     const numericValue = parseFloat(newValue);
@@ -51,7 +51,7 @@ const PriceFilter = ({
       <div
         onClick={() => setIsOpen(!isOpen)}
         className={`flex justify-between items-center cursor-pointer ${
-          isOpen ? "pb-2 border-b" : "pb-4"
+          isOpen ? "pb-2 border-b" : ""
         }`}
       >
         <h2
@@ -59,12 +59,12 @@ const PriceFilter = ({
         >
           {heading}
         </h2>
-        <div
-          className={`transition-transform duration-300 ${
-            isOpen ? "rotate-180" : "rotate-0"
-          }`}
-        >
-          <FaAngleUp size={18} />
+        <div className="transition-transform duration-300">
+          {isOpen ? (
+            <FaMinus size={14} className="animate-scaleIn" />
+          ) : (
+            <FaPlus size={14} className="animate-scaleIn" />
+          )}
         </div>
       </div>
 
@@ -87,7 +87,7 @@ const PriceFilter = ({
             className={`flex justify-between items-center ${bigShoulders.className} font-extrabold pt-2`}
           >
             <span
-              className={`${bigShoulders.className} font-black uppercase text-gray-500`}
+              className={`${bigShoulders.className} font-black uppercase text-sm text-gray-500`}
             >
               Price:{" "}
               <span className="text-black">
@@ -97,7 +97,7 @@ const PriceFilter = ({
             <button
               type="button"
               onClick={applyFilter}
-              className="bg-black text-white text-sm py-1 px-4 rounded hover:bg-primary transition"
+              className="bg-black text-white text-xs py-1 px-2 rounded hover:bg-primary transition"
             >
               Apply
             </button>

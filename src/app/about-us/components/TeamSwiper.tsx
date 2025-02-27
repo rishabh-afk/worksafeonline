@@ -4,23 +4,24 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Autoplay } from "swiper/modules";
-import {
-  FaFacebook,
-  FaInstagram,
-  FaLinkedin,
-  FaTwitter,
-} from "react-icons/fa6";
+// import {
+//   FaFacebook,
+//   FaInstagram,
+//   FaLinkedin,
+//   FaTwitter,
+// } from "react-icons/fa6";
 import Image from "next/image";
-import Link from "next/link";
+// import Link from "next/link";
 
-interface Teams {
-  id: number;
-  name: string;
-  designation: string;
-  imageUrl: string;
-}
+// interface Teams {
+//   id: number;
+//   name: string;
+//   designation: string;
+//   imageUrl: string;
+// }
 
 interface OurTeamSwiperProps {
+  response: any;
   slidesPerViewDesktop?: number;
 }
 
@@ -32,51 +33,39 @@ const SkeletonLoader = () => (
 );
 
 const OurTeamSwiper: React.FC<OurTeamSwiperProps> = ({
+  response,
   slidesPerViewDesktop,
 }) => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [teamsData, setTeamsData] = useState<Teams[]>([]);
+  const [isLoading, SetIsLoading] = useState(true);
+  const teamsData = [
+    {
+      id: 1,
+      name: response?.TeamName1,
+      imageUrl: response?.TeamImage1,
+      designation: response?.TeamPost1,
+    },
+    {
+      id: 2,
+      name: response?.TeamName2,
+      imageUrl: response?.TeamImage2,
+      designation: response?.TeamPost2,
+    },
+    {
+      id: 3,
+      name: response?.TeamName3,
+      imageUrl: response?.TeamImage3,
+      designation: response?.TeamPost3,
+    },
+    {
+      id: 4,
+      name: response?.TeamName4,
+      imageUrl: response?.TeamImage4,
+      designation: response?.TeamPost4,
+    },
+  ];
 
-  // Simulating an API call
   useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      setTimeout(() => {
-        setTeamsData([
-          {
-            id: 1,
-            name: "Product 1",
-            designation: "Designer",
-            imageUrl:
-              "https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/team-1.jpg",
-          },
-          {
-            id: 2,
-            name: "Product 2",
-            designation: "Developer",
-            imageUrl:
-              "https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/team-2.jpg",
-          },
-          {
-            id: 3,
-            name: "Product 3",
-            designation: "Manager",
-            imageUrl:
-              "https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/team-3.jpg",
-          },
-          {
-            id: 4,
-            name: "Product 4",
-            designation: "Photographer",
-            imageUrl:
-              "https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/team-4.jpg",
-          },
-        ]);
-        setIsLoading(false);
-      }, 500); // Simulated 500ms delay
-    };
-
-    fetchData();
+    SetIsLoading(false);
   }, []);
 
   if (isLoading) {
@@ -182,7 +171,7 @@ const OurTeamSwiper: React.FC<OurTeamSwiperProps> = ({
                 <p className="font-bold text-3xl">{team.name}</p>
                 <p>{team.designation}</p>
               </div>
-              <div className="absolute bottom-0 w-full h-full">
+              {/* <div className="absolute bottom-0 w-full h-full">
                 <div className="relative font-sans uppercase font-semibold w-full border-black/10 pt-20 flex justify-center overflow-hidden group h-full">
                   <span className="absolute whitespace-nowrap w-[80%] bottom-0 transition-all duration-300 ease-in-out transform group-hover:translate-y-[-100%] bg-white group-hover:opacity-100 opacity-0 translate-y-0 py-3 rounded-full p-3">
                     <div className="space-x-4 text-center flex justify-center w-full">
@@ -201,7 +190,7 @@ const OurTeamSwiper: React.FC<OurTeamSwiperProps> = ({
                     </div>
                   </span>
                 </div>
-              </div>
+              </div> */}
             </div>
           </SwiperSlide>
         ))}

@@ -2,12 +2,13 @@
 
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { FaAngleUp } from "react-icons/fa";
 import { bigShoulders } from "@/app/layout";
 import { includes } from "@/utils/polyfills";
+import { FaPlus, FaMinus } from "react-icons/fa";
 
 interface FilterProps {
   filters: any;
+  brand?: string;
   setFilters: any;
   heading: string;
   labelKey: string;
@@ -28,11 +29,12 @@ const Filter = ({
   subcategory,
   handleProducts,
 }: FilterProps) => {
-  const [isOpen, setIsOpen] = useState<boolean>(true);
+  const [isOpen, setIsOpen] = useState<boolean>(
+    labelKey === "menu_name" ? true : false
+  );
   const [subcategoryInput, setSubcategory] = useState<string | null>(
     subcategory ? subcategory.toString() : null
   );
-
   const handleUrl = async (data: any) => {
     try {
       const updatedValues =
@@ -76,19 +78,19 @@ const Filter = ({
         >
           {heading}
         </h2>
-        <div
-          className={`transition-transform duration-300 ${
-            isOpen ? "rotate-180" : "rotate-0"
-          }`}
-        >
-          <FaAngleUp size={18} />
+        <div className="transition-transform duration-300">
+          {isOpen ? (
+            <FaMinus size={14} className="animate-scaleIn" />
+          ) : (
+            <FaPlus size={14} className="animate-scaleIn" />
+          )}
         </div>
       </div>
 
       {/* Filter Options with scrollable animation and blurred edges */}
       <div
-        className={`overflow-y-auto hide-scrollbar transition-["height"] duration-300 ease-in-out mt-4 space-y-3 ${
-          isOpen ? "md:max-h-96 lg:max-h-[33vh]" : "max-h-0"
+        className={`overflow-y-auto hide-scrollbar transition-["height"] duration-100 ease-in-out space-y-3  ${
+          isOpen ? "md:max-h-96 lg:max-h-[33vh] mt-4" : "max-h-0"
         }`}
       >
         {options.map((option: any, index: number) => {
