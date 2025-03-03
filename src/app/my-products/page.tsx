@@ -1,10 +1,9 @@
 import React from "react";
 import ClientPage from "./ClientPage";
-import { Get } from "@/api/generalApi";
-import Header from "../shop/components/Header";
+// import { Get } from "@/api/generalApi";
 
 export async function generateMetadata() {
-  const pageData = await Get("");
+  const pageData: any = {};
 
   return {
     title: pageData?.title ?? "Worksafeonline | My Products",
@@ -23,13 +22,5 @@ export async function generateMetadata() {
 }
 
 export default async function Page() {
-  return (
-    <>
-      <Header
-        title="My Products"
-        getBreadCrumbs={[{ id: "/my-products", name: "My Products" }]}
-      />
-      <ClientPage />
-    </>
-  );
+  return <ClientPage />;
 }

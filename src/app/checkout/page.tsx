@@ -1,8 +1,9 @@
-import { Get } from "@/api/generalApi";
+// import { Get } from "@/api/generalApi";
 import ClientPage from "./ClientPage";
 
 export async function generateMetadata() {
-  const pageData = await Get("");
+  const pageData: any = {};
+  // await Get("");
 
   return {
     title: pageData?.title ?? "Worksafeonline | Checkout",

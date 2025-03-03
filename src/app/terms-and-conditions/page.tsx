@@ -1,10 +1,10 @@
-import { Get } from "@/api/generalApi";
+// import { Get } from "@/api/generalApi";
 import React from "react";
 import { bigShoulders } from "../layout";
 
 export async function generateMetadata() {
 // Replace with the correct endpoint
-const pageData = await Get("");
+const pageData: any = {};
 
 return {
   title: pageData?.title ?? "Worksafeonline | Privacy-Policy",

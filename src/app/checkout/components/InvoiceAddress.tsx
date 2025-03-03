@@ -211,17 +211,6 @@ const InvoiceAddress = ({
                 handleInputChange={handleInputChange}
                 error={errors[formFields[3].name]}
               />
-              {options.length > 0 && (
-                <Select
-                  field={{
-                    ...formFields[4],
-                    options: options,
-                    value: formData[formFields[4].name] || "",
-                  }}
-                  handleInputChange={handleInputChange}
-                  error={errors[formFields[4].name]}
-                />
-              )}
               <Text
                 field={{
                   ...formFields[5],
@@ -238,6 +227,17 @@ const InvoiceAddress = ({
                 handleInputChange={handleInputChange}
                 error={errors[formFields[6].name]}
               />
+              {options.length > 0 && (
+                <Select
+                  field={{
+                    ...formFields[4],
+                    options: options,
+                    value: formData[formFields[4].name] || "",
+                  }}
+                  handleInputChange={handleInputChange}
+                  error={errors[formFields[4].name]}
+                />
+              )}
 
               <div className="hidden lg:block"></div>
               <div className="hidden lg:block"></div>

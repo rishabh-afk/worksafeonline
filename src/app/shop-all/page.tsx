@@ -4,7 +4,7 @@ import Header from "../shop/components/Header";
 import FilterSection from "../shop/components/FilterSection";
 
 export async function generateMetadata() {
-  const pageData = await Get("");
+  const pageData: any = {};
 
   return {
     title: pageData?.title ?? "Worksafeonline | Shop All",
@@ -40,10 +40,14 @@ export default async function Page() {
     };
   if (productResponse.status === "fulfilled") products = productResponse?.value;
 
+  const url = products?.ProductBanner;
+  const bannerName = products?.BannerName;
+
   return (
     <>
       <Header
         title="Shop"
+        data={{ url, name: bannerName }}
         getBreadCrumbs={[{ id: "/shop-all", name: "Shop" }]}
       />
       <FilterSection

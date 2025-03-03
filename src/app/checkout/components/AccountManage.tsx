@@ -20,7 +20,7 @@ const AccountManage = ({
   };
 
   const handleContinue = useCallback(() => {
-    handleButtonClick("billingAddress");
+    handleButtonClick("myDetails");
     // eslint-disable-next-line
   }, []);
 

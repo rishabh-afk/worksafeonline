@@ -1,13 +1,13 @@
 import { Get } from "@/api/generalApi";
 import { features } from "@/data/country";
 import Map from "./components/MapComponent";
+import Header from "../about-us/components/Header";
 import ContactForm from "./components/ContactForm";
 import ContactDetails from "./components/ContactDetails";
-import Header from "../about-us/components/Header";
 
 export async function generateMetadata() {
   // Replace with the correct endpoint
-  const pageData = await Get("");
+  const pageData: any = {};
 
   return {
     title: pageData?.title ?? "Worksafeonline | Contact Us",

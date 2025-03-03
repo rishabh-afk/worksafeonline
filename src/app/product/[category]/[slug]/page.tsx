@@ -1,5 +1,4 @@
 import { redirect } from "next/navigation";
-import { productData } from "@/data/productData";
 import Features from "@/components/common/Features";
 import ProductImage from "../../components/ProductImage";
 import { fetchProductMenuData, Get } from "@/api/generalApi";
@@ -16,7 +15,7 @@ type ProductPageProps = {
 };
 
 export async function generateMetadata() {
-  const pageData = await Get("");
+  const pageData: any = {};
   return {
     title: pageData?.title ?? "Worksafeonline | Product Details",
     keywords: pageData?.keyword ?? "default, keywords", // Provide default value if keyword is missing
@@ -44,9 +43,8 @@ export default async function Page(ctx: ProductPageProps) {
   const productListImages = productResponse.ProductImageList.map(
     (image: any) => image?.ProductImage
   );
-  const product = productData;
   const bread = {
-    name: productData?.productName,
+    name: productResponse?.ProductName,
     id: `/product/${category}/${slug}`,
   };
   if (getBreadCrumbs.length > 0) getBreadCrumbs.push(bread);
@@ -56,9 +54,7 @@ export default async function Page(ctx: ProductPageProps) {
         <BreadcrumbsHeader getBreadCrumbs={getBreadCrumbs} />
         <div className="mt-5 lg:mt-10 block min-h-screen lg:flex gap-14">
           <ProductImage images={productListImages} />
-          <ProductContent
-            product={{ ...product, ...productResponse, category, slug }}
-          />
+          <ProductContent product={{ ...productResponse, category, slug }} />
         </div>
         <div className="bg-gray-300 h-[1px] my-[30px]" />
         <ProductFeatures product={productResponse} />

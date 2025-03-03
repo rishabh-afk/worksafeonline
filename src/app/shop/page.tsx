@@ -5,7 +5,7 @@ import FilterSection from "./components/FilterSection";
 
 export async function generateMetadata() {
   // Replace with the correct endpoint
-  const pageData = await Get("");
+  const pageData: any = {};
 
   return {
     title: pageData?.title ?? "Worksafeonline | Shop",
@@ -59,10 +59,16 @@ export default async function Page(ctx: any) {
       "api/ProductsByPageN?category_id=0&page=1&pagesize=12"
     );
   }
+  const url = response?.ProductBanner;
+  const bannerName = response?.BannerName;
   const getBreadCrumbs = await fetchMenuData(category, subcategory);
   return (
     <>
-      <Header title="Shop" getBreadCrumbs={getBreadCrumbs} />
+      <Header
+        title="Shop"
+        getBreadCrumbs={getBreadCrumbs}
+        data={{ url: url, name: bannerName || "Shop" }}
+      />
       <FilterSection
         category={category}
         response={response}

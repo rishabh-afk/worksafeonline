@@ -128,12 +128,25 @@ const AddText: React.FC<AddTextProps> = ({
   };
 
   const uploadNext = async () => {
+    const sizes: any = {
+      "text-[12px]": "S",
+      "text-[14px]": "M",
+      "text-[16px]": "L",
+      "text-[18px]": "XL",
+      "text-[20px]": "XXL",
+    };
     const resp = await handleConvertAndUpload();
     if (resp) {
       const url = "api/AddTextToProduct";
-      const selectedFieldsArray: any = Object.values(selectedFields).map(
+      let selectedFieldsArray: any = Object.values(selectedFields).map(
         (field: any) => ({ ...field, UploadImage: resp ?? "" })
       );
+      selectedFieldsArray = selectedFieldsArray.map((field: any) => {
+        if (field.TextSize && sizes[field.TextSize]) {
+          return { ...field, TextSize: sizes[field.TextSize] };
+        }
+        return field;
+      });
       const response: any = await Post(url, selectedFieldsArray, 5000, true);
       if (response.status) {
         setCustomizeData((prev: any) => ({ ...prev, addtext: selectedFields }));
@@ -246,7 +259,7 @@ const AddText: React.FC<AddTextProps> = ({
             </div>
             <div
               ref={divRef}
-              className="col-span-2 rounded-lg py-10 min-h-full bg-gray-100"
+              className="col-span-2 font-sans rounded-lg py-10 min-h-full bg-gray-100"
             >
               <div className="relative flex flex-col w-fit mx-auto">
                 {textLines.map((line) => {

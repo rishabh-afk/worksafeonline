@@ -1,9 +1,9 @@
-import { Get } from "@/api/generalApi";
+// import { Get } from "@/api/generalApi";
 import { bigShoulders } from "../layout";
 import { features } from "@/data/country";
 
 export async function generateMetadata() {
-  const pageData = await Get("");
+  const pageData: any = {};
 
   return {
     title: pageData?.title ?? "Worksafeonline | Order Tracker",

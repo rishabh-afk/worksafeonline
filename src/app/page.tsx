@@ -4,7 +4,7 @@ import { bigShoulders } from "./layout";
 import Banner from "@/components/home/Banner";
 import Upcoming from "@/components/home/Upcoming";
 import WhoWeAre from "@/components/home/WhoWeAre";
-import { fetchHomePageData, Get } from "@/api/generalApi";
+import { fetchHomePageData } from "@/api/generalApi";
 import Categories from "@/components/home/Categories";
 import ReasonsToShop from "@/components/home/ReasonToShop";
 import ListingByCategory from "@/components/home/ListingByCategory";
@@ -12,7 +12,7 @@ import AnimatedActionButton from "@/components/common/AnimatedActionButton";
 
 export async function generateMetadata() {
   // Replace with the correct endpoint
-  const pageData = await Get("");
+  const pageData: any = {};
 
   return {
     title: pageData?.title ?? "Worksafeonline | Home",

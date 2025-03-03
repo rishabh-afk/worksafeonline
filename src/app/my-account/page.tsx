@@ -1,12 +1,17 @@
 "use client";
 
-import { Fetch, Post } from "@/utils/axios";
 import { bigShoulders } from "../layout";
+import { Fetch, Post } from "@/utils/axios";
 import { useRouter } from "next/navigation";
 import { MdModeEdit } from "react-icons/md";
+import Loader from "@/components/common/Loader";
 import { useCallback, useEffect, useState } from "react";
 import AccountLayout from "@/components/account/AccountLayout";
-import Loader from "@/components/common/Loader";
+
+interface Resp {
+  status: boolean;
+  account_details: any;
+}
 
 export default function Page() {
   const router = useRouter();
@@ -24,13 +29,8 @@ export default function Page() {
         typeof window !== "undefined" &&
         localStorage.getItem("WORK_SAFE_ONLINE_USER_TOKEN");
       if (!token) return router.replace("/");
-      const response: { status: boolean; account_details: any } = await Fetch(
-        "/api/MyAccountProfile",
-        {},
-        5000,
-        true,
-        false
-      );
+      const url = "/api/MyAccountProfile";
+      const response: Resp = await Fetch(url, {}, 5000, true, false);
       if (response.status) {
         setAccountDetail(response);
         setEditableFields({

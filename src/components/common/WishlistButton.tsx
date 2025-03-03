@@ -9,8 +9,8 @@ import { includes } from "@/utils/polyfills";
 import { RxEnterFullScreen } from "react-icons/rx";
 import { useEffect, useState, useRef } from "react";
 import QuickViewModal from "../modals/QuickViewModal";
-import eventEmitter, { handleAddToWishlist } from "@/hooks/useEventEmitter";
 import { removeFromWishlist } from "@/api/wishlistApis";
+import eventEmitter, { handleAddToWishlist } from "@/hooks/useEventEmitter";
 
 const WishlistButton = ({
   imgSrc,

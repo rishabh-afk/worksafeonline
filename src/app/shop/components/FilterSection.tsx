@@ -7,9 +7,9 @@ import CustomFilter from "./CustomFilter";
 import { useEffect, useState } from "react";
 import ProductSection from "./ProductSection";
 import { usePathname } from "next/navigation";
+import Loader from "@/components/common/Loader";
 import Pagination from "@/components/common/Pagination";
 import { BASE_URL, getCategoryId, getPaginateData } from "@/api/generalApi";
-import Loader from "@/components/common/Loader";
 
 interface Filter {
   response: any;

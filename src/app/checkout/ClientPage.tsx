@@ -20,6 +20,7 @@ import InvoiceAddress from "./components/InvoiceAddress";
 import BillingAddress from "./components/BillingAddress";
 import ApplyCoupon from "../cart/components/ApplyCoupon";
 import DeliveryAddress from "./components/DeliveryAddress";
+import AdditionalFields from "./components/AdditionalFields";
 import AvailableCoupon from "../cart/components/AvailableCoupon";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { checkFormFields, getSelectFormattedData } from "@/api/generalApi";
@@ -31,6 +32,7 @@ export default function ClientPage() {
   const router = useRouter();
   const formRef1 = useRef<HTMLFormElement>(null);
   const formRef2 = useRef<HTMLFormElement>(null);
+  const formRef3 = useRef<HTMLFormElement>(null);
 
   // cart information
   const [cart, setCart] = useState<any>({});
@@ -44,6 +46,7 @@ export default function ClientPage() {
   const [formloading, setFormLoading] = useState<boolean>(false);
   const [accordionStates, setAccordionStates] = useState({
     askLogin: true,
+    myDetails: false,
     orderSummary: false,
     billingAddress: false,
     invoiceAddress: false,
@@ -63,9 +66,11 @@ export default function ClientPage() {
     Add: "",
     DAdd: "",
     Name: "",
+    CName: "",
     DName: "",
     PTown: "",
     Email: "",
+    CEmail: "",
     PCode: "",
     DPTown: "",
     DPCode: "",
@@ -75,8 +80,10 @@ export default function ClientPage() {
     Express: 0,
     DCounty: "",
     DeviceID: "",
+    PONumber: "",
     Comments: "",
     Telephone: "",
+    CTelephone: "",
     Collection: 0,
     TermsAgreed: 1,
     DTelephone: "",
@@ -88,6 +95,9 @@ export default function ClientPage() {
     Despatch_Comments: "",
   });
 
+  const handleForm3Validation = () => {
+    return checkFormFields(formRef3, ["CName", "CEmail", "CTelephone"]);
+  };
   const handleForm1Validation = () => {
     return checkFormFields(formRef1, [
       "DName",
@@ -335,6 +345,18 @@ export default function ClientPage() {
             handleButtonClick={handleButtonClick}
             setIsOpen={(isOpen: any) =>
               setAccordionStates((prev) => ({ ...prev, askLogin: isOpen }))
+            }
+          />
+          <AdditionalFields
+            errors={errors}
+            formRef3={formRef3}
+            formData={formData}
+            setFormData={setFormData}
+            isOpen={accordionStates.myDetails}
+            handleButtonClick={handleButtonClick}
+            handleForm3Validation={handleForm3Validation}
+            setIsOpen={(isOpen: any) =>
+              setAccordionStates((prev) => ({ ...prev, myDetails: isOpen }))
             }
           />
           <CheckoutForm

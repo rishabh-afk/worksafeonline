@@ -9,7 +9,7 @@ import TradeSafetyBanner from "./components/TradeSafetyBanner";
 
 export async function generateMetadata() {
   // Replace with the correct endpoint
-  const pageData = await Get("");
+  const pageData: any = {};
 
   return {
     title: pageData?.title ?? "Worksafeonline | About Us",

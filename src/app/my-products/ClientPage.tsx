@@ -2,11 +2,12 @@
 
 import { Fetch } from "@/utils/axios";
 import { useRouter } from "next/navigation";
+import Header from "../shop/components/Header";
 import Loader from "@/components/common/Loader";
 import React, { useEffect, useState } from "react";
+import eventEmitter from "@/hooks/useEventEmitter";
 import { isTokenExist } from "@/api/generateDeviceId";
 import FilterSection from "../shop/components/FilterSection";
-import eventEmitter from "@/hooks/useEventEmitter";
 
 export default function ClientPage() {
   const router = useRouter();
@@ -31,11 +32,18 @@ export default function ClientPage() {
 
   if (loading) return <Loader />;
   return (
-    <FilterSection
-      category={0}
-      subcategory={0}
-      response={products}
-      categoryResponse={products}
-    />
+    <>
+      <Header
+        data={{}}
+        title="My Products"
+        getBreadCrumbs={[{ id: "/my-products", name: "My Products" }]}
+      />
+      <FilterSection
+        category={0}
+        subcategory={0}
+        response={products}
+        categoryResponse={products}
+      />
+    </>
   );
 }

@@ -44,10 +44,7 @@ export const Accordion = ({
   };
 
   return (
-    <div
-      ref={containerRef}
-      className="rounded-lg md:shadow-md border border-gray-300 md:border-gray-100 mb-5"
-    >
+    <div ref={containerRef} className="border border-gray-300 rounded-lg mb-5">
       <button
         onClick={toggle}
         className={`w-full px-3 md:px-5 py-2.5 md:py-3 flex justify-between items-center text-left md:text-lg font-bold ${bigShoulders.className}`}
