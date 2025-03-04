@@ -5,6 +5,7 @@ import { bigShoulders } from "@/app/layout";
 import LogoModal from "@/components/modals/LogoModal";
 import { formatPound } from "@/components/logo/general";
 import DeleteProductModal from "@/components/modals/DeleteProductModal";
+import Link from "next/link";
 
 interface CartItemProps {
   fetchCart: any;
@@ -195,10 +196,13 @@ const CartItem: React.FC<CartItemProps> = ({
               />
             </div>
             <div className="col-span-2">
-              <p className="line-clamp-3 text-sm font-bold">
+              <Link
+                href={`/product/1023/${item?.ProductCode}`}
+                className="line-clamp-3 text-sm font-bold"
+              >
                 <span className="text-primary">{item.ProductCode} </span>{" "}
                 {item.ProductDescription}
-              </p>
+              </Link>
               {item.Colour && <span className="text-sm"> {item.Colour}</span>}
               {item.Fitting && (
                 <span className="border-x text-sm px-2 mx-2 border-black">

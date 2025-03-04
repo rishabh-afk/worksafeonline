@@ -164,12 +164,12 @@ const StandardLogin = ({
         </form>
         {/* Additional Links */}
         <div className="mt-4 text-center">
-          <span
+          {/* <span
             onClick={() => setScreen("forgetregister")}
             className="text-sm cursor-pointer hover:underline"
           >
             Forget password?
-          </span>
+          </span> */}
           <p className="text-sm mt-2">
             Don&apos;t have an account?{" "}
             <span

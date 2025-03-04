@@ -158,7 +158,7 @@ const InvoiceAddress = ({
             onClick={handleFill}
             className="px-4 mb-5 py-2 bg-secondary text-white font-semibold focus:outline-none transition"
           >
-            Use Billing Address
+            Same as Billing Address
           </button>
           <form ref={formRef2} onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-5 items-center">

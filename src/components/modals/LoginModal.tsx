@@ -168,9 +168,9 @@ const LoginModal = ({
 
             {/* Additional Links */}
             <div className="mt-4 text-center">
-              <Link href="/forgot-password" className="text-sm hover:underline">
+              {/* <Link href="/forgot-password" className="text-sm hover:underline">
                 Forget password?
-              </Link>
+              </Link> */}
               <p className="text-sm mt-2">
                 Don&apos;t have an account?{" "}
                 <Link
