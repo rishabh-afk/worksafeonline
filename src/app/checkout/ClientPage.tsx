@@ -66,11 +66,10 @@ export default function ClientPage() {
     Add: "",
     DAdd: "",
     Name: "",
-    CName: "",
     DName: "",
     PTown: "",
     Email: "",
-    CEmail: "",
+    PEmail: "",
     PCode: "",
     DPTown: "",
     DPCode: "",
@@ -83,20 +82,21 @@ export default function ClientPage() {
     PONumber: "",
     Comments: "",
     Telephone: "",
-    CTelephone: "",
+    PTelephone: "",
     Collection: 0,
     TermsAgreed: 1,
     DTelephone: "",
     AddressCode: "",
     CountryCode: "",
     Customer_Ref: "",
+    PContactName: "",
     DCountryCode: "",
     InvAddressCode: "",
     Despatch_Comments: "",
   });
 
   const handleForm3Validation = () => {
-    return checkFormFields(formRef3, ["CName", "CEmail", "CTelephone"]);
+    return checkFormFields(formRef3, ["PContactName", "PEmail", "PTelephone"]);
   };
   const handleForm1Validation = () => {
     return checkFormFields(formRef1, [
@@ -341,6 +341,7 @@ export default function ClientPage() {
         />
         <div className="flex flex-col mt-5">
           <AccountManage
+            setFormData={setFormData}
             isOpen={accordionStates.askLogin}
             handleButtonClick={handleButtonClick}
             setIsOpen={(isOpen: any) =>

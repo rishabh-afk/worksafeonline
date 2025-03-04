@@ -3,14 +3,17 @@ import { bigShoulders } from "@/app/layout";
 import { RiLoginBoxFill } from "react-icons/ri";
 import eventEmitter from "@/hooks/useEventEmitter";
 import { useCallback, useEffect, useState } from "react";
+import { Fetch } from "@/utils/axios";
 
 const AccountManage = ({
   isOpen,
   setIsOpen,
+  setFormData,
   handleButtonClick,
 }: {
   setIsOpen: any;
   isOpen: boolean;
+  setFormData: any;
   handleButtonClick: any;
 }) => {
   const [loggedIn, setUserLoggedIn] = useState<boolean>(false);
@@ -24,10 +27,30 @@ const AccountManage = ({
     // eslint-disable-next-line
   }, []);
 
-  const handleToggle = useCallback(() => {
-    setUserLoggedIn(true);
-    handleContinue();
+  const getPODetails = useCallback(async () => {
+    try {
+      const url = "api/MyProfileCheckout";
+      const response: any = await Fetch(url, {}, 5000, true, false);
+      if (response?.status) {
+        setFormData((prev: any) => ({
+          ...prev,
+          PEmail: response?.Email || "",
+          PONumber: response?.PONumber || "",
+          PTelephone: response?.Telephone || "",
+          PContactName: response?.ContactName || "",
+        }));
+        handleContinue();
+      }
+    } catch (error) {
+      console.log("Error fetch: " + error);
+    }
+    // eslint-disable-next-line
   }, [handleContinue]);
+
+  const handleToggle = useCallback(async () => {
+    setUserLoggedIn(true);
+    await getPODetails();
+  }, [getPODetails]);
 
   useEffect(() => {
     eventEmitter?.on("loggedIn", handleToggle);

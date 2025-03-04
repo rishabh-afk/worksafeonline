@@ -247,7 +247,7 @@ export const AdditionalFormField: FormField[] = [
   {
     type: "text",
     required: true,
-    name: "CName",
+    name: "PContactName",
     maxLength: 40,
     label: "Company / your name ",
     placeholder: "Enter company / your name",
@@ -261,7 +261,7 @@ export const AdditionalFormField: FormField[] = [
     type: "stringNumeric",
     required: true,
     label: "Telephone",
-    name: "CTelephone",
+    name: "PTelephone",
     maxLength: 20,
     pattern: "d*",
     placeholder: "Enter your phone number",
@@ -274,7 +274,7 @@ export const AdditionalFormField: FormField[] = [
     },
   },
   {
-    name: "CEmail",
+    name: "PEmail",
     type: "email",
     required: true,
     maxLength: 50,
