@@ -1,8 +1,10 @@
 import { Accordion } from "./Accordion";
 import Text from "@/components/input/Text";
+import { useEffect, useState } from "react";
 import { RiLoginBoxFill } from "react-icons/ri";
-import { AdditionalFormField as formFields } from "./formType";
+import eventEmitter from "@/hooks/useEventEmitter";
 import NumericStringInput from "@/components/input/NumericString";
+import { AdditionalFormField as updatedformFields } from "./formType";
 
 const AdditionalFields = ({
   isOpen,
@@ -28,10 +30,29 @@ const AdditionalFields = ({
     handleButtonClick("billingAddress");
   };
 
+  const [formFields, setFormFields] = useState(updatedformFields);
+
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
     setFormData((prev: any) => ({ ...prev, [name]: value }));
   };
+
+  useEffect(() => {
+    const handleData = (data: any) => {
+      if (data?.accounttype === "Account") {
+        const fields = updatedformFields.map((field: any) => {
+          if (field.name === "PONumber") return { ...field, required: true };
+          else return field;
+        });
+        setFormFields(fields);
+      }
+    };
+    eventEmitter?.on("FetchedLogin", handleData);
+    return () => {
+      eventEmitter?.off("FetchedLogin", handleData);
+    };
+  }, []);
+
   return (
     <>
       <Accordion

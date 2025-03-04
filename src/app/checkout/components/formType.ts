@@ -293,6 +293,6 @@ export const AdditionalFormField: FormField[] = [
     name: "PONumber",
     label: "PO Number",
     maxLength: 200,
-    placeholder: "Post Office Number",
+    placeholder: "Purchase Order Number",
   },
 ];

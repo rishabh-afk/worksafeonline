@@ -39,6 +39,7 @@ const AccountManage = ({
           PTelephone: response?.Telephone || "",
           PContactName: response?.ContactName || "",
         }));
+        eventEmitter?.emit("FetchedLogin", response);
         handleContinue();
       }
     } catch (error) {

@@ -131,9 +131,12 @@ const Register = ({
           </button>
           <p className="text-xs mt-2 text-center text-white/60">
             I have read & agree to the{" "}
-            <Link href={"/terms-and-conditions"} className="underline">
+            <span
+              onClick={() => (window.location.href = "/terms-and-conditions")}
+              className="underline cursor-pointer"
+            >
               terms & condition{" "}
-            </Link>
+            </span>
           </p>
         </form>
       </div>

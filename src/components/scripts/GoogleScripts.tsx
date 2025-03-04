@@ -35,9 +35,10 @@ const GoogleScript = () => {
 
       const data = getDeviceData();
       if (!data && !token && !sessionVerified) await storeDeviceData();
+      if (!token && pathname === "/") eventEmitter?.emit("openLoginModal");
     };
     fetchDevices();
-  }, []);
+  }, [pathname]);
 
   return null;
 };
