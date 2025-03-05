@@ -7,12 +7,12 @@ import Text from "@/components/input/Text";
 import { bigShoulders } from "@/app/layout";
 import Select from "@/components/input/Select";
 import { FaAddressBook } from "react-icons/fa";
+import Button from "@/components/common/Button";
 import { getDeviceCheck } from "@/api/generateDeviceId";
 import React, { useEffect, useRef, useState } from "react";
 import { InvoiceFormFields as formFields } from "./formType";
 import { AddressFinder } from "@ideal-postcodes/address-finder";
 import NumericStringInput from "@/components/input/NumericString";
-import Button from "@/components/common/Button";
 
 const InvoiceAddress = ({
   errors,
@@ -44,15 +44,25 @@ const InvoiceAddress = ({
   handleForm1Validation: any;
 }) => {
   const shouldRender = useRef(true);
+  const [apiKey, setApiKey] = useState("");
   const [showList, setShowList] = useState(false);
 
   useEffect(() => {
-    if (!shouldRender.current) return;
+    const fetchKey = async () => {
+      const url = "api/AddressFinderID";
+      const resp: any = await Fetch(url, {}, 5000, true, false);
+      if (resp?.status) setApiKey(resp?.message);
+    };
+    if (!apiKey) fetchKey();
+  }, [apiKey]);
+
+  useEffect(() => {
+    if (!shouldRender.current || !apiKey) return;
     shouldRender.current = false;
 
     AddressFinder.watch({
+      apiKey: apiKey,
       inputField: "#PCode",
-      apiKey: "ak_m5xjqe9dDb9a32eo5fgmZkbbzf9a2",
       onAddressRetrieved: (address: any) => {
         setFormData((prev: any) => ({
           ...prev,
@@ -63,7 +73,7 @@ const InvoiceAddress = ({
       },
     });
     // eslint-disable-next-line
-  }, []);
+  }, [apiKey]);
 
   const [options, setOptions] = useState([]);
   const handleInputChange = (e: any) => {

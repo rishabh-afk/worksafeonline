@@ -1,16 +1,17 @@
 "use client";
 
+import { Fetch } from "@/utils/axios";
 import AddressCard from "./AddressCard";
 import { Accordion } from "./Accordion";
 import Text from "@/components/input/Text";
 import { bigShoulders } from "@/app/layout";
 import { FaAddressBook } from "react-icons/fa";
 import Select from "@/components/input/Select";
+import Button from "@/components/common/Button";
 import React, { useEffect, useRef, useState } from "react";
 import { BillingFormField as formFields } from "./formType";
 import { AddressFinder } from "@ideal-postcodes/address-finder";
 import NumericStringInput from "@/components/input/NumericString";
-import Button from "@/components/common/Button";
 
 const CheckoutForm = ({
   errors,
@@ -40,27 +41,37 @@ const CheckoutForm = ({
   handleForm1Validation: any;
 }) => {
   const shouldRender2 = useRef(true);
+  const [apiKey, setApiKey] = useState("");
   const [options, setOptions] = useState([]);
   const [showList, setShowList] = useState(false);
 
   useEffect(() => {
-    if (!shouldRender2.current) return;
+    const fetchKey = async () => {
+      const url = "api/AddressFinderID";
+      const resp: any = await Fetch(url, {}, 5000, true, false);
+      if (resp?.status) setApiKey(resp?.message);
+    };
+    if (!apiKey) fetchKey();
+  }, [apiKey]);
+
+  useEffect(() => {
+    if (!shouldRender2.current || !apiKey) return;
     shouldRender2.current = false;
 
     AddressFinder.watch({
+      apiKey: apiKey,
       inputField: "#DPCode",
-      apiKey: "ak_m5xjqe9dDb9a32eo5fgmZkbbzf9a2",
       onAddressRetrieved: (address: any) => {
         setFormData((prev: any) => ({
           ...prev,
-          Add: address.line_1,
+          DAdd: address.line_1,
           DPCode: address.postcode,
           DPTown: address.post_town,
         }));
       },
     });
     // eslint-disable-next-line
-  }, []);
+  }, [apiKey]);
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;

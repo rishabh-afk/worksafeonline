@@ -277,7 +277,7 @@ const AddText: React.FC<AddTextProps> = ({
                           textData.TextItalic ? "italic" : ""
                         } 
             ${textData.TextAlign || ""} ${textData.TextSpacing || ""} ${
-                          textData.FontWeight || ""
+                          textData.FontSize || ""
                         }`}
                       >
                         {textData.TextLine}

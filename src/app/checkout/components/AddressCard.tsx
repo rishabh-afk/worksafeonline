@@ -38,7 +38,7 @@ const AddressCard = ({
           : "border-gray-200 text-gray-500"
       }`}
     >
-      {!address?.ITag && (
+      {address?.ITag && (
         <span className="text-gray-500 absolute right-3 flex text-sm text-center">
           <span className="ml-1 bg-black text-white rounded-full w-5 h-5 font-black flex items-center justify-center text-xs cursor-pointer group relative">
             i
