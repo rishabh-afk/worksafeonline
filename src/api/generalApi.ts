@@ -10,8 +10,8 @@ export const Get = async (url: string) => {
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error))
-      console.error("Axios Error:", error.response?.data || error.message);
-    else console.error("Unexpected Error:", (error as Error).message || error);
+      console.log("Axios Error:", error.response?.data || error.message);
+    else console.log("Unexpected Error:", (error as Error).message || error);
     return null;
   }
 };
@@ -204,7 +204,7 @@ export const fetchMenuData = async (id: any, subId?: any) => {
     }
     return result || { data: [] };
   } catch (error) {
-    console.error("Error fetching menu:", error);
+    console.log("Error fetching menu:", error);
     return { data: [] };
   }
 };
@@ -231,7 +231,7 @@ export const fetchProductMenuData = async (id: any) => {
 
     return result || [];
   } catch (error) {
-    console.error("Error fetching menu:", error);
+    console.log("Error fetching menu:", error);
     return [];
   }
 };

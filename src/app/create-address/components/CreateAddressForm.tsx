@@ -77,7 +77,7 @@ const CreateAddressForm = ({ address }: { address?: any }) => {
       }
     } catch (error) {
       toast.error("Failed to save the address. Please try again.");
-      console.error(error);
+      console.log(error);
     } finally {
       setLoading(false);
     }

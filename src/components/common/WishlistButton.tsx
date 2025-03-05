@@ -113,7 +113,7 @@ const WishlistButton = ({
           if (Array.isArray(parsedWishlist))
             ids = parsedWishlist.filter((wishlist: any) => wishlist !== id);
         } catch (error) {
-          console.error("Error parsing wishlist:", error);
+          console.log("Error parsing wishlist:", error);
         }
       }
       localStorage.setItem("wishlist", JSON.stringify(ids));

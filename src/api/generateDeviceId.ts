@@ -15,7 +15,7 @@ export const generateDeviceId = async (): Promise<string> => {
     if (response.status) return response.deviceID;
     else return "";
   } catch (error: any) {
-    console.error("Error generating device ID:", error.message);
+    console.log("Error generating device ID:", error.message);
     throw new Error("Failed to generate device ID.");
   }
 };

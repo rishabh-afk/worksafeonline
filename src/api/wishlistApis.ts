@@ -11,7 +11,7 @@ export const getWishlist = async (): Promise<any> => {
     const response = await Fetch(`api/ViewWishlist`, {}, 5000, true, false);
     return response;
   } catch (error: any) {
-    console.error("Error fetching wishlist details:", error.message);
+    console.log("Error fetching wishlist details:", error.message);
     throw new Error("Failed to fetch wishlist details.");
   }
 };
@@ -29,7 +29,7 @@ export const addToWishlist = async (productId: any): Promise<any> => {
     const response = await Fetch(url, {}, 5000, true);
     return response;
   } catch (error: any) {
-    console.error("Error adding item to wishlist:", error.message);
+    console.log("Error adding item to wishlist:", error.message);
     throw new Error("Failed to add item to wishlist.");
   }
 };
@@ -47,7 +47,7 @@ export const removeFromWishlist = async (productId: string): Promise<any> => {
     const response = await Post(`api/RemoveWishlist`, data, 5000, true);
     return response;
   } catch (error: any) {
-    console.error("Error removing item from wishlist:", error.message);
+    console.log("Error removing item from wishlist:", error.message);
     throw new Error("Failed to remove item from wishlist.");
   }
 };

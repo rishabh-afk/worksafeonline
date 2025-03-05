@@ -58,7 +58,7 @@ export const handleAddToWishlist = async (product: Product) => {
       return true;
     } else return false;
   } catch (error) {
-    console.error("Error accessing or updating wishlist:", error);
+    console.log("Error accessing or updating wishlist:", error);
     return false;
   }
 };
@@ -100,7 +100,7 @@ export const handleAddToCart = async (product: Product) => {
     eventEmitter?.emit("addToCart", productData);
     return true;
   } catch (error) {
-    console.error("Error accessing or updating cart:", error);
+    console.log("Error accessing or updating cart:", error);
     return false;
   }
 };

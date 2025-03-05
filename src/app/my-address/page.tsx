@@ -70,46 +70,56 @@ export default function Page() {
             </button>
           </div>
           <div className="mt-5">
-            <h2 className={`${bigShoulders.className} text-xl font-semibold`}>
-              My Billing Address
-            </h2>
-            <div className="grid md:grid-cols-2 gap-5 my-3">
-              {accountDetail?.my_BillingAddress?.length > 0 &&
-                accountDetail?.my_BillingAddress.map((address: any) => {
-                  return (
-                    <React.Fragment key={address?.ID}>
-                      <AddressCard
-                        type="billing"
-                        address={address}
-                        fetchUserData={fetchUserData}
-                        handleSelected={handleSelected}
-                        selectedAddress={selectedAddress}
-                      />
-                    </React.Fragment>
-                  );
-                })}
-            </div>
-            <h2
-              className={`${bigShoulders.className} mt-5 text-xl font-semibold`}
-            >
-              My Delivery Address
-            </h2>
-            <div className="grid md:grid-cols-2 gap-5 my-3">
-              {accountDetail?.my_DeliveryAddress?.length > 0 &&
-                accountDetail?.my_DeliveryAddress.map((address: any) => {
-                  return (
-                    <React.Fragment key={address?.ID}>
-                      <AddressCard
-                        type="delivery"
-                        address={address}
-                        fetchUserData={fetchUserData}
-                        handleSelected={handleSelected}
-                        selectedAddress={selectedAddress}
-                      />
-                    </React.Fragment>
-                  );
-                })}
-            </div>
+            {accountDetail?.AllowBillingAdd === 1 && (
+              <>
+                <h2
+                  className={`${bigShoulders.className} text-xl font-semibold`}
+                >
+                  My Billing Address
+                </h2>
+                <div className="grid md:grid-cols-2 gap-5 my-3">
+                  {accountDetail?.my_BillingAddress?.length > 0 &&
+                    accountDetail?.my_BillingAddress.map((address: any) => {
+                      return (
+                        <React.Fragment key={address?.ID}>
+                          <AddressCard
+                            type="billing"
+                            address={address}
+                            fetchUserData={fetchUserData}
+                            handleSelected={handleSelected}
+                            selectedAddress={selectedAddress}
+                          />
+                        </React.Fragment>
+                      );
+                    })}
+                </div>
+              </>
+            )}
+            {accountDetail?.AllowDeliveryAdd === 1 && (
+              <>
+                <h2
+                  className={`${bigShoulders.className} mt-5 text-xl font-semibold`}
+                >
+                  My Delivery Address
+                </h2>
+                <div className="grid md:grid-cols-2 gap-5 my-3">
+                  {accountDetail?.my_DeliveryAddress?.length > 0 &&
+                    accountDetail?.my_DeliveryAddress.map((address: any) => {
+                      return (
+                        <React.Fragment key={address?.ID}>
+                          <AddressCard
+                            type="delivery"
+                            address={address}
+                            fetchUserData={fetchUserData}
+                            handleSelected={handleSelected}
+                            selectedAddress={selectedAddress}
+                          />
+                        </React.Fragment>
+                      );
+                    })}
+                </div>
+              </>
+            )}
           </div>
         </div>
       </AccountLayout>

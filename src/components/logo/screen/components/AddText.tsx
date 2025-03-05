@@ -100,7 +100,7 @@ const AddText: React.FC<AddTextProps> = ({
 
       return false; // Return false if response is invalid
     } catch (error) {
-      console.error("Failed to set selected image:", error);
+      console.log("Failed to set selected image:", error);
       return false;
     } finally {
       setLoading(false);

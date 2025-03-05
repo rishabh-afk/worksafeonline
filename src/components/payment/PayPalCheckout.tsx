@@ -20,12 +20,12 @@ const PayPalCheckout: React.FC = () => {
 
   const handleScriptError = (error: ErrorEvent) => {
     setError("Failed to load PayPal SDK. Please try again later.");
-    console.error("PayPal Script Load Error:", error);
+    console.log("PayPal Script Load Error:", error);
   };
 
   const handleButtonError = (error: any) => {
     setError("Something went wrong during the transaction.");
-    console.error("PayPal Button Error:", error);
+    console.log("PayPal Button Error:", error);
   };
 
   return (

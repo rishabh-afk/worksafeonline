@@ -46,7 +46,7 @@ export default function ClientPage() {
         eventEmitter?.emit("emptyWishlist");
       }
     } catch (error) {
-      console.error("❌ Error fetching wishlist:", error);
+      console.log("❌ Error fetching wishlist:", error);
     } finally {
       setIsFetching(false); // Ensure state updates even if an error occurs
     }

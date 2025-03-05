@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Post } from "@/utils/axios";
 import { bigShoulders } from "@/app/layout";
 import { IoArrowBackOutline } from "react-icons/io5";
+import { toast } from "react-toastify";
 
 const RegisterForget = ({
   formData,
@@ -31,36 +32,16 @@ const RegisterForget = ({
     e.preventDefault();
     try {
       setLoading(true);
-      const response: any = await Post(
-        "api/WRegister1",
-        { email: formData?.email },
-        5000,
-        true
+      const url = "api/WForgotPassword";
+      const data = { username: formData?.email, app: "Worksafe" };
+      await Post(url, data, 5000, true);
+      toast.success(
+        "Your login details has been sent to your registered mail!"
       );
-      if (response.status && response?.name && response?.cust) {
-        setErrors({ email: "" });
-        setFormData((prev: any) => ({
-          ...prev,
-          cust: response?.cust,
-          custName: response?.name,
-        }));
-        setScreen("registerSuccess");
-      } else if (response?.status && response?.cust && !response?.name) {
-        setScreen("confirmationCode");
-        setFormData((prev: any) => ({
-          ...prev,
-          cust: "",
-          custName: "",
-        }));
-      }
+      setScreen("standardlogin");
     } catch (error) {
+      setErrors({ email: "Account does not exist!" });
       console.log("Register failed: ", error);
-      setScreen("confirmationCode");
-      setFormData((prev: any) => ({
-        ...prev,
-        cust: "",
-        custName: "",
-      }));
     } finally {
       setLoading(false);
     }
@@ -94,25 +75,21 @@ const RegisterForget = ({
           <h2
             className={`text-4xl md:text-6xl mb-2 text-center md:text-left font-bold text-primary/90 uppercase ${bigShoulders.className}`}
           >
-            Register!
+            Forget Password!
           </h2>
-          <p className="text-center md:text-left text-white">
-            To ensure we setup your account correctly, Please enter your email
-            address and select continue.
-          </p>
         </div>
       </div>
       <div className="w-full lg:w-1/2 space-y-6 md:space-y-8 md:pl-6 lg:pl-10">
         <form onSubmit={handleSubmit}>
           <div className="mb-6">
             <input
-              id="email"
-              type="email"
-              name="email"
               required
-              placeholder="Email ID or Username"
+              id="email"
+              type="text"
+              name="email"
               value={formData.email}
               onChange={handleChange}
+              placeholder="Email ID or Username"
               className={`w-full p-2 border-b text-white outline-none bg-transparent ${
                 errors.email ? "border-red-500" : "border-gray-300"
               } focus:ring-primary focus:border-primary`}
@@ -124,17 +101,16 @@ const RegisterForget = ({
           <button
             type="submit"
             disabled={loading}
-            onClick={() => setScreen("register")}
             className={`w-full py-2 px-4 bg-primary text-white uppercase rounded-full shadow-md text-lg font-bold hover:bg-primary/80 transition outline-none ${bigShoulders.className}`}
           >
             {loading ? "Please wait..." : "Continue"}
           </button>
-          <p className="text-xs mt-2 text-center text-white/60">
+          {/* <p className="text-xs mt-2 text-center text-white/60">
             I have read & agree to the{" "}
             <Link href={"/terms-and-conditions"} className="underline">
               terms & condition{" "}
             </Link>
-          </p>
+          </p> */}
         </form>
       </div>
     </div>

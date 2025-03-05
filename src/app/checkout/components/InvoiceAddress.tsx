@@ -12,6 +12,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { InvoiceFormFields as formFields } from "./formType";
 import { AddressFinder } from "@ideal-postcodes/address-finder";
 import NumericStringInput from "@/components/input/NumericString";
+import Button from "@/components/common/Button";
 
 const InvoiceAddress = ({
   errors,
@@ -43,6 +44,7 @@ const InvoiceAddress = ({
   handleForm1Validation: any;
 }) => {
   const shouldRender = useRef(true);
+  const [showList, setShowList] = useState(false);
 
   useEffect(() => {
     if (!shouldRender.current) return;
@@ -106,6 +108,33 @@ const InvoiceAddress = ({
     // eslint-disable-next-line
   }, [selectedAddress?.invoiceAddressId?.ID]);
 
+  useEffect(() => {
+    if (accountDetail?.my_DeliveryAddress.length > 0) {
+      const data = accountDetail?.my_DeliveryAddress.find(
+        (item: any) => item?.DefaultDelAddress === 1
+      );
+      if (data?.ID) {
+        const address = {
+          Add: data?.Addr,
+          Email: data?.EMail,
+          County: data?.County,
+          PCode: data?.Post_Code,
+          PTown: data?.Post_Town,
+          Name: data?.Customer_Name,
+          Telephone: data?.Telephone,
+          CountryCode: data?.Country_Code,
+          InvAddressCode: data?.Address_Code,
+        };
+        setSelectedAddress((prev: any) => ({
+          ...prev,
+          invoiceAddressId: data,
+        }));
+        setFormData((prev: any) => ({ ...prev, ...address }));
+      }
+    }
+    // eslint-disable-next-line
+  }, [accountDetail?.my_DeliveryAddress]);
+
   const handleFill = () => {
     const address = {
       Add: formData?.DAdd,
@@ -131,28 +160,45 @@ const InvoiceAddress = ({
         handleForm1Validation={handleForm1Validation}
       >
         <div>
-          <div className="grid gap-2 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 pb-2">
-            {accountDetail?.my_DeliveryAddress &&
-              accountDetail?.my_DeliveryAddress.map((address: any) => {
-                return (
-                  <React.Fragment key={address?.ID}>
-                    <AddressCard
-                      type="invoice"
-                      address={address}
-                      selectedAddress={selectedAddress}
-                      handleSelected={setSelectedAddress}
-                    />
-                  </React.Fragment>
-                );
-              })}
-          </div>
-          {accountDetail?.my_DeliveryAddress &&
-            accountDetail?.my_DeliveryAddress.length > 0 && (
-              <div className="flex items-center gap-4 my-5">
-                <div className="h-[2px] flex-grow bg-gray-200"></div>
-                <span className="text-gray-700 font-medium">Or </span>
-                <div className="h-[2px] flex-grow bg-gray-200"></div>
+          {selectedAddress?.invoiceAddressId.Address && (
+            <div className="flex items-center bg-white mb-5 p-4 rounded-xl border border-gray-200 w-full col-span-3">
+              <div className="w-full">
+                <h2 className="text-xl mb-1 font-semibold">
+                  Selected Address:
+                </h2>
+                <p>{selectedAddress?.invoiceAddressId.Address}</p>
               </div>
+              <Button
+                text={showList ? "Hide" : "Change"}
+                classes="!border !border-black !text-lg !bg-white !text-black !py-1 uppercase"
+                onClick={() => setShowList(!showList)}
+              />
+            </div>
+          )}
+          {accountDetail?.my_DeliveryAddress &&
+            showList &&
+            accountDetail?.my_DeliveryAddress.length > 0 && (
+              <>
+                <div className="grid gap-2 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 pb-2">
+                  {accountDetail?.my_DeliveryAddress.map((address: any) => {
+                    return (
+                      <React.Fragment key={address?.ID}>
+                        <AddressCard
+                          type="invoice"
+                          address={address}
+                          selectedAddress={selectedAddress}
+                          handleSelected={setSelectedAddress}
+                        />
+                      </React.Fragment>
+                    );
+                  })}
+                </div>
+                <div className="flex items-center gap-4 my-5">
+                  <div className="h-[2px] flex-grow bg-gray-200"></div>
+                  <span className="text-gray-700 font-medium">Or </span>
+                  <div className="h-[2px] flex-grow bg-gray-200"></div>
+                </div>
+              </>
             )}
           <button
             onClick={handleFill}

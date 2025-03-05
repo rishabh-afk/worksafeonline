@@ -10,6 +10,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { BillingFormField as formFields } from "./formType";
 import { AddressFinder } from "@ideal-postcodes/address-finder";
 import NumericStringInput from "@/components/input/NumericString";
+import Button from "@/components/common/Button";
 
 const CheckoutForm = ({
   errors,
@@ -39,6 +40,8 @@ const CheckoutForm = ({
   handleForm1Validation: any;
 }) => {
   const shouldRender2 = useRef(true);
+  const [options, setOptions] = useState([]);
+  const [showList, setShowList] = useState(false);
 
   useEffect(() => {
     if (!shouldRender2.current) return;
@@ -58,8 +61,6 @@ const CheckoutForm = ({
     });
     // eslint-disable-next-line
   }, []);
-
-  const [options, setOptions] = useState([]);
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
@@ -86,6 +87,36 @@ const CheckoutForm = ({
   }, [selectedAddress?.billingAddressId?.ID]);
 
   useEffect(() => {
+    if (
+      accountDetail?.my_BillingAddress &&
+      accountDetail?.my_BillingAddress?.length > 0
+    ) {
+      const data = accountDetail?.my_BillingAddress.find(
+        (item: any) => item?.DefaultInvAddress === 1
+      );
+      if (data?.ID) {
+        const address = {
+          DAdd: data?.Addr,
+          DEmail: data?.EMail,
+          DCounty: data?.County,
+          DPCode: data?.Post_Code,
+          DPTown: data?.Post_Town,
+          DName: data?.Customer_Name,
+          DTelephone: data?.Telephone,
+          AddressCode: data?.Address_Code,
+          DCountryCode: data?.Country_Code,
+        };
+        setSelectedAddress((prev: any) => ({
+          ...prev,
+          billingAddressId: data,
+        }));
+        setFormData((prev: any) => ({ ...prev, ...address }));
+      }
+    }
+    // eslint-disable-next-line
+  }, [accountDetail?.my_BillingAddress]);
+
+  useEffect(() => {
     setOptions(countries);
     // eslint-disable-next-line
   }, [countries.length]);
@@ -104,28 +135,45 @@ const CheckoutForm = ({
         handleForm1Validation={handleForm1Validation}
       >
         <div>
-          <div className="grid gap-2 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 pb-2">
-            {accountDetail?.my_BillingAddress &&
-              accountDetail?.my_BillingAddress.map((address: any) => {
-                return (
-                  <React.Fragment key={address?.ID}>
-                    <AddressCard
-                      type="billing"
-                      address={address}
-                      selectedAddress={selectedAddress}
-                      handleSelected={setSelectedAddress}
-                    />
-                  </React.Fragment>
-                );
-              })}
-          </div>
-          {accountDetail?.my_BillingAddress &&
-            accountDetail?.my_BillingAddress.length > 0 && (
-              <div className="flex items-center gap-4 my-5">
-                <div className="h-[2px] flex-grow bg-gray-200"></div>
-                <span className="text-gray-700 font-medium">Or </span>
-                <div className="h-[2px] flex-grow bg-gray-200"></div>
+          {selectedAddress?.billingAddressId.Address && (
+            <div className="flex items-center bg-white mb-5 p-4 rounded-xl border border-gray-200 w-full col-span-3">
+              <div className="w-full">
+                <h2 className="text-xl mb-1 font-semibold">
+                  Selected Address:
+                </h2>
+                <p>{selectedAddress?.billingAddressId.Address}</p>
               </div>
+              <Button
+                text={showList ? "Hide" : "Change"}
+                classes="!border !border-black !text-lg !bg-white !text-black !py-1 uppercase"
+                onClick={() => setShowList(!showList)}
+              />
+            </div>
+          )}
+          {accountDetail?.my_BillingAddress &&
+            showList &&
+            accountDetail?.my_BillingAddress.length > 0 && (
+              <>
+                <div className="grid gap-2 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 pb-2">
+                  {accountDetail?.my_BillingAddress.map((address: any) => {
+                    return (
+                      <React.Fragment key={address?.ID}>
+                        <AddressCard
+                          type="billing"
+                          address={address}
+                          selectedAddress={selectedAddress}
+                          handleSelected={setSelectedAddress}
+                        />
+                      </React.Fragment>
+                    );
+                  })}
+                </div>
+                <div className="flex items-center gap-4 my-5">
+                  <div className="h-[2px] flex-grow bg-gray-200"></div>
+                  <span className="text-gray-700 font-medium">Or </span>
+                  <div className="h-[2px] flex-grow bg-gray-200"></div>
+                </div>
+              </>
             )}
           <form ref={formRef1} onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-5 items-center">

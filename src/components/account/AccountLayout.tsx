@@ -27,9 +27,13 @@ const AccountLayout = ({
 
   const logout = () => {
     const deviceData = getDeviceData();
+    const cookie1 = localStorage.getItem("COOKIE_POPUP_ACCEPTED");
+    const cookie2 = localStorage.getItem("COOKIE_POPUP_ANALYTICAL");
     localStorage.clear();
     if (deviceData)
       localStorage.setItem("deviceData", JSON.stringify(deviceData));
+    if (cookie1) localStorage.setItem("COOKIE_POPUP_ACCEPTED", "true");
+    if (cookie2) localStorage.setItem("COOKIE_POPUP_ANALYTICAL", "true");
     toast.success("User logged out!");
     eventEmitter?.emit("loggedOut");
     window.location.href = "/";

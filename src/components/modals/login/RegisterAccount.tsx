@@ -32,7 +32,7 @@ const RegisterAccount = ({
         setDepotList(depotResp?.Depot || []);
         setTemplateList(templateResp?.Template || []);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.log("Error fetching data:", error);
         setDepotList([]);
         setTemplateList([]);
       }
@@ -93,14 +93,14 @@ const RegisterAccount = ({
       const response: any = await Post(url, data);
       if (response?.status) setScreen("login");
       else {
-        console.error("Submission failed:", response);
+        console.log("Submission failed:", response);
         setErrors((prev) => ({
           ...prev,
           depot: response?.message || "Failed to register. Please try again.",
         }));
       }
     } catch (error) {
-      console.error("Register error:", error);
+      console.log("Register error:", error);
       setErrors((prev) => ({
         ...prev,
         depot: "An error occurred. Please try again later.",

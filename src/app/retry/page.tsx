@@ -23,7 +23,7 @@ export default function Page() {
       if (resp?.status && resp?.paymenturl1)
         window.location.href = resp.paymenturl1;
     } catch (error) {
-      console.error("Payment error:", error);
+      console.log("Payment error:", error);
     } finally {
       setLoading(false);
     }

@@ -58,7 +58,7 @@ const Filter = ({
       }
       await handleProducts(updated);
     } catch (error) {
-      console.error("Error updating filters or handling products:", error);
+      console.log("Error updating filters or handling products:", error);
       toast.error(
         "Something went wrong while updating filters. Please try again."
       );

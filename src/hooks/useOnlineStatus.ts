@@ -18,7 +18,7 @@ const useOnlineStatus = (): boolean => {
         window.removeEventListener("offline", handleOffline);
       };
     } else {
-      console.error("navigator.onLine is not available in this environment.");
+      console.log("navigator.onLine is not available in this environment.");
       return () => {};
     }
   }, []);

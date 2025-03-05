@@ -3,8 +3,10 @@
 import Link from "next/link";
 import BottomTabs from "./BottomTabs";
 import { FaRegHeart } from "react-icons/fa6";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import eventEmitter from "@/hooks/useEventEmitter";
+import { getWishlist } from "@/api/wishlistApis";
+import { filterData } from "@/api/generalApi";
 
 type Product = {
   ID: number;
@@ -15,6 +17,32 @@ type Product = {
 
 const Wishlist = () => {
   const [wishlist, setWishlist] = useState<Product[]>([]);
+
+  const fetchWishlist = useCallback(async () => {
+    try {
+      const response = await getWishlist();
+      if (response?.wishlist) {
+        const updatedWishlist = response.wishlist.map((product: any) =>
+          filterData(product)
+        );
+        updatedWishlist.forEach((wishlist: any) =>
+          eventEmitter?.emit("addToWishlist", wishlist?.ID)
+        );
+        const ids = updatedWishlist.map((wishlist: any) => wishlist.ID);
+        return localStorage.setItem("wishlist", JSON.stringify(ids));
+      }
+      eventEmitter?.emit("emptyWishlist");
+    } catch (error) {
+      console.log("❌ Error fetching wishlist:", error);
+    }
+  }, []);
+
+  useEffect(() => {
+    eventEmitter?.on("fetchWishlist", fetchWishlist);
+    return () => {
+      eventEmitter?.off("fetchWishlist", fetchWishlist);
+    };
+  }, [fetchWishlist]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {

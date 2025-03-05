@@ -41,7 +41,7 @@ export default function ClientPage({ orderId }: { orderId: string | number }) {
 
       setLoading(false);
     } catch (error) {
-      console.error("Fetch Data Error: ", error);
+      console.log("Fetch Data Error: ", error);
       router.replace("/");
     }
   }, [router, orderId]);

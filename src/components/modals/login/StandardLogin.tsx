@@ -60,6 +60,7 @@ const StandardLogin = ({
         setFormData({ password: "", email: "" });
         sessionStorage.setItem("verified", "true");
         toast.success("User logged in successfully!");
+        eventEmitter?.emit("fetchWishlist");
         localStorage.setItem("WORK_SAFE_ONLINE_USER_TOKEN", response?.token);
         onClose();
       } else if (!response?.status && response?.message)
@@ -164,12 +165,12 @@ const StandardLogin = ({
         </form>
         {/* Additional Links */}
         <div className="mt-4 text-center">
-          {/* <span
+          <span
             onClick={() => setScreen("forgetregister")}
             className="text-sm cursor-pointer hover:underline"
           >
             Forget password?
-          </span> */}
+          </span>
           <p className="text-sm mt-2">
             Don&apos;t have an account?{" "}
             <span

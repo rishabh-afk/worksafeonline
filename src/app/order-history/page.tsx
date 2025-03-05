@@ -60,7 +60,7 @@ export default function Page() {
 
       setLoading(false);
     } catch (error) {
-      console.error("Fetch Data Error: ", error);
+      console.log("Fetch Data Error: ", error);
       router.replace("/");
     }
   }, [router]);

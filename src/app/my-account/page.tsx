@@ -74,7 +74,7 @@ export default function Page() {
       setIsEditing(false);
       fetchUserData();
     } catch (error) {
-      console.error("Error saving account details: ", error);
+      console.log("Error saving account details: ", error);
     }
   };
 

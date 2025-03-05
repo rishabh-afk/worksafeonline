@@ -13,7 +13,7 @@ const SubTotal = ({ cart }: { cart: any }) => {
   //     if (typeof item?.EndPrice === "number") {
   //       return acc + item.EndPrice * item.Quantity;
   //     } else {
-  //       console.error(`Invalid EndPrice for item ID: ${item?.ID}`);
+  //       console.log(`Invalid EndPrice for item ID: ${item?.ID}`);
   //       return acc;
   //     }
   //   }, 0) || 0;

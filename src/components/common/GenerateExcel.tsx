@@ -23,7 +23,7 @@ const GenerateExcelButton: React.FC<GenerateExcelButtonProps> = ({ data }) => {
 
       XLSX.writeFile(workbook, filename);
     } catch (error) {
-      console.error("Error generating Excel file:", error);
+      console.log("Error generating Excel file:", error);
       toast.error(
         "An error occurred while generating the Excel file. Please try again."
       );

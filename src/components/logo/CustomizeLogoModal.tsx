@@ -134,7 +134,7 @@ const CustomizeLogoModal = ({
         return onclose();
       } else toast.info(response?.message);
     } catch (error) {
-      console.error("Error adding product to cart:", error);
+      console.log("Error adding product to cart:", error);
     } finally {
       setAddToCartLoading(false);
     }
@@ -181,7 +181,7 @@ const CustomizeLogoModal = ({
             else if (response?.status)
               setLocalState(key, response[key] || response);
           } catch (error) {
-            console.error(`Error fetching ${key}:`, error);
+            console.log(`Error fetching ${key}:`, error);
           } finally {
             setTimeout(() => {
               setLoading(false);

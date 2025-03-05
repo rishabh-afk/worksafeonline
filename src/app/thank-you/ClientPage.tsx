@@ -77,6 +77,11 @@ const ClientPage = () => {
         </div>
         <div className="">
           <OrderTotals total={orderSummary?.Ordertotal} />
+          {orderSummary?.Orderdetails?.DespatchComments && (
+            <h2 className="py-4">
+              Dispatch Comment: {orderSummary?.Orderdetails?.DespatchComments}
+            </h2>
+          )}
           <button
             onClick={handleNavigation}
             className="flex justify-between items-center mt-5 w-fit mx-auto bg-secondary/80 hover:bg-secondary text-white transition px-6 py-3 rounded-lg text-xl"

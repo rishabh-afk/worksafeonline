@@ -30,7 +30,7 @@ const Header: React.FC<HeaderProps> = ({
     try {
       handleCustomizeNext(id);
     } catch (error) {
-      console.error("Error changing step:", error);
+      console.log("Error changing step:", error);
     }
   };
 

@@ -21,7 +21,7 @@ export const addToCart = async (product: any): Promise<any> => {
     const response = await Post(`api/AddToCart12`, product);
     return response;
   } catch (error: any) {
-    console.error("Error adding product to cart:", error.message);
+    console.log("Error adding product to cart:", error.message);
     throw new Error("Failed to add product to the cart.");
   }
 };
@@ -37,7 +37,7 @@ export const removeProduct = async (data: any): Promise<any> => {
     const response = await Post(`api/RemoveProduct`, data);
     return response;
   } catch (error: any) {
-    console.error("Error removing product from cart:", error.message);
+    console.log("Error removing product from cart:", error.message);
     throw new Error("Failed to remove product from the cart.");
   }
 };
@@ -53,7 +53,7 @@ export const updateQuantity = async (data: any): Promise<any> => {
     const response = await Post(`api/CartQtyCh`, data, 5000, true);
     return response;
   } catch (error: any) {
-    console.error("Error updating product quantity:", error.message);
+    console.log("Error updating product quantity:", error.message);
     throw new Error("Failed to update product quantity in the cart.");
   }
 };
@@ -75,7 +75,7 @@ export const getCartDetails = async (): Promise<any> => {
     const response = await Fetch("api/Cart", param, 5000, true, false);
     return response;
   } catch (error: any) {
-    console.error("Error fetching cart details:", error.message);
+    console.log("Error fetching cart details:", error.message);
     throw new Error("Failed to fetch cart details.");
   }
 };
