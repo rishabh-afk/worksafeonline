@@ -28,7 +28,7 @@ const FontWeightSelector = ({
       fontWeightOptions.indexOf(selectedFields[font]["FontSize"])
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [font]);
+  }, [font, selectedFields[font]["FontSize"]]);
 
   const handleSliderChange = (index: number) => {
     setFontWeightIndex(index);

@@ -1,25 +1,48 @@
 import Image from "next/image";
+import { Fetch } from "@/utils/axios";
 import { bigShoulders } from "@/app/layout";
-import React, { useEffect, useState } from "react";
 import { formatPound } from "../../general";
+import React, { useEffect, useState } from "react";
 
 interface GalleryProps {
   localData: {
-    artworkList?: any[];
     savedLogos?: any[];
+    artworkList?: any[];
   };
   field: string;
+  updateForm?: any;
   isLogoSelected: any;
   setCustomizeData: any;
   selectedOption: number;
+  setSelectedFilters?: any;
 }
+
+type TextLineData = {
+  TextLine: string;
+  TextSize: string;
+  TextItalic: number;
+  FontFamily: string;
+  TextAlign: string;
+  TextColour: string;
+  FontSize: string;
+  UploadImage: string;
+  TextSpacing: string;
+};
+
+type FormattedOutput = {
+  textLine1: TextLineData;
+  textLine2: TextLineData;
+  textLine3: TextLineData;
+};
 
 const Gallery: React.FC<GalleryProps> = ({
   field,
   localData,
+  updateForm,
   isLogoSelected,
   selectedOption,
   setCustomizeData,
+  setSelectedFilters,
 }) => {
   const [localSavedLogos, setLocalSavedLogos] = useState<any[]>([]);
 
@@ -33,8 +56,65 @@ const Gallery: React.FC<GalleryProps> = ({
     return <p className="text-center text-gray-500">No logos available.</p>;
   }
 
-  const selectLogo = (option: any) => {
+  const transformArtworkData = (data: any[]) => {
+    const defaultTemplate = {
+      TextLine: "",
+      TextSize: "text-[12px]",
+      TextItalic: 0,
+      FontFamily: "",
+      TextAlign: "text-left",
+      TextColour: "",
+      FontSize: "font-normal",
+      UploadImage: "",
+      TextSpacing: "tracking-normal",
+    };
+    const transformedData = data.map((item) => ({
+      TextLine: item.TextLine || "",
+      TextSize: item.TextSize ? `text-${item.TextSize}` : "text-[12px]",
+      TextItalic: item.TextItalic || 0,
+      FontFamily: item.FontFamily || "",
+      TextAlign: item.TextAlign || "text-left",
+      TextColour: item.TextColour || "",
+      FontSize: item.FontSize || "font-normal",
+      UploadImage: item.ArtworkImage || "",
+      TextSpacing: item.TextSpacing || "tracking-normal",
+    }));
+
+    while (transformedData.length < 3) {
+      transformedData.push({ ...defaultTemplate });
+    }
+    const finalData = transformedData.slice(0, 3);
+    return {
+      textLine1: finalData[0],
+      textLine2: finalData[1],
+      textLine3: finalData[2],
+    };
+  };
+
+  const updateFormWithData = (data: FormattedOutput) => {
+    Object.entries(data).forEach(([line, values]) => {
+      Object.entries(values).forEach(([field, value]) => {
+        updateForm(line, field, value);
+      });
+    });
+  };
+
+  const selectLogo = async (option: any) => {
     const key = field === "artworkList" ? "textDesign" : "logoDesign";
+    if (field === "artworkList") {
+      const url = "api/TextArtworkDetails";
+      const data = { artcode: option?.Item_Code };
+      const response: any = await Fetch(url, data, 5000, true, false);
+      if (response.status) {
+        const data = transformArtworkData(response?.textArtworkDetails);
+        setSelectedFilters(data);
+        updateFormWithData(data);
+      } else {
+        const data = transformArtworkData([]);
+        setSelectedFilters(data);
+        updateFormWithData(data);
+      }
+    }
     setCustomizeData((prev: any) => ({ ...prev, [key]: option }));
   };
 

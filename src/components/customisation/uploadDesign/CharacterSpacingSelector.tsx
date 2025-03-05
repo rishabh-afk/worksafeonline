@@ -25,7 +25,7 @@ const CharacterSpacingSelector = ({
       spacingOptions.indexOf(selectedFields[space]["TextSpacing"])
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [space]);
+  }, [space, selectedFields[space]["TextSpacing"]]);
 
   const handleSliderChange = (index: number) => {
     setCharacterSpacingIndex(index);

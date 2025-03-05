@@ -14,7 +14,7 @@ const ItalicButton = ({
   useEffect(() => {
     setIsItalic(selectedFields[italic]["TextItalic"]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [italic]);
+  }, [italic, selectedFields[italic]["TextItalic"]]);
 
   const handleToggleItalic = () => {
     const newItalicState = isItalic === 1 ? 0 : 1;

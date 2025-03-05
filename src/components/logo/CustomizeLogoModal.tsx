@@ -1,19 +1,19 @@
 import Header from "./Header";
 import Modal from "../common/Modal";
+import { toast } from "react-toastify";
+import { addToCart } from "@/api/cartApi";
 import ImageText from "./screen/ImageText";
 import { Fetch, Post } from "@/utils/axios";
 import SavedLogos from "./screen/SavedLogos";
 import TextEditor from "./screen/TextEditor";
 import LogoPosition from "./screen/LogoPosition";
+import eventEmitter from "@/hooks/useEventEmitter";
 import PrintEmbroidery from "./screen/PrintEmbroidery";
 import { getDeviceCheck } from "@/api/generateDeviceId";
 import { useState, useCallback, useEffect } from "react";
 import { fetchRequest, getScreenActiveStatus } from "./general";
 import { InterationButton, NextButton, PrevButton } from "./Button";
 import CustomisationDetails from "../customisation/screens/CustomisationDetails";
-import eventEmitter from "@/hooks/useEventEmitter";
-import { addToCart } from "@/api/cartApi";
-import { toast } from "react-toastify";
 
 // describe the steps
 const customize = [

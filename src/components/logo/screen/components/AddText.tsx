@@ -18,6 +18,7 @@ interface AddTextProps {
   customizeData: any;
   selectedFields: any;
   setCustomizeData: any;
+  setSelectedFilters: any;
 }
 
 const AddText: React.FC<AddTextProps> = ({
@@ -26,6 +27,7 @@ const AddText: React.FC<AddTextProps> = ({
   customizeData,
   selectedFields,
   setCustomizeData,
+  setSelectedFilters,
 }) => {
   const divRef = useRef<HTMLDivElement>(null);
   const [loading, setLoading] = useState(false);
@@ -165,9 +167,11 @@ const AddText: React.FC<AddTextProps> = ({
         <Gallery
           field="artworkList"
           localData={localData}
+          updateForm={updateForm}
           isLogoSelected={isLogoSelected}
           selectedOption={selectedOption}
           setCustomizeData={setCustomizeData}
+          setSelectedFilters={setSelectedFilters}
         />
       </div>
       <div
@@ -221,6 +225,7 @@ const AddText: React.FC<AddTextProps> = ({
                     )} ${index > 0 ? "(optional)" : ""}`}
                     onChange={handleInputChange}
                     onFocus={handleCurrentIndex}
+                    value={selectedFields[name].TextLine}
                     onKeyDown={(e) => handleKeyPress(e, index)}
                     ref={(el: any) => (inputRefs.current[index] = el)} // Assign input ref
                     className="border w-full text-sm border-gray-300 focus:ring-2 focus:ring-primary/50 focus:border-primary/50 rounded-full px-3 py-2 outline-none"
@@ -229,6 +234,7 @@ const AddText: React.FC<AddTextProps> = ({
                     sizeKey={name}
                     hideText={true}
                     updateForm={updateForm}
+                    selectedFields={selectedFields}
                   />
                 </div>
               ))}
@@ -268,7 +274,6 @@ const AddText: React.FC<AddTextProps> = ({
               <div className="relative flex flex-col w-fit mx-auto">
                 {textLines.map((line) => {
                   const textData = selectedFields[line];
-
                   return (
                     textData.TextLine && (
                       <p

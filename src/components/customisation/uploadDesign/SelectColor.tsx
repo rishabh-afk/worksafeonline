@@ -35,7 +35,7 @@ const SelectColor = ({
       setSelectedColor(selectedFields[field]["TextColour"]);
     else setSelectedColor("");
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [field]);
+  }, [field, selectedFields[field]["TextColour"]]);
 
   return (
     <div>

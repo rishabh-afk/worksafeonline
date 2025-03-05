@@ -1,14 +1,16 @@
 import { bigShoulders } from "@/app/layout";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const TextSizeSelector = ({
   sizeKey,
   hideText,
   updateForm,
+  selectedFields,
 }: {
   sizeKey: string;
   updateForm: any;
   hideText?: boolean;
+  selectedFields?: any;
 }) => {
   const [textSize, setTextSize] = useState("text-[12px]");
 
@@ -16,6 +18,8 @@ const TextSizeSelector = ({
     setTextSize(size);
     updateForm(sizeKey, "TextSize", size);
   };
+
+  useEffect(() => {}, [selectedFields]);
 
   return (
     <div className="relative w-32">

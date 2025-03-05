@@ -15,7 +15,7 @@ const TextAlignButtons = ({
   useEffect(() => {
     setSelectedAlignment(selectedFields[align]["TextAlign"]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [align]);
+  }, [align, selectedFields[align]["TextAlign"]]);
 
   const handleAlignmentChange = (alignment: string) => {
     setSelectedAlignment(alignment);

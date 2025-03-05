@@ -30,7 +30,7 @@ const FontSelector = ({
       setSelectedFont(selectedFields[field]["FontFamily"]);
     else setSelectedFont("");
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [field]);
+  }, [field, selectedFields[field]["FontFamily"]]);
 
   return (
     <div className="grid grid-cols-4 items-center gap-2">

@@ -72,6 +72,7 @@ const TextEditor = ({
           customizeData={customizeData}
           selectedFields={selectedFields}
           setCustomizeData={setCustomizeData}
+          setSelectedFilters={setSelectedFilters}
         />
       </div>
     </>
