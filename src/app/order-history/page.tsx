@@ -83,9 +83,10 @@ export default function Page() {
           <div className="relative w-full mt-5">
             <input
               type="text"
-              placeholder="Search by Order ID, Customer, Reference, Email, or Order By"
+              placeholder="Search by Order ID, Customer, Reference"
+              // placeholder="Search by Order ID, Customer, Reference, Email, or Order By"
               onChange={(e) => filterOrders(e.target.value)}
-              className="w-full px-5 py-3 border border-gray-300 rounded-full focus:ring-1 focus:ring-primary focus:border-primary outline-none text-sm transition-all duration-300"
+              className="w-full px-5 py-3 border font-sans border-gray-300 rounded-full focus:ring-1 focus:ring-primary focus:border-primary outline-none text-sm transition-all duration-300"
             />
             <div className="absolute inset-y-0 right-4 flex items-center text-gray-500">
               <LuSearch className="w-5 h-5" />

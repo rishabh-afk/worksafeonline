@@ -38,15 +38,17 @@ const CartItem = ({
         </h2>
         <p>
           {product?.Colour && (
-            <span className="text-base">Color: {product?.Colour}</span>
+            <span className="text-sm text-gray-500">
+              Color: {product?.Colour}
+            </span>
           )}
           {product?.Fitting && (
-            <span className="border-x text-base px-2 mx-2 border-black">
+            <span className="border-x text-sm text-gray-500 px-2 mx-2 border-gray-600">
               Fitting: {product?.Fitting}
             </span>
           )}
           {product?.Size && (
-            <span className="text-base">Size: {product?.Size}</span>
+            <span className="text-sm text-gray-500">Size: {product?.Size}</span>
           )}
         </p>
         <p className="text-primary text-lg font-semibold">

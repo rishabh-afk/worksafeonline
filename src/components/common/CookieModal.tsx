@@ -40,9 +40,10 @@ const CookieSettings = ({
 
   const handleSetting = () => {
     setExpanded(null);
-    setCookies({ necessary: true, analytical: true });
-    localStorage.setItem("COOKIE_POPUP_ACCEPTED", "true");
-    localStorage.setItem("COOKIE_POPUP_ANALYTICAL", "true");
+    if (cookies.necessary)
+      localStorage.setItem("COOKIE_POPUP_ACCEPTED", "true");
+    if (cookies.analytical)
+      localStorage.setItem("COOKIE_POPUP_ANALYTICAL", "true");
     onClose();
     handleAccept();
   };

@@ -84,6 +84,13 @@ const CartModal = () => {
       ? `0${totalQuantity}`
       : totalQuantity;
 
+  useEffect(() => {
+    if (openCartModal && cart?.Products && cart?.Products.length > 0)
+      document.body.style.overflow = "hidden";
+    else document.body.style.overflow = "auto";
+    // eslint-disable-next-line
+  }, [openCartModal]);
+
   return (
     <span className="hover:text-yellow-500 cursor-pointer relative transition-all duration-100 ease-linear">
       <TiShoppingCart onClick={openCart} size={23} />
