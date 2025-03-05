@@ -143,7 +143,11 @@ const AddText: React.FC<AddTextProps> = ({
       );
       selectedFieldsArray = selectedFieldsArray.map((field: any) => {
         if (field.TextSize && sizes[field.TextSize]) {
-          return { ...field, TextSize: sizes[field.TextSize] };
+          return {
+            ...field,
+            FontWeight: field.FontSize,
+            TextSize: sizes[field.TextSize],
+          };
         }
         return field;
       });
