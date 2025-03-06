@@ -24,3 +24,5 @@ export async function generateMetadata() {
 export default async function Page() {
   return <ClientPage />;
 }
+
+export const revalidate = 900;

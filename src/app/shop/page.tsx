@@ -1,6 +1,6 @@
 import React from "react";
-import { fetchMenuData, Get } from "@/api/generalApi";
 import Header from "./components/Header";
+import { fetchMenuData, Get } from "@/api/generalApi";
 import FilterSection from "./components/FilterSection";
 
 export async function generateMetadata() {
@@ -78,3 +78,4 @@ export default async function Page(ctx: any) {
     </>
   );
 }
+export const revalidate = 900;

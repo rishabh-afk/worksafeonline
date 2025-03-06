@@ -1,6 +1,6 @@
 "use client";
-import { bigShoulders } from "@/app/layout";
 import React from "react";
+import { bigShoulders } from "@/app/layout";
 
 const SubscribeMail = () => {
   return (
@@ -19,7 +19,7 @@ const SubscribeMail = () => {
           placeholder="Email address"
           className="rounded-l-full w-full focus:outline-none p-3 text-black"
         />
-        <button className="bg-yellow-400 font-semibold hover:bg-yellow-500 text-black p-3 rounded-r-full">
+        <button className="bg-primary font-semibold hover:bg-yellow-500 text-black p-3 rounded-r-full">
           Subscribe
         </button>
       </div>

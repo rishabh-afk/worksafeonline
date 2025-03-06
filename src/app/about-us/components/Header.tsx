@@ -11,10 +11,10 @@ const Header: React.FC<HeaderProps> = ({ title, getBreadCrumbs }) => {
   return (
     <div
       id="header"
-      style={{
-        clipPath: "polygon(0 0, 100% 0, 100% 90%, 0 100%)",
-        overflow: "hidden",
-      }}
+      // style={{
+      //   clipPath: "polygon(0 0, 100% 0, 100% 90%, 0 100%)",
+      //   overflow: "hidden",
+      // }}
       className="relative bg-gray-800 text-white h-[400px]"
     >
       <Image

@@ -11,6 +11,10 @@ const GoogleScript = () => {
   const pathname = usePathname();
 
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [pathname]);
+
+  useEffect(() => {
     const sessionVerified = sessionStorage.getItem("verified");
     const token = localStorage.getItem("WORK_SAFE_ONLINE_USER_TOKEN");
 

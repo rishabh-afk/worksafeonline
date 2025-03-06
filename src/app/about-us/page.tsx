@@ -46,3 +46,5 @@ const AboutUS = async () => {
 };
 
 export default AboutUS;
+
+export const revalidate = 1800;
