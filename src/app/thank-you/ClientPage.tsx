@@ -19,7 +19,7 @@ const ClientPage = () => {
   const [orderSummary, setOrderSummary] = useState<any>({});
 
   const handleNavigation = () => {
-    router.push("/shop-all"); // Navigate to the page
+    router.replace("/shop-all"); // Navigate to the page
     router.refresh(); // Revalidate and refresh the page
   };
 
