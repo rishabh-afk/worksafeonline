@@ -34,12 +34,16 @@ const GoogleScript = () => {
 
   useEffect(() => {
     const fetchDevices = async () => {
+      const sessionPopUp = sessionStorage.getItem("popup");
       const sessionVerified = sessionStorage.getItem("verified");
       const token = localStorage.getItem("WORK_SAFE_ONLINE_USER_TOKEN");
 
       const data = getDeviceData();
       if (!data && !token && !sessionVerified) await storeDeviceData();
-      if (!token && pathname === "/") eventEmitter?.emit("openLoginModal");
+      if (!token && pathname === "/" && !sessionPopUp) {
+        eventEmitter?.emit("openLoginModal");
+        sessionStorage.setItem("popup", "true");
+      }
     };
     fetchDevices();
   }, [pathname]);
