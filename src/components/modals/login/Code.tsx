@@ -163,12 +163,12 @@ const Code = ({
           </button>
         </form>
         <div>
-          <p className="text-xs mt-2 text-center text-white/80">
+          {/* <p className="text-xs mt-2 text-center text-white/80">
             I have read & agree to the{" "}
             <Link href={"/terms-and-conditions"} className="underline">
               terms & condition{" "}
             </Link>
-          </p>
+          </p> */}
         </div>
       </div>
     </div>

@@ -88,12 +88,12 @@ const ConfirmationCode = ({
               <RxCross2 size={25} /> No
             </button>
           </div>
-          <p className="text-xs mt-5 text-center text-white/70">
+          {/* <p className="text-xs mt-5 text-center text-white/70">
             I have read & agree to the{" "}
             <Link href={"/terms-and-conditions"} className="underline">
               terms & condition{" "}
             </Link>
-          </p>
+          </p> */}
         </div>
       </div>
     </div>

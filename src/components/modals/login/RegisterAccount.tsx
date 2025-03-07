@@ -233,12 +233,12 @@ const RegisterAccount = ({
           >
             Continue
           </button>
-          <p className="text-xs mt-2 text-center text-white/60">
+          {/* <p className="text-xs mt-2 text-center text-white/60">
             I have read & agree to the{" "}
             <Link href={"/terms-and-conditions"} className="underline">
               terms & conditions
             </Link>
-          </p>
+          </p> */}
         </form>
       </div>
     </div>
