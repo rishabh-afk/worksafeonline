@@ -140,6 +140,7 @@ const SizeQuantities = ({
                   </button>
                   <input
                     type="text"
+                    disabled={!selectedFields?.color?.Colour_Sequence_No}
                     value={quantities[size.Size] || 0}
                     onChange={(e) => {
                       const newValue = Math.max(

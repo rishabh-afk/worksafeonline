@@ -1,4 +1,5 @@
 import { formatPound } from "@/components/logo/general";
+import TermsModal from "@/components/modals/TermsModal";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { IoBagCheckOutline } from "react-icons/io5";
@@ -14,6 +15,7 @@ const OrderTotals: React.FC<OrderTotalsProps> = ({
   updatedCart,
   formloading,
 }) => {
+  const [showTerms, setShowTerms] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const [cartValues, setCartValues] = useState({
     Coupon: 0,
@@ -45,6 +47,7 @@ const OrderTotals: React.FC<OrderTotalsProps> = ({
 
   return (
     <div>
+      <TermsModal isVisible={showTerms} onclose={() => setShowTerms(false)} />
       <h2 className="text-lg font-semibold uppercase lg:rounded-t-xl bg-black text-white py-2 px-4">
         Order <span className="text-secondary">Totals</span>
       </h2>
@@ -156,9 +159,9 @@ const OrderTotals: React.FC<OrderTotalsProps> = ({
           />
           <label htmlFor="terms">
             I have read & agree to the{" "}
-            <Link href="/terms-and-conditions" className="underline">
+            <span onClick={() => setShowTerms(true)} className="underline">
               terms & conditions
-            </Link>
+            </span>
           </label>
         </div>
         <button
