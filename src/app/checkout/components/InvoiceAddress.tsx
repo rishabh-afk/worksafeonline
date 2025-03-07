@@ -119,7 +119,10 @@ const InvoiceAddress = ({
   }, [selectedAddress?.invoiceAddressId?.ID]);
 
   useEffect(() => {
-    if (accountDetail?.my_DeliveryAddress.length > 0) {
+    if (
+      accountDetail?.my_DeliveryAddress &&
+      accountDetail?.my_DeliveryAddress.length > 0
+    ) {
       const data = accountDetail?.my_DeliveryAddress.find(
         (item: any) => item?.DefaultDelAddress === 1
       );
