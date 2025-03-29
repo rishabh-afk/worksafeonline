@@ -42,7 +42,8 @@ const Wishlist = () => {
   const fetchUserData = useCallback(async () => {
     try {
       const account = sessionStorage.getItem("account");
-      if (account) return setaccountDetail(Boolean(account));
+      if (account) return setaccountDetail(JSON.parse(account));
+
       const token = localStorage.getItem("WORK_SAFE_ONLINE_USER_TOKEN");
       if (!token) return;
       const url = "/api/MyProfileCheckout";
