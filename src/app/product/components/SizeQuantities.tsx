@@ -114,26 +114,23 @@ const SizeQuantities = ({
           return (
             <motion.div
               key={size.Size}
-              className={`spt-1 p-[2px] text-center cursor-pointer ${
-                isActive ? "bg-primary/80" : "bg-gray-200/80"
-              }`}
+              className={`spt-1 p-[2px] text-center cursor-pointer ${isActive ? "bg-primary/80" : "bg-gray-200/80"
+                }`}
               variants={itemVariants}
             >
               <div
-                className={`font-black ${
-                  isActive ? "text-white" : "text-gray-600"
-                } ${bigShoulders.className}`}
+                className={`font-black ${isActive ? "text-white" : "text-gray-600"
+                  } ${bigShoulders.className}`}
               >
                 {size.Size}
               </div>
               <div className={`px-1 pt-px pb-1 mt-1 bg-white`}>
                 <div className="flex items-center justify-between mt-2">
                   <button
-                    className={`w-5 h-5 flex justify-center items-center active:scale-[0.9] transition ${
-                      isActive
+                    className={`min-w-5 min-h-5 flex justify-center items-center active:scale-[0.9] transition ${isActive
                         ? "bg-primary/80 text-white hover:bg-primary"
                         : "bg-gray-300 text-white hover:bg-gray-400"
-                    }`}
+                      }`}
                     onClick={debounce(() => handleDecrement(size), 150)}
                   >
                     -
@@ -151,14 +148,13 @@ const SizeQuantities = ({
                       setQuantities({ ...quantities, [size.Size]: newValue });
                     }}
                     onBlur={() => handleIncrement(size, true)}
-                    className="text-xs py-0.5 w-9 text-center border border-gray-300 focus:outline-none focus:ring-1 focus:ring-primary"
+                    className="text-xs py-1 w-full text-center focus:outline-none focus:ring-0"
                   />
                   <button
-                    className={`w-5 h-5 flex disabled:cursor-not-allowed justify-center items-center active:scale-[0.9] transition ${
-                      isActive
+                    className={`min-w-5 min-h-5 flex disabled:cursor-not-allowed justify-center items-center active:scale-[0.9] transition ${isActive
                         ? "bg-primary/80 text-white hover:bg-primary"
                         : "bg-gray-300 text-white hover:bg-gray-400"
-                    }`}
+                      }`}
                     // disabled={quantities[size.Size] === size.qty}
                     onClick={debounce(() => handleIncrement(size), 150)}
                   >

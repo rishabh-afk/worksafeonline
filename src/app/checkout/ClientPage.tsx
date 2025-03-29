@@ -148,7 +148,7 @@ export default function ClientPage() {
         setUpdatedCart(response?.CartTot);
       } else {
         setCart({});
-        router.replace("/shop-all");
+        router.replace("/collection");
       }
     } catch (error) {
       setCart({});
@@ -278,7 +278,7 @@ export default function ClientPage() {
   useEffect(() => {
     router.prefetch("/thank-you");
     router.prefetch("/retry");
-    router.prefetch("/shop-all");
+    router.prefetch("/collection");
   }, [router]);
 
   const handleButtonClick = (activeScreen: any) => {

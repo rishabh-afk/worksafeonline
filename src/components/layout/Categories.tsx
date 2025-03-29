@@ -1,19 +1,26 @@
 "use client";
 
-import React from "react";
+import Image from "next/image";
+import React, { useEffect } from "react";
 import ActivateLink from "./ActivateLink";
 import { bigShoulders } from "@/app/layout";
-import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const Categories = ({ categories }: { categories: any }) => {
+  const router = useRouter()
+
   const handleNavigation = (menu_id: string | number) => {
-    const href = `/shop?category=${menu_id}`;
-    if (href && menu_id) return (window.location.href = href);
+    const href = `/collection/${menu_id}`;
+    router.push(href);
   };
 
   const handlelink = (href: string) => {
     window.location.href = href;
   };
+
+  useEffect(() => {
+    router.prefetch("/collection")
+  }, [router]);
 
   return (
     <div className="flex lg:flex-wrap gap-3 lg:gap-5 text-white items-center overflow-x-auto lg:overflow-x-visible">
@@ -31,7 +38,7 @@ const Categories = ({ categories }: { categories: any }) => {
             </span>
             <span className="w-max bg-white gap-1 shadow-lg py-1 rounded-b-lg hidden group-hover:flex text-black flex-col left-0 z-20 absolute opacity-0 h-0 group-hover:h-fit transition-all duration-300 ease-in-out group-hover:opacity-100">
               {Array.isArray(link?.subcategories) &&
-              link?.subcategories.length > 0 ? (
+                link?.subcategories.length > 0 ? (
                 link.subcategories.map((category: any) => {
                   if (!category?.menu_id || !category?.menu_name) {
                     console.warn("Invalid category data:", category);

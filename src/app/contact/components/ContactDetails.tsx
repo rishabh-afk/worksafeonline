@@ -45,22 +45,27 @@ const ContactDetails: React.FC<ContactDetailsProps> = ({ details }) => {
   ];
 
   return (
-    <div className="max-w-9xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-3 lg:gap-10 py-8 px-4 md:px-6 lg:px-10 lg:py-20">
+    <div className="max-w-9xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-3 lg:gap-10 py-8 px-4 md:px-6 lg:px-10 lg:pt-20 lg:pb-10">
       {contactInfo.map((detail, index) => {
         const Icon = detail.icon;
         return (
-          <div key={index} className="flex flex-col">
-            <div className="flex flex-col lg:flex-row justify-center items-center md:justify-start md:items-start text-4xl gap-5">
-              <div>
-                <Icon />
-              </div>
-              <div className="text-center md:text-left">
-                <h3
-                  className={`font-black uppercase text-2xl md:text-xl lg:text-2xl ${bigShoulders.className}`}
-                >
-                  {detail.title}
-                </h3>
-                <p className="mt-5 text-gray-700 text-lg md:text-sm lg:text-lg whitespace-pre-line">
+          <div key={index} className="flex flex-col items-center text-center">
+            {/* Wrapper to handle alignment across breakpoints */}
+            <div className="flex flex-col lg:flex-row justify-center items-center gap-5 w-full">
+
+              {/* Title & Icon Section */}
+              <div className="flex flex-col items-center">
+                <div className="flex gap-2 items-center">
+                  <Icon size={40} />
+                  <h3
+                    className={`font-black uppercase text-2xl md:text-xl lg:text-2xl ${bigShoulders.className}`}
+                  >
+                    {detail.title}
+                  </h3>
+                </div>
+
+                {/* Description */}
+                <p className="mt-5 text-gray-700 text-lg md:text-sm lg:text-lg whitespace-pre-line max-w-2xl">
                   {detail.description}
                 </p>
               </div>

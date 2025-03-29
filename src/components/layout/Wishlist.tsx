@@ -2,11 +2,12 @@
 
 import Link from "next/link";
 import BottomTabs from "./BottomTabs";
+import { Fetch } from "@/utils/axios";
 import { FaRegHeart } from "react-icons/fa6";
-import React, { useState, useEffect, useCallback } from "react";
-import eventEmitter from "@/hooks/useEventEmitter";
-import { getWishlist } from "@/api/wishlistApis";
 import { filterData } from "@/api/generalApi";
+import { getWishlist } from "@/api/wishlistApis";
+import eventEmitter from "@/hooks/useEventEmitter";
+import React, { useState, useEffect, useCallback } from "react";
 
 type Product = {
   ID: number;
@@ -17,6 +18,7 @@ type Product = {
 
 const Wishlist = () => {
   const [wishlist, setWishlist] = useState<Product[]>([]);
+  const [accountDetail, setaccountDetail] = useState<any>(false);
 
   const fetchWishlist = useCallback(async () => {
     try {
@@ -38,8 +40,10 @@ const Wishlist = () => {
   }, []);
 
   useEffect(() => {
+    eventEmitter?.on("loggedIn", fetchUserData);
     eventEmitter?.on("fetchWishlist", fetchWishlist);
     return () => {
+      eventEmitter?.off("loggedIn", fetchUserData);
       eventEmitter?.off("fetchWishlist", fetchWishlist);
     };
   }, [fetchWishlist]);
@@ -83,21 +87,47 @@ const Wishlist = () => {
     };
   }, []);
 
+  const fetchUserData = useCallback(async () => {
+    try {
+      const account = sessionStorage.getItem("account");
+      if (account) return setaccountDetail(Boolean(account));
+      const token = localStorage.getItem("WORK_SAFE_ONLINE_USER_TOKEN");
+      if (!token) return;
+      const url = "/api/MyProfileCheckout";
+      const response: any = await Fetch(url, {}, 5000, true, false);
+      if (response?.status) {
+        if (response?.accounttype === "Account") {
+          sessionStorage.setItem("account", "false")
+          setaccountDetail(false);
+        } else {
+          sessionStorage.setItem("account", "true")
+          setaccountDetail(true);
+        }
+      }
+    } catch (error) {
+      console.log("Account Details Error]: ", error);
+      return;
+    }
+    // eslint-disable-next-line
+  }, []);
+
   return (
     <div className="relative">
-      <Link
-        href="/wishlist"
-        className="hover:text-yellow-500 relative hidden lg:block transition-all duration-100 ease-linear"
-      >
-        <FaRegHeart size={23} />
-        <span className="absolute -top-3 -right-3 min-w-6 min-h-6 text-xs text-black rounded-full bg-secondary flex items-center justify-center">
-          {wishlist.length > 0 && wishlist.length < 9
-            ? "0" + wishlist.length
-            : wishlist.length >= 10
-            ? wishlist.length
-            : 0}
-        </span>
-      </Link>
+      {!accountDetail &&
+        <Link
+          href="/wishlist"
+          className="hover:text-yellow-500 relative hidden lg:block transition-all duration-100 ease-linear"
+        >
+          <FaRegHeart size={23} />
+          <span className="absolute -top-3 -right-3 min-w-6 min-h-6 text-xs text-black rounded-full bg-secondary flex items-center justify-center">
+            {wishlist.length > 0 && wishlist.length < 9
+              ? "0" + wishlist.length
+              : wishlist.length >= 10
+                ? wishlist.length
+                : 0}
+          </span>
+        </Link>
+      }
       <BottomTabs wishlist={wishlist} />
     </div>
   );

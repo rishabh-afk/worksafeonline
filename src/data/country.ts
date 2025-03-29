@@ -210,7 +210,7 @@ export const links: LinkProps[] = [
   },
   {
     id: 2,
-    href: "/shop-all",
+    href: "/collection",
     label: "PRODUCTS",
   },
   // {

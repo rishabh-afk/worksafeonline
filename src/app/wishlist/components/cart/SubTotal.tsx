@@ -1,5 +1,5 @@
-import { bigShoulders } from "@/app/layout";
 import { formatPound } from "@/components/logo/general";
+import { FaStickyNote, FaTicketAlt, FaBox } from "react-icons/fa";
 
 // interface CartItem {
 //   ID: string;
@@ -19,13 +19,33 @@ const SubTotal = ({ cart }: { cart: any }) => {
   //   }, 0) || 0;
 
   return (
-    <div
-      className={`flex uppercase justify-between items-center text-2xl p-4 ${bigShoulders.className}`}
-    >
-      <strong>SubTotal:</strong>{" "}
-      <span className="font-black text-xl">
-        {formatPound(cart?.TotalAmountExVat)}
-      </span>
+    <div className="border-t p-4">
+      {/* Icons Row */}
+      <div className="grid grid-cols-4 items-center text-gray-500 text-sm">
+        <div className="flex gap-2 items-center">
+          <FaStickyNote size={20} />
+          <span>Order Note</span>
+        </div>
+        <div className="flex gap-2 items-center">
+          <FaTicketAlt size={20} />
+          <span>Coupon</span>
+        </div>
+        <div className="flex gap-2 items-center">
+          <FaBox size={20} />
+          <span>Shipping</span>
+        </div>
+      </div>
+
+      {/* Total Section */}
+      <div className="border-t mt-4 pt-2">
+        <div className="flex justify-between font-bold text-2xl">
+          <span>Total:</span>
+          <span>
+            {formatPound(cart?.TotalAmountExVat)}
+          </span>
+        </div>
+        <p className="text-gray-500 text-sm">Taxes and shipping calculated at checkout</p>
+      </div>
     </div>
   );
 };

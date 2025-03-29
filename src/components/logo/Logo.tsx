@@ -1,7 +1,7 @@
 "use client";
 
-import Button from "../common/Button";
 import { toast } from "react-toastify";
+import { FaRegImage } from "react-icons/fa";
 import { bigShoulders } from "@/app/layout";
 import { useEffect, useState } from "react";
 import CustomizeLogoModal from "./CustomizeLogoModal";
@@ -69,12 +69,14 @@ const Logo = ({
           onclose={handleToggle}
         />
       )}
-      <Button
+      <button
         type="button"
-        text="Customize Logo"
         onClick={handleCustomizeLogo}
-        classes={`w-full flex items-center justify-center px-4 py-2 transition-all duration-200 ease-linear hover:bg-primary !rounded-full text-2xl font-bold uppercase bg-black !text-white ${bigShoulders.className}`}
-      />
+        className={`w-full flex items-center justify-center gap-3 px-4 py-2 border transition-all duration-200 ease-linear border-primary hover:bg-primary text-2xl font-bold uppercase bg-black text-white ${bigShoulders.className}`}
+      >
+        <FaRegImage className="text-2xl" />
+        Add Logo
+      </button>
     </>
   );
 };

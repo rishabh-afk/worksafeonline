@@ -168,11 +168,11 @@ const CartItem: React.FC<CartItemProps> = ({
           className={`grid grid-cols-7 border-y py-4 gap-5 justify-center items-center ${bigShoulders.className}`}
         >
           <p></p>
-          <p className="text-xl col-span-2 font-black uppercase">Product</p>
-          <p className="text-xl font-black uppercase">ArtWork</p>
-          <p className="text-xl font-black uppercase">Unit</p>
-          <p className="text-xl font-black uppercase">Quantity</p>
-          <p className="text-xl font-black uppercase">Total</p>
+          <p className="text-xl col-span-2 font-black">Product</p>
+          <p className="text-xl font-black">ArtWork</p>
+          <p className="text-xl font-black">Unit</p>
+          <p className="text-xl font-black">Quantity</p>
+          <p className="text-xl font-black">Total</p>
         </div>
 
         {fetchCart.map((item: any) => (
@@ -192,13 +192,13 @@ const CartItem: React.FC<CartItemProps> = ({
                 height={100}
                 src={item.ProductImage}
                 alt={item.ProductDescription}
-                className="min-w-14 aspect-square object-contain border"
+                className="min-w-20 aspect-square object-contain border"
               />
             </div>
             <div className="col-span-2">
               <Link
                 href={`/product/1023/${item?.ProductCode}`}
-                className="line-clamp-3 text-sm font-bold"
+                className="line-clamp-3 font-bold"
               >
                 <span className="text-primary">{item.ProductCode} </span>{" "}
                 {item.ProductDescription}

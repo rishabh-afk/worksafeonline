@@ -39,45 +39,44 @@ const AddressCard = ({
   return (
     <div
       onClick={() => handleSelected(address?.ID)}
-      className={`text-black p-4 pb-2 h-fit bg-white transition-all border-2 cursor-pointer duration-200 rounded-xl ${
-        selectedAddress === address?.ID ? "border-primary" : "border-primary/20"
-      }`}
+      className={`text-black p-3 pb-2 h-fit bg-white transition-all border-2 cursor-pointer duration-200 rounded-xl ${selectedAddress === address?.ID ? "border-primary" : "border-primary/20"
+        }`}
     >
       {address?.Customer_Name && (
-        <p className="flex items-center gap-5 text-lg mb-1">
-          <span className="text-primary text-xl">
+        <p className="flex items-center gap-2 text-lg mb-1">
+          <span className="text-primary text-base">
             <FaUser />
           </span>
-          <span className="text-base">{address.Customer_Name}</span>
+          <span className="text-sm">{address.Customer_Name}</span>
         </p>
       )}
       {address?.Telephone && (
-        <p className="flex items-center gap-5 text-lg mb-1">
-          <span className="text-primary text-xl">
+        <p className="flex items-center gap-2 text-lg mb-1">
+          <span className="text-primary text-base">
             <FaPhone />
           </span>
-          <span className="text-base">{address.Telephone}</span>
+          <span className="text-sm">{address.Telephone}</span>
         </p>
       )}
       {address?.Address && (
-        <p className="flex items-center gap-5 text-lg mb-1">
-          <span className="text-primary text-xl">
+        <p className="flex items-center gap-2 text-lg mb-1">
+          <span className="text-primary text-base">
             <FaLocationDot />
           </span>
-          <span className="text-base">
+          <span className="text-sm">
             {address.Address ? address.Address : "-"}
           </span>
         </p>
       )}
-      <div className="flex justify-end gap-3 mb-2">
+      <div className="flex justify-end mt-2 gap-1">
         {address?.AllowEdit === 1 && (
           <button
             title="Edit Address"
             disabled={loading}
             onClick={() => handleEdit(address?.ID)}
-            className="flex items-center text-sm gap-1 px-2 py-1.5 text-white bg-primary/80 hover:bg-primary rounded-md transition"
+            className="flex items-center text-sm gap-1 px-2 py-1 text-white bg-primary/80 hover:bg-primary rounded-md transition"
           >
-            <MdEdit className="text-xl" />
+            <MdEdit className="text-base" />
             Edit
           </button>
         )}
@@ -86,9 +85,9 @@ const AddressCard = ({
             title="Delete Address"
             disabled={loading}
             onClick={() => handleDelete(address?.ID)}
-            className="flex items-center text-sm gap-1 px-2 py-1.5 text-white bg-red-500 hover:bg-red-600 rounded-md transition"
+            className="flex items-center text-sm gap-1 px-2 py-1 text-white bg-red-500 hover:bg-red-600 rounded-md transition"
           >
-            <MdDelete className="text-xl" />
+            <MdDelete className="text-lg" />
             {loading ? "Deleting..." : "Delete"}
           </button>
         )}

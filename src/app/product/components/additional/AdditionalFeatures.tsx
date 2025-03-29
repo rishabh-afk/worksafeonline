@@ -13,7 +13,7 @@ const AdditionalFeatures = ({ productFeatures }: { productFeatures: any }) => {
           </h2>
         </div>
         <div className="flex flex-col gap-5 w-full mt-5 lg:mt-0">
-          {productFeatures}
+          {productFeatures ? productFeatures : "No Additional Information Available"}
           {/* {productFeatures.map((feature: any, index: number) => (
             <p
               key={index}

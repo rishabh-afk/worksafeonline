@@ -9,17 +9,15 @@ const ActivateLink = ({ name, id }: { name: string; id: string }) => {
 
   return (
     <span
-      className={`relative inline-block ${
-        category === id
+      className={`relative inline-block ${category === id
           ? "text-secondary"
           : "text-white hover:text-secondary transition-all duration-200 ease-in-out"
-      } group`}
+        } group`}
     >
       {name}
       <span
-        className={`hidden lg:block absolute inset-x-0 bottom-0 h-[1.5px] bg-secondary transform origin-left transition-transform duration-300 ${
-          category === id || "group-hover:scale-x-100"
-        } ${category === id ? "scale-x-100" : "scale-x-0"}`}
+        className={`hidden lg:block absolute inset-x-0 bottom-0 h-[1.5px] bg-secondary transform origin-left transition-transform duration-300 ${category === id || "group-hover:scale-x-100"
+          } ${category === id ? "scale-x-100" : "scale-x-0"}`}
       />
     </span>
   );
@@ -33,7 +31,7 @@ const ActivateLinkWithSuspense = ({
   id: string;
 }) => {
   return (
-    <Suspense fallback={<span>Loading...</span>}>
+    <Suspense fallback={<span></span>}>
       <ActivateLink name={name} id={id} />
     </Suspense>
   );

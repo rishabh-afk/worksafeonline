@@ -8,9 +8,11 @@ const ProductSection = ({
   products,
   category,
   isLoading,
+  showFilters
 }: {
   products: any[];
   isLoading: boolean;
+  showFilters: boolean;
   category: string | number;
 }) => {
   const containerVariants = {
@@ -39,7 +41,7 @@ const ProductSection = ({
   return (
     <motion.div
       key={category}
-      className="col-span-2 lg:col-span-3 grid grid-cols-2 lg:grid-cols-4 gap-10"
+      className={`col-span-2 lg:col-span-3 grid grid-cols-2 ${showFilters ? "lg:grid-cols-4 lg:gap-10" : "lg:grid-cols-5 lg:gap-7"} gap-3`}
       variants={containerVariants}
       initial="hidden"
       animate="visible"

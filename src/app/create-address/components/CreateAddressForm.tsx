@@ -1,31 +1,34 @@
 import { toast } from "react-toastify";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Fetch, Post } from "@/utils/axios";
 import { bigShoulders } from "@/app/layout";
 import { useRouter } from "next/navigation";
+import { AddressFinder } from "@ideal-postcodes/address-finder";
 
 const CreateAddressForm = ({ address }: { address?: any }) => {
   const router = useRouter();
+  const shouldRender2 = useRef(true);
+  const [apiKey, setApiKey] = useState("");
   const [loading, setLoading] = useState(false);
   const [countries, setCountries] = useState([]);
   const [formData, setFormData] = useState<any>(
     address?.address_id
       ? address
       : {
-          address_id: 0,
-          first_name: "",
-          address_line1: "",
-          town: "",
-          county: "",
-          country: "",
-          post_code: "",
-          mobile: "",
-          email: "",
-          invaddress: 0,
-          deladdress: 0,
-          dinvaddress: 0,
-          ddeladdress: 0,
-        }
+        address_id: 0,
+        first_name: "",
+        address_line1: "",
+        town: "",
+        county: "",
+        country: "",
+        post_code: "",
+        mobile: "",
+        email: "",
+        invaddress: 0,
+        deladdress: 0,
+        dinvaddress: 0,
+        ddeladdress: 0,
+      }
   );
 
   useEffect(() => {
@@ -41,6 +44,36 @@ const CreateAddressForm = ({ address }: { address?: any }) => {
     };
     fetchCountries();
   }, []);
+
+  useEffect(() => {
+    const fetchKey = async () => {
+      const url = "api/AddressFinderID";
+      const resp: any = await Fetch(url, {}, 5000, true, false);
+      if (resp?.status) setApiKey(resp?.message);
+    };
+    if (!apiKey) fetchKey();
+  }, [apiKey]);
+
+  useEffect(() => {
+    if (!shouldRender2.current || !apiKey) return;
+    shouldRender2.current = false;
+
+    AddressFinder.watch({
+      apiKey: apiKey,
+      inputField: "#post_code",
+      onAddressRetrieved: (address: any) => {
+        setFormData((prev: any) => ({
+          ...prev,
+          county: address.county,
+          town: address.post_town,
+          country: address.country,
+          post_code: address.postcode,
+          address_line1: `${address.line_1} ${address.line_2} ${address.line_3}`,
+        }));
+      },
+    });
+    // eslint-disable-next-line
+  }, [apiKey]);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -102,6 +135,24 @@ const CreateAddressForm = ({ address }: { address?: any }) => {
             onChange={handleInputChange}
             className="mt-1 p-3 block w-full rounded-full border-gray-300 shadow-sm focus:ring-2 outline-none focus:border-primary focus:ring-primary"
             placeholder="Enter full name"
+            required
+          />
+        </div>
+
+
+        {/* Post Code */}
+        <div>
+          <label htmlFor="post_code" className="block font-semibold text-lg">
+            Post Code
+          </label>
+          <input
+            type="text"
+            id="post_code"
+            name="post_code"
+            value={formData.post_code}
+            onChange={handleInputChange}
+            className="mt-1 p-3 block w-full rounded-full border-gray-300 shadow-sm focus:ring-2 outline-none focus:border-primary focus:ring-primary"
+            placeholder="Enter post code"
             required
           />
         </div>
@@ -183,23 +234,6 @@ const CreateAddressForm = ({ address }: { address?: any }) => {
                 );
               })}
           </select>
-        </div>
-
-        {/* Post Code */}
-        <div>
-          <label htmlFor="post_code" className="block font-semibold text-lg">
-            Post Code
-          </label>
-          <input
-            type="text"
-            id="post_code"
-            name="post_code"
-            value={formData.post_code}
-            onChange={handleInputChange}
-            className="mt-1 p-3 block w-full rounded-full border-gray-300 shadow-sm focus:ring-2 outline-none focus:border-primary focus:ring-primary"
-            placeholder="Enter post code"
-            required
-          />
         </div>
 
         {/* Mobile */}
@@ -297,15 +331,15 @@ const CreateAddressForm = ({ address }: { address?: any }) => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-primary/80 text-black text-xl font-bold py-3 rounded-full uppercase hover:bg-primary transition"
+            className="w-full bg-primary/80 text-white text-xl font-bold py-3 rounded-full uppercase hover:bg-primary transition"
           >
             {address?.address_id
               ? loading
                 ? "Updating..."
                 : "Update Address"
               : loading
-              ? "Please wait...."
-              : "Save Address"}
+                ? "Please wait...."
+                : "Save Address"}
           </button>
         </div>
       </form>

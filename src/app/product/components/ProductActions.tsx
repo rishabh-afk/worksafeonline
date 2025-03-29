@@ -11,12 +11,21 @@ const ProductActions = ({ ProSpecsheet }: { ProSpecsheet: string }) => (
       <TiMessages size={20} />
       <span className="underline">Ask a question</span>
     </div> */}
-    {ProSpecsheet && (
+    {ProSpecsheet ? (
       <div className="flex items-center mb-10 gap-2">
         <TfiRulerAlt2 size={20} />
-        <Link href={ProSpecsheet} target="_blank" className="underline">
-          Specifications
+        <Link
+          href={ProSpecsheet}
+          target="_blank"
+          className="underline text-primary hover:text-black transition"
+        >
+          View Specifications
         </Link>
+      </div>
+    ) : (
+      <div className="text-gray-500 text-sm flex items-center mb-6 gap-2">
+        <TfiRulerAlt2 size={20} />
+        <span className="font-bold">No Specifications Available</span>
       </div>
     )}
     {/* <div className="flex items-center gap-2">

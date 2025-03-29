@@ -1,18 +1,25 @@
-import React from "react";
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
+import React, { useEffect } from "react";
 import { bigShoulders } from "@/app/layout";
+import { useRouter } from "next/navigation";
 import { FaArrowRightLong } from "react-icons/fa6";
 
-const CategoryCard = ({ category }: { category: any }) => {
-  const url = `/collection/${category?.menu_id}`;
+const SubCategoryCard = ({ category }: { category: any }) => {
+  const router = useRouter();
+  const url = `/shop?category=${category.parent_id}&subcategory=${category?.menu_id}`
+
+  useEffect(() => { if (url) router.prefetch(url) }, [router, url]);
+
   return (
     <div className="relative rounded-xl overflow-hidden cursor-pointer group">
       <Image
         width={400}
         height={400}
         alt={category?.menu_name}
-        src={category?.thumbail_Image}
+        src={category?.menu_Image}
         className="w-full h-full object-contain object-center transition-all duration-200 ease-linear group-hover:scale-125"
       />
       <Link passHref href={url}>
@@ -44,4 +51,4 @@ const CategoryCard = ({ category }: { category: any }) => {
   );
 };
 
-export default CategoryCard;
+export default SubCategoryCard;

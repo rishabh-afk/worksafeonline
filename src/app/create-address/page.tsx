@@ -2,6 +2,7 @@
 
 import { Fetch } from "@/utils/axios";
 import { bigShoulders } from "../layout";
+import { IoClose } from "react-icons/io5";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Loader from "@/components/common/Loader";
@@ -43,11 +44,19 @@ export default function Page() {
     <div className="max-w-9xl mx-auto p-4 md:p-6 lg:p-12">
       <AccountLayout accountDetail={accountDetail}>
         <div>
-          <h1
-            className={`uppercase text-lg md:text-2xl lg:text-4xl flex items-center gap-2 font-black ${bigShoulders.className}`}
-          >
-            Create <span className="text-primary"> New Address</span>
-          </h1>
+          <div className="flex gap-5 items-center">
+            <div
+              onClick={() => router.back()}
+              className="flex items-center space-x-2 bg-primary p-2 rounded-full cursor-pointer text-white transition"
+            >
+              <IoClose className="hover:scale-125 transition" size={20} />
+            </div>
+            <h1
+              className={`uppercase text-lg md:text-2xl lg:text-4xl flex items-center gap-2 font-black ${bigShoulders.className}`}
+            >
+              Create <span className="text-primary"> New Address</span>
+            </h1>
+          </div>
           <CreateAddressForm />
         </div>
       </AccountLayout>

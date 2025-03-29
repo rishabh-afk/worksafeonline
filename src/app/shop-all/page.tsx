@@ -48,7 +48,7 @@ export default async function Page() {
       <Header
         title="Shop"
         data={{ url, name: bannerName }}
-        getBreadCrumbs={[{ id: "/shop-all", name: "Shop" }]}
+        getBreadCrumbs={[{ id: "/collection", name: "Shop" }]}
       />
       <FilterSection
         category={0}

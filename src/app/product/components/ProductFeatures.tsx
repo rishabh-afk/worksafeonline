@@ -15,22 +15,20 @@ const ProductFeatures = ({ product }: { product: Product | any }) => {
       <div className="flex overflow-auto pb-5 justify-center items-center w-full mt-5 md:mt-16 gap-4">
         <Button
           text="DESCRIPTION"
-          classes={`!rounded-full text w-fit md:text-2xl py-3 font-bold border-none tracking-tight !px-10 ${
-            content === "description" ? "bg-black text-white" : "text-[#000000]"
-          }  hover:bg-[#000000]`}
+          classes={`!rounded-full text w-fit md:text-2xl py-3 font-bold border-none tracking-tight !px-10 ${content === "description" ? "bg-black text-white" : "text-[#000000]"
+            }  hover:bg-[#000000]`}
           onClick={() => handleChangeContent("description")}
         />
-        {product?.AdditionalDescription && (
-          <Button
-            text="ADDITIONAL INFORMATION"
-            classes={`!rounded-full text w-fit md:text-2xl py-3 font-bold border-none tracking-tight !px-10 ${
-              content === "additional"
-                ? "bg-black text-white"
-                : "text-[#000000]"
+        {/* {product?.AdditionalDescription && ( */}
+        <Button
+          text="ADDITIONAL INFORMATION"
+          classes={`!rounded-full text w-fit md:text-2xl py-3 font-bold border-none tracking-tight !px-10 ${content === "additional"
+            ? "bg-black text-white"
+            : "text-[#000000]"
             }  hover:bg-[#000000]`}
-            onClick={() => handleChangeContent("additional")}
-          />
-        )}
+          onClick={() => handleChangeContent("additional")}
+        />
+        {/* )} */}
         {/* <Button
           text={`REVIEWS (5)`}
           classes={`!rounded-full text w-fit md:text-2xl py-3 font-bold border-none tracking-tight !px-10 ${

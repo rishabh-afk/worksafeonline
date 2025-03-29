@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
-import { bigShoulders } from "@/app/layout";
+
 import Image from "next/image";
+import { useState, useEffect } from "react";
+import { bigShoulders } from "@/app/layout";
 
 // Skeleton loader component
 const SkeletonLoader = () => (
@@ -74,7 +75,7 @@ const BlogsSwiper = ({ slidesPerViewDesktop }: { slidesPerViewDesktop?: number }
 
     if (loading) {
         return (
-            <div className="container mx-auto px-6">
+            <div className="container mx-auto lg:px-6">
                 <Swiper
                     spaceBetween={30}
                     slidesPerView={3}
@@ -125,7 +126,7 @@ const BlogsSwiper = ({ slidesPerViewDesktop }: { slidesPerViewDesktop?: number }
     }
 
     return (
-        <div className="container mx-auto px-6">
+        <div className="container mx-auto lg:px-6">
             <Swiper
                 spaceBetween={30}
                 slidesPerView={3}

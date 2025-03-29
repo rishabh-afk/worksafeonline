@@ -7,6 +7,7 @@ import { fetchHomePageData } from "@/api/generalApi";
 import Categories from "@/components/home/Categories";
 import ReasonsToShop from "@/components/home/ReasonToShop";
 import ListingByCategory from "@/components/home/ListingByCategory";
+// import Blogs from "./about-us/components/Blogs";
 
 export async function generateMetadata() {
   // Replace with the correct endpoint
@@ -76,6 +77,7 @@ export default async function Home() {
       <ReasonsToShop />
       <Categories categories={categories} />
       <WhoWeAre brands={brands} />
+      {/* <Blogs /> */}
     </div>
   );
 }

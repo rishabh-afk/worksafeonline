@@ -19,7 +19,7 @@ const ClientPage = () => {
   const [orderSummary, setOrderSummary] = useState<any>({});
 
   const handleNavigation = () => {
-    router.replace("/shop-all"); // Navigate to the page
+    router.replace("/collection"); // Navigate to the page
     router.refresh(); // Revalidate and refresh the page
   };
 
@@ -45,7 +45,7 @@ const ClientPage = () => {
           setOrderSummary(response?.my_orders);
         } else {
           toast.info("Order not found!");
-          return router.replace("/shop-all");
+          return router.replace("/collection");
         }
       } catch (error) {
         console.log("Error: ", error);

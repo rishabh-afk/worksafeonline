@@ -36,7 +36,7 @@ export default async function Page() {
       <ContactDetails details={data} />
       <Map location={data?.Location} />
       <ContactForm />
-      <div className="max-w-9xl mx-auto grid grid-cols-2 lg:grid-cols-4">
+      {/* <div className="max-w-9xl mx-auto grid grid-cols-2 lg:grid-cols-4">
         {features.map((feature, index) => {
           const Icon = feature.icon;
           return (
@@ -53,7 +53,7 @@ export default async function Page() {
             </div>
           );
         })}
-      </div>
+      </div> */}
     </>
   );
 }

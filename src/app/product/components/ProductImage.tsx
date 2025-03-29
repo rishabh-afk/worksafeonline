@@ -11,6 +11,7 @@ import { Navigation, Thumbs, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/thumbs";
 import "swiper/css/navigation";
+import ZoomableImage from "./ZoomableImage";
 
 type ProductImageProps = {
   images: string[];
@@ -19,22 +20,23 @@ type ProductImageProps = {
 const ProductImage: React.FC<ProductImageProps> = ({ images }) => {
   const [mounted, setMounted] = useState(true);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [position, setPosition] = useState({ x: 50, y: 50 });
+  // const [position, setPosition] = useState({ x: 50, y: 50 });
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperClass | null>(null);
   const [swiperInstance, setSwiperInstance] = useState<SwiperClass | null>(
     null
   );
 
-  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    const { left, top, width, height } =
-      e.currentTarget.getBoundingClientRect();
-    const x = ((e.clientX - left) / width) * 100;
-    const y = ((e.clientY - top) / height) * 100;
-    setPosition({ x, y });
-  }, []);
+  // const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+  //   const { left, top, width, height } =
+  //     e.currentTarget.getBoundingClientRect();
+  //   const x = ((e.clientX - left) / width) * 100;
+  //   const y = ((e.clientY - top) / height) * 100;
+  //   setPosition({ x, y });
+  // }, []);
 
-  const handleMouseEnter = () => swiperInstance?.autoplay.stop();
-  const handleMouseLeave = () => swiperInstance?.autoplay.start();
+  // const handleMouseEnter = () => swiperInstance?.autoplay.stop();
+  // const handleMouseLeave = () => swiperInstance?.autoplay.start();
 
   const handleSwiperInstance = useCallback((swiper: SwiperClass) => {
     setSwiperInstance(swiper);
@@ -47,6 +49,11 @@ const ProductImage: React.FC<ProductImageProps> = ({ images }) => {
   useEffect(() => {
     setMounted(false);
   }, []);
+
+  useEffect(() => {
+    if (selectedImage) document.body.style.overflow = "hidden";
+    else document.body.style.overflow = "auto";
+  }, [selectedImage]);
 
   if (!images || images.length === 0) {
     return <div className="text-center">No images available</div>;
@@ -73,10 +80,11 @@ const ProductImage: React.FC<ProductImageProps> = ({ images }) => {
           {images.map((src, index) => (
             <SwiperSlide key={src}>
               <div
-                onMouseMove={handleMouseMove}
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-                className="relative group cursor-zoom-in overflow-hidden w-full h-full"
+                // onMouseMove={handleMouseMove}
+                // onMouseEnter={handleMouseEnter}
+                // onMouseLeave={handleMouseLeave}
+                onClick={() => setSelectedImage(src)}
+                className="relative group overflow-hidden w-full h-full"
               >
                 <Image
                   src={src}
@@ -85,12 +93,13 @@ const ProductImage: React.FC<ProductImageProps> = ({ images }) => {
                   height={400}
                   unoptimized
                   priority
-                  style={{
-                    transformOrigin: `${position.x}% ${position.y}%`,
-                  }}
-                  className="absolute top-0 left-0 w-full h-full object-contain transition-transform duration-300 group-hover:scale-[2.25] rounded-md"
+                  // style={{
+                  //   transformOrigin: `${position.x}% ${position.y}%`,
+                  // }}
+                  className="absolute top-0 left-0 w-full h-full object-contain transition-transform duration-300 rounded-md"
                 />
                 <TbZoomScan className="absolute top-3 right-3 text-4xl" />
+                {selectedImage === src && <ZoomableImage src={src} isOpen={selectedImage === src} setIsOpen={setSelectedImage} />}
               </div>
             </SwiperSlide>
           ))}
@@ -113,11 +122,10 @@ const ProductImage: React.FC<ProductImageProps> = ({ images }) => {
           {images.map((src, index) => (
             <SwiperSlide key={src} className="cursor-pointer">
               <div
-                className={`border ${
-                  activeIndex === index
-                    ? "border-primary shadow-lg"
-                    : "border-gray-300"
-                }`}
+                className={`border ${activeIndex === index
+                  ? "border-primary shadow-lg"
+                  : "border-gray-300"
+                  }`}
                 onClick={() => swiperInstance?.slideTo(index)}
               >
                 <Image
@@ -127,7 +135,7 @@ const ProductImage: React.FC<ProductImageProps> = ({ images }) => {
                   priority
                   unoptimized
                   alt={`Thumbnail ${index + 1}`}
-                  className="w-full p-1 md:p-2 h-auto object-cover"
+                  className="w-full aspect-square p-1 md:p-2 object-contain"
                 />
               </div>
             </SwiperSlide>

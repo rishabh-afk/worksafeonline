@@ -253,7 +253,7 @@ const QuantitySelector = ({
           setSelectedFields={setSelectedFields}
         />
       )}
-      <div className="flex text-center pt-5 pb-2 gap-3">
+      <div className="flex text-center pt-5 pb-2 gap-2">
         <AddToCartButton
           fieldsCheck={fieldsCheck}
           selectedFields={selectedFields}
@@ -263,19 +263,19 @@ const QuantitySelector = ({
             ProductSellingPrice: price.ProductSellingPrice,
           }}
         />
+        {showLogoModal && (
+          <Logo
+            fieldsCheck={fieldsCheck}
+            selectedFields={selectedFields}
+            filterProductSizes={filterProductSizes}
+            product={{
+              ...(product || {}),
+              ...(selectedFields || {}),
+              quantity: 0,
+            }}
+          />
+        )}
       </div>
-      {showLogoModal && (
-        <Logo
-          fieldsCheck={fieldsCheck}
-          selectedFields={selectedFields}
-          filterProductSizes={filterProductSizes}
-          product={{
-            ...(product || {}),
-            ...(selectedFields || {}),
-            quantity: 0,
-          }}
-        />
-      )}
     </>
   );
 };

@@ -38,7 +38,7 @@ export default function ClientPage() {
       <div className="flex flex-col justify-center items-center text-5xl h-screen">
         <h2 className="font-semibold">No Product Found</h2>
         <button
-          onClick={() => router.push("/shop-all")}
+          onClick={() => router.push("/collection")}
           className="mt-4 px-4 py-2 transition text-lg bg-primary text-white rounded-md hover:bg-primary/80 focus:outline-none"
         >
           Shop Now

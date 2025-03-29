@@ -79,7 +79,7 @@ export default function ClientPage() {
       <div className="max-w-9xl min-h-screen mx-auto p-4 md:p-6 lg:p-10">
         <div className="flex justify-between items-center">
           <h1
-            className={`text-lg md:text-2xl lg:text-4xl flex items-center font-black ${bigShoulders.className}`}
+            className={`text-lg md:text-2xl upp lg:text-4xl flex items-center font-black ${bigShoulders.className}`}
           >
             Order Details{" "}
             <span className="text-xl md:text-2xl lg:text-4xl">
@@ -90,7 +90,7 @@ export default function ClientPage() {
           {cart && cart?.Products && cart?.Products.length === 0 && (
             <AnimatedActionButton
               type="button"
-              href="/shop-all"
+              href="/collection"
               isLoading={false}
               text="View Products"
               classes="uppercase md:text-lg font-semibold whitespace-nowrap left-2 py-6 w-[180px] hover:bg-primary bg-white text-black hover:text-black"

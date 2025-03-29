@@ -72,7 +72,7 @@ const BottomTabs = ({ wishlist }: { wishlist: any[] }) => {
           </span>
         </span>
       </p>
-      <Link href={"/shop-all"}>
+      <Link href={"/collection"}>
         <span className="py-2 md:py-3 flex flex-col justify-center items-center border-gray-400 border-r">
           <AiFillAppstore size={24} />
           <span className="md:text-lg font-bold md:font-extrabold">Shop</span>

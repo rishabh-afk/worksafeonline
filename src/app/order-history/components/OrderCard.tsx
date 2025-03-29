@@ -34,16 +34,13 @@ const OrderHistoryTable = ({ orders }: { orders: Order[] }) => {
             <th className="border border-primary px-4 py-3 text-left">
               Reference
             </th>
-            <th className="border border-primary px-4 py-3 text-left">
-              Order Date
-            </th>
-            <th className="border border-primary px-4 py-3 text-left">
+            {/* <th className="border border-primary px-4 py-3 text-left">
               Order By
-            </th>
+            </th> */}
             <th className="border border-primary px-4 py-3 text-right">
               Total Value
             </th>
-            <th className="border border-primary px-4 py-3 text-left">Email</th>
+            {/* <th className="border border-primary px-4 py-3 text-left">Email</th> */}
             <th className="border border-primary px-4 py-3 text-left">
               Payment Status
             </th>
@@ -56,9 +53,8 @@ const OrderHistoryTable = ({ orders }: { orders: Order[] }) => {
           {orders.map((order, index) => (
             <tr
               key={order.Seq}
-              className={`cursor-pointer ${
-                index % 2 !== 0 ? "bg-primary/20" : "bg-white"
-              }`}
+              className={`cursor-pointer ${index % 2 !== 0 ? "bg-primary/20" : "bg-white"
+                }`}
             >
               <td className="border border-primary text-center px-4 py-3">
                 {order.Seq ? order.Seq : "-"}
@@ -72,24 +68,20 @@ const OrderHistoryTable = ({ orders }: { orders: Order[] }) => {
               <td className="border border-primary px-4 py-3">
                 {order.Customer_Ref ? order.Customer_Ref : "-"}
               </td>
-              <td className="border border-primary px-4 py-3">
-                {order.Order_Date ? order.Order_Date : "-"}
-              </td>
-              <td className="border border-primary px-4 py-3">
+              {/* <td className="border border-primary px-4 py-3">
                 {order.OrderedBy ? order.OrderedBy : "-"}
-              </td>
+              </td> */}
               <td className="border border-primary font-semibold px-4 py-3 text-left">
                 {order.TotalValue ? formatPound(order.TotalValue) : "-"}
               </td>
-              <td className="border border-primary px-4 py-3">
+              {/* <td className="border border-primary px-4 py-3">
                 {order.Email ? order.Email : "-"}
-              </td>
+              </td> */}
               <td
-                className={`border border-primary text-lg px-4 py-2 ${
-                  order.PaymentStatus === "success"
-                    ? "text-green-700"
-                    : "text-red-600"
-                }`}
+                className={`border border-primary text-lg px-4 py-2 ${order.PaymentStatus === "success"
+                  ? "text-green-700"
+                  : "text-red-600"
+                  }`}
               >
                 {order.PaymentStatus}
               </td>

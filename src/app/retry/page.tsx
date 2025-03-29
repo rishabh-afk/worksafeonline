@@ -15,7 +15,7 @@ export default function Page() {
     setLoading(true);
     try {
       const OrderID = localStorage.getItem("OrderID");
-      if (!OrderID) return router.replace("/shop-all");
+      if (!OrderID) return router.replace("/collection");
 
       const data = { OrderID };
       const url = "/api/TransactionRetry";
@@ -50,7 +50,7 @@ export default function Page() {
         />
         <Button
           text={"Cancel"}
-          onClick={() => router.replace("/shop-all")}
+          onClick={() => router.replace("/collection")}
           classes="mt-2 w-full bg-red-500 hover:bg-red-600 text-white text-xl !py-1.5 rounded-lg flex items-center justify-center"
         />
       </motion.div>

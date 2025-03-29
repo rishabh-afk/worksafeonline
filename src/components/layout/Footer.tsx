@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Get } from "@/api/generalApi";
-// import SocialConnect from "./SocialLinks";
+import SocialConnect from "./SocialLinks";
 import { bigShoulders } from "@/app/layout";
 import SubscribeMail from "./SubscribeMail";
 import AnimatedActionButton from "../common/AnimatedActionButton";
@@ -16,7 +16,7 @@ const Footer = async () => {
 
   const aboutLinks = [
     { label: "Company Info", href: "/about-us" },
-    // { label: "Reviews", href: "/about-us" },
+    { label: "Blogs", href: "/blogs" },
   ];
 
   const quickLinks = [
@@ -34,7 +34,6 @@ const Footer = async () => {
   // ];
 
   const data = await Get("api/ContactDetail1?app=Worksafe");
-
   return (
     <>
       {/* Guide Section */}
@@ -65,7 +64,7 @@ const Footer = async () => {
             <FaArrowRightLong className="ml-2" />
           </span> */}
           <AnimatedActionButton
-            href="/shop-all"
+            href="/collection"
             text="CLICK HERE TO VIEW"
             classes="md:text-lg font-extrabold whitespace-nowrap py-6 text-wider w-[280px] hover:bg-primary bg-white text-black hover:!text-white"
             isLoading={false}
@@ -167,29 +166,15 @@ const Footer = async () => {
         <div className="border-t border-white/20 mt-14" />
 
         {/* social links */}
-        {/* <SocialConnect /> */}
+        <SocialConnect phone={data?.Telephone} />
 
         <div className="flex flex-col justify-center items-center w-full relative">
-          <div className="hidden lg:flex absolute bg-[#1C1C1C] justify-center items-center -top-10 p-1 sm:left-auto ">
-            <Link href="/">
-              <Image
-                width={100}
-                unoptimized
-                height={60}
-                alt="Logo"
-                src={
-                  "https://www.worksafeonline.co.uk/LogoImages/WorksafeHeader.png"
-                }
-                className="w-40"
-              />
-            </Link>
-          </div>
-          <div className="bg-white pt-6 w-full text-black flex flex-col md:flex-row gap-3 justify-center md:justify-between items-center py-5 max-w-9xl mx-auto px-4 md:px-6 lg:px-10">
+          <div className="bg-white pt-6 w-full text-black flex flex-col md:flex-row gap-3 justify-center items-center py-5 max-w-9xl mx-auto px-4 md:px-6 lg:px-10">
             <p className="text-gray-500">
               Copyright © {new Date().getFullYear()} WorkSafeOnline. All rights
               reserved
             </p>
-            <Image
+            {/* <Image
               src="https://demo2.wpopal.com/axetor/wp-content/uploads/2024/01/payment.jpg"
               alt="Payment"
               width={100}
@@ -197,7 +182,7 @@ const Footer = async () => {
               priority
               unoptimized
               className="object-contain w-72"
-            />
+            /> */}
           </div>
         </div>
       </footer>
