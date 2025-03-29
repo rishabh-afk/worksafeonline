@@ -1,5 +1,4 @@
 import { Get } from "@/api/generalApi";
-import { features } from "@/data/country";
 import Map from "./components/MapComponent";
 import Header from "../about-us/components/Header";
 import ContactForm from "./components/ContactForm";

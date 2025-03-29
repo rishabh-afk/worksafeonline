@@ -1,6 +1,5 @@
 import Image from "next/image";
 import React, { useState } from "react";
-import { RxCross1 } from "react-icons/rx";
 import { formatPound } from "@/components/logo/general";
 
 const CartItem = ({

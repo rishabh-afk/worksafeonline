@@ -3,7 +3,7 @@ import { Get } from "@/api/generalApi";
 import Header from "../shop/components/Header";
 import CategoryCard from "@/components/common/CategoryCard";
 
-export async function generateMetadata({ params }: { params: { collectionSlug: string } }) {
+export async function generateMetadata() {
     // Fetch collection-specific metadata (replace with actual API call)
     const pageData: any = {}; // Replace with actual API response
 

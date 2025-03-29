@@ -39,6 +39,30 @@ const Wishlist = () => {
     }
   }, []);
 
+  const fetchUserData = useCallback(async () => {
+    try {
+      const account = sessionStorage.getItem("account");
+      if (account) return setaccountDetail(Boolean(account));
+      const token = localStorage.getItem("WORK_SAFE_ONLINE_USER_TOKEN");
+      if (!token) return;
+      const url = "/api/MyProfileCheckout";
+      const response: any = await Fetch(url, {}, 5000, true, false);
+      if (response?.status) {
+        if (response?.accounttype === "Account") {
+          sessionStorage.setItem("account", "false")
+          setaccountDetail(false);
+        } else {
+          sessionStorage.setItem("account", "true")
+          setaccountDetail(true);
+        }
+      }
+    } catch (error) {
+      console.log("Account Details Error]: ", error);
+      return;
+    }
+    // eslint-disable-next-line
+  }, []);
+
   useEffect(() => {
     eventEmitter?.on("loggedIn", fetchUserData);
     eventEmitter?.on("fetchWishlist", fetchWishlist);
@@ -46,7 +70,7 @@ const Wishlist = () => {
       eventEmitter?.off("loggedIn", fetchUserData);
       eventEmitter?.off("fetchWishlist", fetchWishlist);
     };
-  }, [fetchWishlist]);
+  }, [fetchWishlist, fetchUserData]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -85,30 +109,6 @@ const Wishlist = () => {
       eventEmitter?.off("emptyWishlist", emptyWishlistListener);
       eventEmitter?.off("removeFromWishlist", removeFromwishlistListener);
     };
-  }, []);
-
-  const fetchUserData = useCallback(async () => {
-    try {
-      const account = sessionStorage.getItem("account");
-      if (account) return setaccountDetail(Boolean(account));
-      const token = localStorage.getItem("WORK_SAFE_ONLINE_USER_TOKEN");
-      if (!token) return;
-      const url = "/api/MyProfileCheckout";
-      const response: any = await Fetch(url, {}, 5000, true, false);
-      if (response?.status) {
-        if (response?.accounttype === "Account") {
-          sessionStorage.setItem("account", "false")
-          setaccountDetail(false);
-        } else {
-          sessionStorage.setItem("account", "true")
-          setaccountDetail(true);
-        }
-      }
-    } catch (error) {
-      console.log("Account Details Error]: ", error);
-      return;
-    }
-    // eslint-disable-next-line
   }, []);
 
   return (
