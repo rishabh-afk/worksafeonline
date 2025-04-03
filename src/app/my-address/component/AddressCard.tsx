@@ -39,7 +39,7 @@ const AddressCard = ({
   return (
     <div
       onClick={() => handleSelected(address?.ID)}
-      className={`text-black p-3 pb-2 h-fit bg-white transition-all border-2 cursor-pointer duration-200 rounded-xl ${selectedAddress === address?.ID ? "border-primary" : "border-primary/20"
+      className={`text-black p-3 relative pb-8 h-full bg-white transition-all border-2 cursor-pointer duration-200 rounded-xl ${selectedAddress === address?.ID ? "border-primary" : "border-primary/20"
         }`}
     >
       {address?.Customer_Name && (
@@ -68,7 +68,7 @@ const AddressCard = ({
           </span>
         </p>
       )}
-      <div className="flex justify-end mt-2 gap-1">
+      <div className="flex justify-end absolute bottom-2 right-2 gap-1">
         {address?.AllowEdit === 1 && (
           <button
             title="Edit Address"

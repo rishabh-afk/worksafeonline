@@ -66,8 +66,8 @@ const CreateAddressForm = ({ address }: { address?: any }) => {
           ...prev,
           county: address.county,
           town: address.post_town,
-          country: address.country,
           post_code: address.postcode,
+          country: address.country_iso_2,
           address_line1: `${address.line_1} ${address.line_2} ${address.line_3}`,
         }));
       },

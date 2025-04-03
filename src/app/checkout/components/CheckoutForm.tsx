@@ -64,9 +64,9 @@ const CheckoutForm = ({
       onAddressRetrieved: (address: any) => {
         setFormData((prev: any) => ({
           ...prev,
-          DAdd: address.line_1,
           DPCode: address.postcode,
           DPTown: address.post_town,
+          DAdd: `${address.line_1} ${address.line_2} ${address.line_3}`,
         }));
       },
     });
