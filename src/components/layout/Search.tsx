@@ -78,8 +78,8 @@ const Search = () => {
   const callApi = async (query: string) => {
     const response = await Get(
       "api/SearchProductsByPageWCategories?search=" +
-        query +
-        "&page=1&pagesize=20"
+      query +
+      "&page=1&pagesize=20"
     );
     if (response.status) {
       setOpenModal(true);
@@ -114,7 +114,7 @@ const Search = () => {
         value={searchText}
         placeholder={placeholder}
         onChange={handleInputChange}
-        className="w-[85%] px-4 text-lg py-2.5 text-gray-500 rounded-full outline-none"
+        className="w-3/4 px-4 text-lg py-2 text-gray-500 rounded-full outline-none"
       />
       {/* <button className="absolute z-20 top-0 right-0 bg-white px-4 py-3 rounded-r-full">
         <IoMdSearch size={24} className="text-gray-500" />

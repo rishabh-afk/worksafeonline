@@ -37,7 +37,7 @@ const Navbar = async () => {
       <header className="bg-[#1C1C1C] sticky top-0 z-[60] w-full text-white shadow-md">
         <div className="max-w-9xl mx-auto flex items-center justify-between px-2 md:px-4 lg:px-6 py-2">
           {/* Logo */}
-          <div className="w-[55%] flex justify-between items-center">
+          <div className="w-[60%] flex justify-between items-center">
             <Link href="/">
               <Image
                 width={100}
@@ -59,7 +59,7 @@ const Navbar = async () => {
               <MyProducts />
             </div>
           </div>
-          <div className="w-[45%] flex gap-5 justify-end lg:justify-between items-center">
+          <div className="w-[40%] flex gap-5 justify-end lg:justify-between items-center">
             <Search />
             <div className="flex items-center lg:mx-auto space-x-2 lg:space-x-5">
               <Account />

@@ -20,7 +20,7 @@ const CreateAddressForm = ({ address }: { address?: any }) => {
         address_line1: "",
         town: "",
         county: "",
-        country: "",
+        country: "GB",
         post_code: "",
         mobile: "",
         email: "",
