@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
@@ -12,10 +12,15 @@ import type { Swiper as SwiperClass } from "swiper";
 import { Autoplay, EffectFade } from "swiper/modules";
 
 const QuickViewProductSwiper = ({
+  image,
+  imagesObj,
   productListingImages,
 }: {
+  image: any,
+  imagesObj: any,
   productListingImages: any;
 }) => {
+  const [selectedColor, setSelectedColor] = useState("");
   const [position, setPosition] = useState({ x: 50, y: 50 });
   const [imageLoaded, setImageLoaded] = useState<boolean[]>([]);
   const [swiperInstance, setSwiperInstance] = useState<SwiperClass | null>(
@@ -29,6 +34,32 @@ const QuickViewProductSwiper = ({
       return newLoaded;
     });
   };
+
+  useEffect(() => {
+    if (!image || !image.Colour || !image.Colour_Description || !imagesObj?.length) return;
+
+    const cleanedColour = image.Colour.trim();
+    const cleanedDesc = image.Colour_Description.trim().toLowerCase();
+
+    const matched = imagesObj.find(
+      (item: any) =>
+        item.Colour.trim() === cleanedColour &&
+        item.Colour_Description.trim().toLowerCase() === cleanedDesc
+    );
+
+    if (matched) setSelectedColor(matched.ProductImage);
+  }, [image, imagesObj]);
+
+  useEffect(() => {
+    if (!swiperInstance || !selectedColor) return;
+
+    const index = productListingImages.findIndex((img: any) => img === selectedColor);
+    if (index !== -1) {
+      swiperInstance.slideTo(index);
+      swiperInstance?.autoplay?.stop();
+    }
+    // eslint-disable-next-line
+  }, [selectedColor, swiperInstance]);
 
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     const { left, top, width, height } =
@@ -107,9 +138,8 @@ const QuickViewProductSwiper = ({
                     style={{
                       transformOrigin: `${position.x}% ${position.y}%`,
                     }}
-                    className={`absolute top-0 left-0 object-contain transition-transform duration-300 group-hover:scale-[2.25] rounded-md h-auto lg:h-[75vh] w-full ${
-                      imageLoaded[index] ? "" : "opacity-0"
-                    }`}
+                    className={`absolute top-0 left-0 object-contain transition-transform duration-300 group-hover:scale-[2.25] rounded-md h-auto lg:h-[75vh] w-full ${imageLoaded[index] ? "" : "opacity-0"
+                      }`}
                     alt={`QuickViewProductSwiper-${index + 1}`}
                     onLoadingComplete={() => handleImageLoad(index)}
                     onError={() => handleImageError(index)}

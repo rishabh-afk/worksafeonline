@@ -1,16 +1,14 @@
+import ClientPage from "./ClientPage";
 import { redirect } from "next/navigation";
 import Features from "@/components/common/Features";
-import ProductImage from "../../components/ProductImage";
 import { fetchProductMenuData, Get } from "@/api/generalApi";
-import ProductContent from "../../components/ProductContent";
 import ProductFeatures from "../../components/ProductFeatures";
 import BreadcrumbsHeader from "../../components/BradcrumbsHeader";
-// import RecommendedProducts from "@/components/common/RecommendedProducts";
 
 type ProductPageProps = {
   params: Promise<{
-    category: string;
     slug: string;
+    category: string;
   }>;
 };
 
@@ -53,8 +51,12 @@ export default async function Page(ctx: ProductPageProps) {
       <div className="max-w-9xl mx-auto p-4 md:p-6 lg:p-10">
         <BreadcrumbsHeader getBreadCrumbs={getBreadCrumbs} />
         <div className="mt-5 lg:mt-10 block min-h-screen lg:flex gap-14">
-          <ProductImage images={productListImages} />
-          <ProductContent product={{ ...productResponse, category, slug }} />
+          <ClientPage
+            slug={slug}
+            category={category}
+            productResponse={productResponse}
+            productListImages={productListImages}
+          />
         </div>
         <div className="bg-gray-300 h-[1px] my-[30px]" />
         <ProductFeatures product={productResponse} />

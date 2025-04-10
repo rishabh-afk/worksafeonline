@@ -5,12 +5,13 @@ import ProductActions from "./ProductActions";
 import QuantitySelector from "./QuantitySelector";
 // import ProductMetaInfo from "./ProductMetaInfo";
 
-const ProductContent = ({ product }: { product: any }) => {
+const ProductContent = ({ product, setImage }: { product: any, setImage: any }) => {
   return (
     <div className="w-full lg:w-1/2 overflow-auto mt-4 lg:mt-0">
       <ProductDetails product={product} />
       <QuantitySelector
         product={product}
+        setImage={setImage}
         showLogoCustomisation={product.ShowDesignLogo}
       />
       <ProductActions ProSpecsheet={product?.ProSpecsheet} />

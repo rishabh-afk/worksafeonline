@@ -14,12 +14,14 @@ import { isTokenExist } from "@/api/generateDeviceId";
 import { formatPound } from "@/components/logo/general";
 
 interface QuantitySelectorProps {
+  setImage: any;
   product: Product;
   showLogoCustomisation?: any;
 }
 
 const QuantitySelector = ({
   product,
+  setImage,
   showLogoCustomisation,
 }: QuantitySelectorProps) => {
   const [price, setPrice] = useState({
@@ -214,6 +216,12 @@ const QuantitySelector = ({
     if (product?.category && product?.slug) fetchProduct();
     // eslint-disable-next-line
   }, [product]);
+
+  useEffect(() => {
+    if (selectedFields.color)
+      setImage(selectedFields.color);
+    // eslint-disable-next-line
+  }, [selectedFields.color])
 
   return (
     <>

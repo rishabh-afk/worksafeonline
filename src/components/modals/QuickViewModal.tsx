@@ -7,6 +7,7 @@ import QuickViewProductSwiper from "./QuickViewProductSwiper";
 import ProductDetails from "@/app/product/components/ProductDetail";
 // import ProductMetaInfo from "@/app/product/components/ProductMetaInfo";
 import QuantitySelector from "@/app/product/components/QuantitySelector";
+import { useState } from "react";
 
 const QuickViewModal = ({
   data,
@@ -17,12 +18,16 @@ const QuickViewModal = ({
   isVisible: boolean;
   onclose: () => void;
 }) => {
+  const [image, setImage] = useState<any>({});
+
   if (!data) return null;
+
   const productListImages =
     data?.ProductImageList &&
     data?.ProductImageList.length > 0 &&
     data?.ProductImageList.map((image: any) => image?.ProductImage);
   const product = { ...data, ...productData };
+
   return (
     <Modal
       onClose={onclose}
@@ -40,6 +45,8 @@ const QuickViewModal = ({
       <div className="flex flex-col pt-14 p-4 lg:flex-row gap-10">
         <div className="w-full lg:w-1/2">
           <QuickViewProductSwiper
+            image={image}
+            imagesObj={data?.ProductImageList}
             productListingImages={productListImages ?? []}
           />
         </div>
@@ -48,6 +55,7 @@ const QuickViewModal = ({
             <ProductDetails product={product} />
             <QuantitySelector
               product={product}
+              setImage={setImage}
               showLogoCustomisation={product.ShowDesignLogo}
             />
           </div>
