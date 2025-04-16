@@ -52,7 +52,6 @@ const ContactDetails: React.FC<ContactDetailsProps> = ({ details }) => {
           <div key={index} className="flex flex-col items-center text-center">
             {/* Wrapper to handle alignment across breakpoints */}
             <div className="flex flex-col lg:flex-row justify-center items-center gap-5 w-full">
-
               {/* Title & Icon Section */}
               <div className="flex flex-col items-center">
                 <div className="flex gap-2 items-center">
@@ -65,9 +64,10 @@ const ContactDetails: React.FC<ContactDetailsProps> = ({ details }) => {
                 </div>
 
                 {/* Description */}
-                <p className="mt-5 text-gray-700 text-lg md:text-sm lg:text-lg whitespace-pre-line max-w-2xl">
-                  {detail.description}
-                </p>
+                <div
+                  className="mt-5 text-gray-700 text-lg md:text-sm lg:text-lg whitespace-pre-line max-w-2xl"
+                  dangerouslySetInnerHTML={{ __html: detail.description }}
+                />
               </div>
             </div>
           </div>

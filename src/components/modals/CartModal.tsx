@@ -75,14 +75,18 @@ const CartListModal = ({
   return (
     <div>
       <div
-        className={`fixed top-0 right-0 h-full text-black bg-white z-50 transform ${isOpen ? "translate-x-0" : "translate-x-full"
-          } transition-transform duration-300 ease-in-out w-full md:w-1/2 lg:w-[35%]`}
+        className={`fixed top-0 right-0 h-full text-black bg-white z-50 transform ${
+          isOpen ? "translate-x-0" : "translate-x-full"
+        } transition-transform duration-300 ease-in-out w-full md:w-1/2 lg:w-[35%]`}
       >
         <div className="flex justify-between relative items-center py-4 border-b mx-4">
           <p
             className={`text-2xl flex items-center font-black uppercase ${bigShoulders.className}`}
           >
-            Cart <span className="bg-red-500 text-white rounded-full ml-1 flex justify-center items-center min-w-6 border border-black aspect-square text-sm font-normal">{formattedQuantity}</span>
+            Cart{" "}
+            <span className="bg-black text-white rounded-full ml-1 flex justify-center items-center min-w-6 border border-black aspect-square text-xs font-normal">
+              {formattedQuantity}
+            </span>
           </p>
           <RxCross1
             size={20}

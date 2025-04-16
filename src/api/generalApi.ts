@@ -17,7 +17,7 @@ export const Get = async (url: string) => {
 };
 export const fetchHomePageData = async () => {
   const apiCalls = [
-    Get("api/Brands"), // Fetch brands
+    Get("api/PopularBrands"), // Fetch brands
     Get("api/Categories"), // Fetch categories
     Get("api/HomeProductListing1?App=Worksafe"), // Fetch home listing 1
     Get("api/HomeProductListing2?App=Worksafe"), // Fetch home listing 2

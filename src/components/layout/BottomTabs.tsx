@@ -10,7 +10,13 @@ import eventEmitter from "@/hooks/useEventEmitter";
 import { FaRegUser, FaRegHeart } from "react-icons/fa";
 import { useCallback, useEffect, useState } from "react";
 
-const BottomTabs = ({ wishlist }: { wishlist: any[] }) => {
+const BottomTabs = ({
+  wishlist,
+  accountDetail,
+}: {
+  wishlist: any[];
+  accountDetail: boolean;
+}) => {
   const navigate = useRouter();
   const wishlistCount = wishlist?.length || 0;
   const [isVisible, setIsVisible] = useState(false);
@@ -54,7 +60,11 @@ const BottomTabs = ({ wishlist }: { wishlist: any[] }) => {
 
   return (
     <div
-      className={`w-full fixed left-0 lg:hidden text-black backdrop-blur-2xl uppercase justify-center items-center bottom-0 grid grid-cols-4 rounded-t-2xl bg-white/50 shadow-md border-t-2 z-50 ${bigShoulders.className}`}
+      className={`w-full fixed -left-2 lg:hidden text-black backdrop-blur-2xl uppercase justify-center items-center bottom-0 grid ${
+        accountDetail ? "grid-cols-3" : "grid-cols-4"
+      } rounded-t-2xl bg-white/50 shadow-md border-t-2 z-50 ${
+        bigShoulders.className
+      }`}
     >
       <AuthFlow onClose={onClose} isVisible={isVisible} />
       {/* <SearchModal isOpen={isVisibleSearch} handleToggle={handleToggle} /> */}
@@ -78,19 +88,21 @@ const BottomTabs = ({ wishlist }: { wishlist: any[] }) => {
           <span className="md:text-lg font-bold md:font-extrabold">Shop</span>
         </span>
       </Link>
-      <Link href={"/wishlist"}>
-        <p className="py-2 md:py-3 flex flex-col justify-center items-center">
-          <span className="relative">
-            <FaRegHeart size={23} />
-            <span className="absolute -top-3 -right-3 w-6 h-6 text-xs text-black rounded-full bg-primary flex items-center justify-center">
-              {displayCount}
+      {!accountDetail && (
+        <Link href={"/wishlist"}>
+          <p className="py-2 md:py-3 flex flex-col justify-center items-center">
+            <span className="relative">
+              <FaRegHeart size={23} />
+              <span className="absolute -top-3 -right-3 w-6 h-6 text-xs text-black rounded-full bg-primary flex items-center justify-center">
+                {displayCount}
+              </span>
             </span>
-          </span>
-          <span className="md:text-lg font-bold md:font-extrabold">
-            Wishlist
-          </span>
-        </p>
-      </Link>
+            <span className="md:text-lg font-bold md:font-extrabold">
+              Wishlist
+            </span>
+          </p>
+        </Link>
+      )}
     </div>
   );
 };

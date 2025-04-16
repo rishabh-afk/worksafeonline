@@ -103,7 +103,10 @@ const AccountLayout = ({
             </Link>
             <Link
               className={`whitespace-nowrap text-left ${
-                pathname === "/order-history" ? activeClass : inActiveClass
+                pathname === "/order-history" ||
+                pathname.includes("/order-history")
+                  ? activeClass
+                  : inActiveClass
               } ${bigShoulders.className}`}
               href={"/order-history"}
             >

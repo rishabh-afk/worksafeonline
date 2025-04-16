@@ -82,7 +82,7 @@ export default function ClientPage() {
       <div className="max-w-9xl min-h-screen mx-auto p-4 md:p-6 lg:p-10">
         <div className="flex justify-between items-center">
           <h1
-            className={`uppercase text-xl md:text-3xl lg:text-5xl flex items-center font-black ${bigShoulders.className}`}
+            className={`uppercase text-4xl md:text-5xl lg:text-6xl flex items-center font-black ${bigShoulders.className}`}
           >
             Wishlist{" "}
             <span className="text-lg md:text-2xl lg:text-4xl">

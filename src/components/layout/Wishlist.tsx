@@ -50,10 +50,10 @@ const Wishlist = () => {
       const response: any = await Fetch(url, {}, 5000, true, false);
       if (response?.status) {
         if (response?.accounttype === "Account") {
-          sessionStorage.setItem("account", "false")
+          sessionStorage.setItem("account", "false");
           setaccountDetail(false);
         } else {
-          sessionStorage.setItem("account", "true")
+          sessionStorage.setItem("account", "true");
           setaccountDetail(true);
         }
       }
@@ -113,24 +113,26 @@ const Wishlist = () => {
   }, []);
 
   return (
-    <div className="relative">
-      {!accountDetail &&
-        <Link
-          href="/wishlist"
-          className="hover:text-yellow-500 relative hidden lg:block transition-all duration-100 ease-linear"
-        >
-          <FaRegHeart size={23} />
-          <span className="absolute -top-3 -right-3 min-w-6 min-h-6 text-xs text-black rounded-full bg-secondary flex items-center justify-center">
-            {wishlist.length > 0 && wishlist.length < 9
-              ? "0" + wishlist.length
-              : wishlist.length >= 10
+    <>
+      {!accountDetail && (
+        <div className="relative">
+          <Link
+            href="/wishlist"
+            className="hover:text-yellow-500 relative hidden lg:block transition-all duration-100 ease-linear"
+          >
+            <FaRegHeart size={23} />
+            <span className="absolute -top-3 -right-3 min-w-6 min-h-6 text-xs text-black rounded-full bg-secondary flex items-center justify-center">
+              {wishlist.length > 0 && wishlist.length < 9
+                ? "0" + wishlist.length
+                : wishlist.length >= 10
                 ? wishlist.length
                 : 0}
-          </span>
-        </Link>
-      }
-      <BottomTabs wishlist={wishlist} />
-    </div>
+            </span>
+          </Link>
+        </div>
+      )}
+      <BottomTabs accountDetail={accountDetail} wishlist={wishlist} />
+    </>
   );
 };
 

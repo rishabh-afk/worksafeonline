@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Product } from "@/types/api";
 import { bigShoulders } from "@/app/layout";
 
@@ -10,6 +10,18 @@ type ProductDetailsProps = {
 
 const ProductDetails = ({ product }: ProductDetailsProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const contentRef = useRef<HTMLParagraphElement>(null);
+  const [isOverflowing, setIsOverflowing] = useState(false);
+
+  // Check if content exceeds 3 lines
+  useEffect(() => {
+    if (contentRef.current) {
+      const isOverflow =
+        contentRef.current.scrollHeight > contentRef.current.clientHeight;
+      setIsOverflowing(isOverflow);
+    }
+  }, [product.Detail]);
+
   const savePercent =
     ((product.ProductActualPrice - product.ProductSellingPrice) /
       product.ProductActualPrice) *
@@ -49,15 +61,24 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
         </div>
       </div> */}
       <div className="bg-gray-300 h-[1px]" />
-      <p className={`mt-4 text-gray-600 ${isOpen ? "" : "line-clamp-3"}`}>
-        {product.Detail}
-      </p>
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="text-primary text-sm font-semibold underline underline-offset-2"
-      >
-        {isOpen ? "Read Less" : "Read More"}
-      </button>
+      <div>
+        <p
+          ref={contentRef}
+          className={`mt-4 text-gray-600 ${isOpen ? "" : "line-clamp-3"}`}
+        >
+          {product.Detail}
+        </p>
+
+        {/* Only show the button if content overflows (more than 3 lines) */}
+        {isOverflowing && (
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="text-primary text-sm font-semibold underline underline-offset-2"
+          >
+            {isOpen ? "Read Less" : "Read More"}
+          </button>
+        )}
+      </div>
     </div>
   );
 };

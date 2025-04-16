@@ -114,23 +114,26 @@ const SizeQuantities = ({
           return (
             <motion.div
               key={size.Size}
-              className={`spt-1 p-[2px] text-center cursor-pointer ${isActive ? "bg-primary/80" : "bg-gray-200/80"
-                }`}
+              className={`spt-1 p-[2px] text-center cursor-pointer ${
+                isActive ? "bg-black" : "bg-gray-200/80"
+              }`}
               variants={itemVariants}
             >
               <div
-                className={`font-black ${isActive ? "text-white" : "text-gray-600"
-                  } ${bigShoulders.className}`}
+                className={`font-black ${
+                  isActive ? "text-white" : "text-gray-600"
+                } ${bigShoulders.className}`}
               >
                 {size.Size}
               </div>
               <div className={`px-1 pt-px pb-1 mt-1 bg-white`}>
                 <div className="flex items-center justify-between mt-2">
                   <button
-                    className={`min-w-5 min-h-5 flex justify-center items-center active:scale-[0.9] transition ${isActive
-                        ? "bg-primary/80 text-white hover:bg-primary"
+                    className={`min-w-5 min-h-5 flex justify-center items-center active:scale-[0.9] transition ${
+                      isActive
+                        ? "bg-black text-white hover:bg-black/50"
                         : "bg-gray-300 text-white hover:bg-gray-400"
-                      }`}
+                    }`}
                     onClick={debounce(() => handleDecrement(size), 150)}
                   >
                     -
@@ -151,10 +154,11 @@ const SizeQuantities = ({
                     className="text-xs py-1 w-full text-center focus:outline-none focus:ring-0"
                   />
                   <button
-                    className={`min-w-5 min-h-5 flex disabled:cursor-not-allowed justify-center items-center active:scale-[0.9] transition ${isActive
-                        ? "bg-primary/80 text-white hover:bg-primary"
+                    className={`min-w-5 min-h-5 flex disabled:cursor-not-allowed justify-center items-center active:scale-[0.9] transition ${
+                      isActive
+                        ? "bg-black text-white hover:bg-black/50"
                         : "bg-gray-300 text-white hover:bg-gray-400"
-                      }`}
+                    }`}
                     // disabled={quantities[size.Size] === size.qty}
                     onClick={debounce(() => handleIncrement(size), 150)}
                   >

@@ -1,19 +1,14 @@
+import Link from "next/link";
 import Image from "next/image";
 import Marquee from "../common/Marquee";
-import { bigShoulders } from "@/app/layout";
 import Features from "../common/Features";
+import { bigShoulders } from "@/app/layout";
 import AnimatedActionButton from "../common/AnimatedActionButton";
 
 const WhoWeAre = ({ brands }: { brands: any }) => {
   return (
     <>
-      <div
-        // style={{
-        //   clipPath: "polygon(0 5%, 100% 0, 100% 95%, 0% 100%)",
-        //   overflow: "hidden",
-        // }}
-        className="min-h-screen relative"
-      >
+      <div className="min-h-screen relative">
         <Image
           src="https://demo2.wpopal.com/axetor/wp-content/uploads/2024/02/h1_bg-4.jpg"
           alt="Image"
@@ -24,30 +19,19 @@ const WhoWeAre = ({ brands }: { brands: any }) => {
           unoptimized
         />
         <div className="absolute inset-0 bg-black transition-all duration-500 ease-linear opacity-80 group-hover:opacity-40"></div>
-        <div className="absolute inset-0 z-50 max-w-9xl mx-auto flex flex-col lg:flex-row justify-start md:justify-center lg:justify-between gap-10 items-center px-4 md:px-6 lg:px-10">
+        <div className="absolute inset-0 z-50 max-w-9xl mx-auto flex flex-col lg:flex-row justify-start md:justify-center lg:justify-between gap-10 items-center lg:items-start px-4 md:px-6 lg:px-10 lg:pt-10">
           <div className="w-full lg:w-1/3 pt-20 lg:pt-0 leading-none">
             <p
-              className={`uppercase text-4xl md:text-8xl lg:text-[112px] text-white font-black ${bigShoulders.className}`}
+              className={`uppercase text-4xl md:text-8xl lg:text-[102px] text-white font-black ${bigShoulders.className}`}
             >
               who <br />
               <span className="text-primary">we are</span>
             </p>
-            {/* <span className="relative flex space-x-2 mt-4 items-center border rounded-full cursor-pointer w-fit hover:bg-primary bg-white hover:border-primary border-black/10 py-4 pl-28 pr-4 overflow-hidden group">
-              <span className="absolute whitespace-nowrap left-4 w-full transition-all duration-300 ease-in-out transform group-hover:translate-y-[-100%] group-hover:opacity-0 opacity-100 translate-y-0">
-                Our Story
-              </span>
-              <span className="absolute whitespace-nowrap left-2 w-full transition-all duration-300 ease-in-out transform group-hover:translate-y-0 group-hover:opacity-100 opacity-0 translate-y-[100%]">
-                Our Story
-              </span>
-              <FaArrowRightLong className="ml-2" />
-            </span> */}
             <AnimatedActionButton
               text="Our Story"
-              href="/about-us"
-              // onClick={() => console.log("Button clicked")}
-              classes=" md:text-lg mt-4 font-semibold whitespace-nowrap py-6 w-[160px] hover:bg-primary bg-white text-black hover:text-black"
               isLoading={false}
-              type="submit"
+              href="/about-us"
+              classes="md:text-lg mt-4 lg:mt-[88px] font-semibold whitespace-nowrap py-6 w-2/5 hover:bg-primary bg-white text-black hover:text-black"
             />
           </div>
           <div className="w-full lg:w-2/3">
@@ -75,7 +59,7 @@ const WhoWeAre = ({ brands }: { brands: any }) => {
             </div>
             <div className="text-white">
               <p
-                className={`${bigShoulders.className} text-3xl font-black uppercase`}
+                className={`${bigShoulders.className} text-3xl py-3 font-black uppercase`}
               >
                 Popular Brands
               </p>
@@ -84,12 +68,20 @@ const WhoWeAre = ({ brands }: { brands: any }) => {
                   brands.length > 0 &&
                   brands.map((brand: any, index: number) => {
                     return (
-                      <span
-                        className="flex justify-center text-center text-sm md:text-lg font-semibold items-center border py-4 md:py-7"
+                      <Link
+                        href={brand?.ApiUrl || "/"}
+                        className="flex justify-center text-center text-sm md:text-lg font-semibold items-center border p-2"
                         key={index}
                       >
-                        {brand?.Brand_Name}
-                      </span>
+                        <Image
+                          width={100}
+                          height={100}
+                          unoptimized
+                          alt={brand?.Brand_Name}
+                          src={brand?.Brand_Image}
+                          className="w-fit object-contain"
+                        />
+                      </Link>
                     );
                   })}
               </div>

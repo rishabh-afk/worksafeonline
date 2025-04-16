@@ -16,7 +16,7 @@ const Footer = async () => {
 
   const aboutLinks = [
     { label: "Company Info", href: "/about-us" },
-    { label: "Blogs", href: "/blogs" },
+    // { label: "Blogs", href: "/blogs" },
   ];
 
   const quickLinks = [

@@ -15,7 +15,7 @@ const ProductColors = ({
 }) => {
   return (
     <div>
-      <p className="mt-4 font-semibold">Color</p>
+      <p className="mt-4 font-semibold">Colour</p>
       <div className="mt-2 flex flex-wrap gap-2 items-center">
         {productColors.map((color: any) => {
           const [primaryColor, secondaryColor] =

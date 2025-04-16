@@ -1,45 +1,15 @@
 import React from "react";
+import { FaArrowsRotate } from "react-icons/fa6";
 
-const Loader = () => {
+const CircularArrowLoader = () => {
   return (
-    <div className="h-screen flex flex-col justify-center gap-5 font-semibold items-center text-3xl">
-      <div className="h-16 w-16 border-4 border-t-4 border-primary animate-spin"></div>
-      <p className="text-center text-primary">
-        <span>Please Wait</span>
-        <span className="dot">.</span>
-        <span className="dot">.</span>
-        <span className="dot">.</span>
-      </p>
-      <style jsx>{`
-        @keyframes dots {
-          0%,
-          20% {
-            opacity: 1;
-          }
-          30%,
-          50% {
-            opacity: 0;
-          }
-          60%,
-          80% {
-            opacity: 0;
-          }
-        }
-        .dot:nth-child(1) {
-          animation: dots 1s infinite;
-          animation-delay: 0s;
-        }
-        .dot:nth-child(2) {
-          animation: dots 1s infinite;
-          animation-delay: 0.3s;
-        }
-        .dot:nth-child(3) {
-          animation: dots 1s infinite;
-          animation-delay: 0.6s;
-        }
-      `}</style>
+    <div className="h-screen flex flex-col justify-center items-center gap-5">
+      <div className="animate-[spin_1.5s_linear_infinite] text-primary">
+        <FaArrowsRotate className="w-20 h-20" />
+      </div>
+      <p className="text-lg font-semibold text-primary">Please wait...</p>
     </div>
   );
 };
 
-export default Loader;
+export default CircularArrowLoader;

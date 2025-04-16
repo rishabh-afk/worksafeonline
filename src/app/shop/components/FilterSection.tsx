@@ -6,7 +6,7 @@ import PriceFilter from "./PriceFilter";
 import CustomFilter from "./CustomFilter";
 import { useEffect, useState } from "react";
 import ProductSection from "./ProductSection";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Loader from "@/components/common/Loader";
 import Pagination from "@/components/common/Pagination";
 import { BASE_URL, getCategoryId, getPaginateData } from "@/api/generalApi";
@@ -24,6 +24,7 @@ const FilterSection = ({
   subcategory,
   categoryResponse,
 }: Filter) => {
+  const router = useRouter();
   const pathname = usePathname();
   const [state, setState] = useState({
     sizes: [],
@@ -39,8 +40,8 @@ const FilterSection = ({
   const [filters, setFilters] = useState<any>(
     subcategory ? { category_id: [subcategory] } : {}
   );
-  const [loader, setLoader] = useState<boolean>(false);
   const [showFilters, setShowFilters] = useState(true);
+  const [loader, setLoader] = useState<boolean>(response?.status);
   const [filteredProducts, setFilteredProducts] = useState(state.products);
 
   const handleClear = async () => {
@@ -60,8 +61,8 @@ const FilterSection = ({
         ...filters,
         category_id:
           state?.categories &&
-            state?.categories.length > 0 &&
-            filters["menu_name"]
+          state?.categories.length > 0 &&
+          filters["menu_name"]
             ? getCategoryId(state.categories, filters["menu_name"])
             : [category],
       });
@@ -109,20 +110,53 @@ const FilterSection = ({
           ? categoryResponse?.SubCategories
           : response?.SubCategories ?? [],
       });
+      setLoader(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category, response, subcategory]);
 
   return (
     <>
-      {state?.products && state?.products.length === 0 ? (
+      {state?.products && state?.products.length === 0 && !loader ? (
+        <div className="flex justify-center items-center min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+          <div className="text-center mx-auto">
+            <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+              No Products Found
+            </h2>
+            <p className="text-lg text-gray-500 mb-6">
+              We couldn&apos;t find any products matching your search. Please
+              try again later or check out other products.
+            </p>
+            <div className="space-x-4">
+              <button
+                onClick={() => window.location.reload()}
+                className="px-6 py-2 bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition"
+              >
+                Try Again
+              </button>
+              <button
+                onClick={() => router.replace("/")}
+                className="px-6 py-2 bg-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-400 transition"
+              >
+                Go to Homepage
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : loader ? (
         <Loader />
       ) : (
         <div
           id="filterSection"
-          className={`grid md:grid-cols-3 lg:grid-cols-5 max-w-9xl mx-auto p-4 lg:p-10 ${showFilters ? "gap-10" : "gap-2"}`}
+          className={`grid md:grid-cols-3 lg:grid-cols-5 max-w-9xl mx-auto p-4 lg:p-10 ${
+            showFilters ? "gap-10" : "gap-2"
+          }`}
         >
-          <div className={`col-span-1 hidden md:block space-y-6 ${showFilters ? "" : ""}`}>
+          <div
+            className={`col-span-1 hidden md:block space-y-6 ${
+              showFilters ? "" : ""
+            }`}
+          >
             <div className="flex justify-between items-center mt-3">
               {/* Filters Title with Clickable Toggle */}
               <h4
@@ -130,7 +164,9 @@ const FilterSection = ({
                 onClick={() => setShowFilters((prev) => !prev)}
                 role="button"
                 tabIndex={0}
-                onKeyDown={(e) => e.key === "Enter" && setShowFilters((prev) => !prev)}
+                onKeyDown={(e) =>
+                  e.key === "Enter" && setShowFilters((prev) => !prev)
+                }
               >
                 Filters
               </h4>
@@ -138,7 +174,7 @@ const FilterSection = ({
               {/* Buttons Section */}
               <div className="flex space-x-2">
                 {/* Clear Filters Button */}
-                {showFilters &&
+                {showFilters && (
                   <button
                     type="button"
                     onClick={handleClear}
@@ -146,7 +182,7 @@ const FilterSection = ({
                   >
                     Clear All
                   </button>
-                }
+                )}
                 {/* Toggle Filter Button */}
                 <button
                   type="button"
@@ -157,7 +193,7 @@ const FilterSection = ({
                 </button>
               </div>
             </div>
-            {showFilters &&
+            {showFilters && (
               <div className="space-y-6">
                 {state.categories && state.categories.length > 0 && (
                   <Filter
@@ -233,9 +269,14 @@ const FilterSection = ({
                     handleProducts={handleProducts}
                   />
                 )}
-              </div>}
+              </div>
+            )}
           </div>
-          <div className={`col-span-2 ${showFilters ? "lg:col-span-4" : "lg:col-span-5"}`}>
+          <div
+            className={`col-span-2 ${
+              showFilters ? "lg:col-span-4" : "lg:col-span-5"
+            }`}
+          >
             {(state.pageCount !== 0 || state.currentPage !== 0) && (
               <CustomFilter
                 filters={filters}
@@ -260,7 +301,7 @@ const FilterSection = ({
               />
             )}
           </div>
-        </div >
+        </div>
       )}
     </>
   );
